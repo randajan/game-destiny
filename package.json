@@ -1,0 +1,53 @@
+{
+  "name": "game-destiny",
+  "version": "0.0.5",
+  "description": "Destiny inspired by AmongUs",
+  "repository": "git@github.com:randajan/game-destiny.git",
+  "main": "index.js",
+  "type": "module",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@randajan/jet-base": "^2.1.4",
+    "@randajan/jet-core": "^3.2.14",
+    "@randajan/jet-react": "1.2.7",
+    "@randajan/js-object-view": "^1.0.2",
+    "@randajan/react-popup": "^5.1.0",
+    "@randajan/simple-app": "^2.0.9",
+    "esbuild-plugin-import-glob": "^0.1.1",
+    "esbuild-sass-plugin": "^2.15.0",
+    "koa": "^2.14.2",
+    "koa-router": "^12.0.0",
+    "koa-send": "^5.0.1",
+    "koa-static": "^5.0.0",
+    "markdown-to-jsx": "^7.3.2",
+    "node-fetch": "^3.3.2",
+    "node-sass": "^9.0.0",
+    "path-to-regexp": "^6.2.1",
+    "prop-types": "^15.8.1",
+    "query-string": "^8.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^6.16.0",
+    "react-router-dom": "^6.16.0",
+    "react-transition-group": "^4.4.5"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "game",
+    "destiny"
+  ],
+  "homepage": "https://github.com/randajan/game-destiny",
+  "bugs": {
+    "url": "https://github.com/randajan/game-destiny/issues"
+  },
+  "author": {
+    "name": "Jan Randa",
+    "email": "jnranda@gmail.com",
+    "url": "https://www.linkedin.com/in/randajan/"
+  }
+}
