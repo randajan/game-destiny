@@ -20,6 +20,7 @@ export const createGameBase = _=>new BaseAsync((base, opt)=>{
         const onTick = jet.isRunnable(node.onTick) ? node.onTick : _=>{};
         const energyUse = Number.jet.frame(Number.jet.to(node.energyUse), 0, 1);
         const enthropy = Number.jet.frame(Number.jet.to(node.enthropy), 0, 1) || energyUse;
+        const health = Number.jet.frame(Number.jet.to(node.health), 0, 1);
 
         base.fit(["ship.nodes", id], (next, f)=>{
             f = next(f);
@@ -40,8 +41,8 @@ export const createGameBase = _=>new BaseAsync((base, opt)=>{
 
         base.set(["ship.nodes", id], {
             isOn:node.isOn != null ? node.isOn : true,
-            health:node.health != null ? node.health : 1,
-            powerSet:node.powerSet != null ? node.powerSet : .5,
+            health,
+            powerSet:Math.max(.2, (1-health)*1.2),
             capacity:Number.jet.only(node.capacity)
         });
 

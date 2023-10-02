@@ -36,7 +36,7 @@ const ShipNode = props => {
             <Switch key={"isOn" + isOn} label={state} rawput={isOn ? 1 : 0} onOutput={(s, v) => {
                 gameBase.set(["ship.nodes", id, "isOn"], !!v);
             }} />
-            <Range key={"powerSet" + powerSet} label={"výkon"} rawput={powerSet * 100} from={0} to={100} onOutput={(s, v) => {
+            <Range key={"powerSet" + powerSet} label={"příkon"} rawput={powerSet * 100} from={0} to={100} onOutput={(s, v) => {
                 gameBase.set(["ship.nodes", id, "powerSet"], v / 100);
             }} />
             <Range key={"health" + health} label={"kondice"} lock rawput={health * 100} from={0} to={100} />

@@ -22,6 +22,7 @@ createRoot(root).render(
         <Background/>
         <nav><h1>Destiny</h1></nav>
         <Monitor/>
+
     </Modal>
 );
 

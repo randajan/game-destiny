@@ -68,7 +68,7 @@ export class Game {
         if (state === "home" || state === "death") { return; }
 
         stats.energy = 0;
-        stats.battery -= rate * .01;
+        stats.battery -= rate * .003;
         stats.direction -= rate * .003;
         stats.health -= rate * .003;
         stats.heat -= rate * .003;
