@@ -9,21 +9,22 @@ import "@randajan/react-popup/css";
 
 import "./index.scss";
 
-//import { screen } from "./config/base";
+import { Background } from "./frames/Background/Background";
 
 
 const root = document.getElementById("root");
 //screen.watch("", _=>root.setAttribute("data-screen", screen.getList().join(" ")), true);
 
-import "./config/game";
 import { Monitor } from "./frames/Monitor/Monitor";
 
 createRoot(root).render(
     <Modal className="App">
-        <nav></nav>
+        <Background/>
+        <nav><h1>Destiny</h1></nav>
         <Monitor/>
     </Modal>
 );
+
 
 
 

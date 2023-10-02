@@ -6,7 +6,7 @@ const { safe } = jet.prop;
 
 
 export const addVolume = (obj, priv, name, def=1)=>{
-    safe(obj, priv, name, n=>Number.jet.frame(n, 0, 1), n=>n || 0);
+    safe(obj, priv, name, n=>Number.jet.round(Number.jet.frame(n, 0, 1), 4), n=>n || 0);
     obj[name] = def;
     return obj;
 };

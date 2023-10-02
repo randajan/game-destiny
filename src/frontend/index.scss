@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Tektur:wght@400;500;600;700;800;900&display=swap');
 
 body,
 input,
 textarea,
 select {
-    font-family: 'Baloo 2', sans-serif;
+    font-family: 'Tektur', sans-serif;
     font-size:1.2rem;
-    color:#666;
+    color: #CCC;
 }
 
 * {
@@ -21,8 +21,16 @@ input {
 
 h1 {
     text-align:center;
+    font-size:3rem;
+    color:#CFAA01;
+    text-shadow: 
+        0px 0px 10px rgba(0,0,0,.6), 
+        0px 0px 20px #CFAA01;
 }
 
+html {
+    background-color:#111;
+}
 html, body, #root, .App {
     height:100%;
 }

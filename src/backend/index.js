@@ -6,7 +6,7 @@ import send from 'koa-send';
 
 import router from "./router";
 import "./controllers/**"; //setup all routes/controllers
-import { Game } from "./modules/game/class/Game";
+
 
 app.use(async (ctx, next) => {
     await next();
@@ -17,9 +17,3 @@ app.use(serve(info.dir.fe));
 
 app.use(router.routes());
 
-
-const game = new Game({
-    onTick:_=>{ be.io.emit("game-tick", JSON.stringify(game)); },
-    tickRate:1000
-});
-game.start();
