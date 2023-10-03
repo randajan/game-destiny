@@ -1,25 +1,28 @@
 import fe, { bridge, info } from "@randajan/simple-app/fe";
 
-import { BaseSync } from "@randajan/jet-base";
 import jet from "@randajan/jet-core";
-import { createGameBase } from "../../arc/game/gameBase";
+import { BaseAsync } from "@randajan/jet-base";
 
-export const gameBase = createGameBase();
+export const game = new BaseAsync(async base=>{
+    const resp = await fetch("/api/game");
+    const data = await resp.json();
+    await base.set(data);
+});
+
 
 let receiving = false;
 bridge.socket.on("game-tick", async (currentState) => {
     receiving = true;
-    await gameBase.set(JSON.parse(currentState));
+    await game.set(JSON.parse(currentState));
     receiving = false;
 });
 
-
-gameBase.watch("", async (get, cngs) => {
+game.watch("", async (get, cngs) => {
     if (receiving) { return; }
 
     const updates = Object.fromEntries(await Promise.all(cngs().map(async p => [p, await get(p)])));
 
-    fetch("/api/game/update", {
+    await fetch("/api/game", {
         method: "PATCH",
         body: JSON.stringify(jet.inflate(updates)),
         headers: {
@@ -32,4 +35,4 @@ gameBase.watch("", async (get, cngs) => {
 
 
 
-window.gameBase = gameBase;
+window.game = game;

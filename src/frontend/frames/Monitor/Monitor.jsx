@@ -5,24 +5,15 @@ import jet from "@randajan/jet-core";
 
 
 import "./Monitor.scss";
-import { gameBase } from '../../config/gameBase';
+import { game } from '../../config/game';
 import { Switch, Range } from '@randajan/react-form';
 import '@randajan/react-form/css';
 
-const _statsTitles = {
-    energy:"energie",
-    battery:"baterie",
-    health:"kondice",
-    oxygen:"kyslík",
-    heat:"teplota",
-    direction:"kurz",
-    distance:"vzdálenost"
-}
-
 const ShipStat = props => {
+    const { id, title, value } = props;
     return (
         <div className="Stat">
-            <Range key={props.value} label={_statsTitles[props.id]} lock vertical rawput={(1 - props.value) * 100} from={0} to={100} />
+            <Range key={value} label={title} lock vertical rawput={(1 - value) * 100} from={0} to={100} />
         </div>
     )
 }
@@ -34,10 +25,10 @@ const ShipNode = props => {
         <>
             <h2 className={`nodeTitle ${state}`}>{title}</h2>
             <Switch key={"isOn" + isOn} label={state} rawput={isOn ? 1 : 0} onOutput={(s, v) => {
-                gameBase.set(["ship.nodes", id, "isOn"], !!v);
+                game.set(["ship.nodes", id, "isOn"], !!v);
             }} />
-            <Range key={"powerSet" + powerSet} label={"příkon"} rawput={powerSet * 100} from={0} to={100} onOutput={(s, v) => {
-                gameBase.set(["ship.nodes", id, "powerSet"], v / 100);
+            <Range key={"powerSet" + powerSet} label={"výkon"} rawput={powerSet * 100} from={0} to={100} onOutput={(s, v) => {
+                game.set(["ship.nodes", id, "powerSet"], v / 100);
             }} />
             <Range key={"health" + health} label={"kondice"} lock rawput={health * 100} from={0} to={100} />
         </>
@@ -46,8 +37,8 @@ const ShipNode = props => {
 
 
 export const Monitor = (props) => {
-    const [gmb, getChanges] = gameBase.use();
-    const [data, refresh] = usePromise(null, _ => gameBase.get(), [getChanges]);
+    const [gmb, getChanges] = game.use();
+    const [data, refresh] = usePromise(null, _ => game.get(), [getChanges]);
 
     if (!data) { return; }
 
@@ -57,7 +48,7 @@ export const Monitor = (props) => {
         <div className="Monitor">
             <h2>Stav lodi : {state}</h2>
             <div className="stats">
-                {jet.forEach(stats, (stat, id) => <ShipStat key={id} id={id} value={stat} />)}
+                {jet.forEach(stats, (stat, id) => <ShipStat key={id} {...stat} />)}
             </div>
             <div className="nodes">
                 {jet.forEach(nodes, (node, id) => <ShipNode key={id} {...node} />)}
