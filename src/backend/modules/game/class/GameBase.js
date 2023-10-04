@@ -47,6 +47,8 @@ export class GameBase extends BaseAsync {
                 const id = stat.id;
                 const init = stat.init || 1;
                 const title = String.jet.to(stat.title) || id;
+                const unit = Array.jet.to(stat.unit) || [0, 100, "%"];
+                const info = String.jet.to(stat.info);
                 const entropy = Number.jet.to(stat.entropy);
 
                 base.fit(["ship.stats", id], (next, f)=>{
@@ -54,6 +56,8 @@ export class GameBase extends BaseAsync {
                     const v = Object.jet.tap(f);
                     v.id = id;
                     v.title = title,
+                    v.unit = unit;
+                    v.info = info;
                     v.entropy = entropy;
                     v.value = Number.jet.round(Number.jet.frame(Number.jet.to(v.value), 0, 1), 4);
                     return v;

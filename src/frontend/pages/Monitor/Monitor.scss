@@ -94,6 +94,14 @@
         display: flex;
         justify-content: space-around;
 
+        .Stat.energy .unmark { background:blue !important; }
+        .Stat.battery .unmark { background: #CFAA01 !important; }
+        .Stat.smog .unmark { background:lime !important; }
+        .Stat.oxygen .unmark { background:white !important; }
+        .Stat.heat .unmark { background:red !important; }
+        .Stat.direction .unmark { background:blue !important; }
+        .Stat.distance .unmark { background: green !important; }
+
         .Range .wrap .interface .track {
             width: 4em;
 

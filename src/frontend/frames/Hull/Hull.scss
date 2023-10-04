@@ -1,0 +1,27 @@
+.Hull {
+    position:relative;
+    overflow:hidden;
+
+    & > * {
+        height:100%;
+        width:100%;
+
+        transition: .5s;
+        overflow:auto;
+        transform:translate(0, -100%);
+    }
+
+
+    & > .page-enter-active, & > .page-appear-active, & > .page-enter-done {
+        transform:translate(0, 0);
+    }
+
+    & > .page-exit-active {
+        position:absolute;
+        top:0;
+        transform:translate(0, 100%);
+        z-index:-1;
+    }
+
+    
+}

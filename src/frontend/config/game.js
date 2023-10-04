@@ -1,6 +1,6 @@
 import fe, { bridge, info } from "@randajan/simple-app/fe";
 
-import jet from "@randajan/jet-core";
+import jet, { usePromise } from "@randajan/jet-react";
 import { BaseAsync } from "@randajan/jet-base";
 
 export const game = new BaseAsync(async base=>{
@@ -33,6 +33,8 @@ game.watch("", async (get, cngs) => {
 });
 
 
-
-
-window.game = game;
+export const useGame = (path)=>{
+    const [gmb, getChanges] = game.use(path);
+    const [data, refresh] = usePromise(null, _ => game.get(path), [getChanges]);
+    return data;
+}

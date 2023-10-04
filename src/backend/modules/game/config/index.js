@@ -43,7 +43,7 @@ export const gameConfig = {
             else if (state === "battery" && battery.value >= (energyUse / nodes.battery.capacity)) {
                 battery.value -= (energyUse / nodes.battery.capacity);
             }
-            else { node.isOn = false; continue; }
+            else if (!node.capacity) { node.isOn = false; continue; }
 
             await onTick(ship, node, q);
 

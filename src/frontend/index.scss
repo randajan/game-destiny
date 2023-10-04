@@ -28,6 +28,10 @@ h1 {
         0px 0px 20px #CFAA01;
 }
 
+h2 {
+    text-align:center;
+}
+
 html {
     background-color:#111;
 }
@@ -37,7 +41,7 @@ html, body, #root, .App {
 
 .App {
     display:grid;
-    grid-template-rows: 10% 1fr 5%;
+    grid-template-rows: auto 1fr;
     overflow:hidden;
 
     .wall {

@@ -1,19 +1,23 @@
-import React from 'react';
-import { usePromise } from "@randajan/jet-react";
+import React, { useEffect } from 'react';
+
 import objectToJSX from "@randajan/js-object-view/toJSX";
 import jet from "@randajan/jet-core";
 
+import { usePop } from "@randajan/react-popup";
+
 
 import "./Monitor.scss";
-import { game } from '../../config/game';
-import { Switch, Range } from '@randajan/react-form';
+import { game, useGame } from '../../config/game';
+import { Switch, Range, Button } from '@randajan/react-form';
 import '@randajan/react-form/css';
 
 const ShipStat = props => {
-    const { id, title, value } = props;
+    const { id, title, value, unit } = props;
+    const vlabel = Number.jet.fromRatio(value, unit[0], unit[1]).toLocaleString(undefined, { maximumFractionDigits:1, minimumFractionDigits:1 }) + " " + unit[2];
     return (
-        <div className="Stat">
-            <Range key={value} label={title} lock vertical rawput={(1 - value) * 100} from={0} to={100} />
+        <div className={`Stat ${id}`}>
+            <Range key={value} label={<><p>{title}</p><p>{vlabel}</p></>} lock vertical rawput={(1 - value) * 100} from={0} to={100} />
+            
         </div>
     )
 }
@@ -35,18 +39,21 @@ const ShipNode = props => {
     )
 }
 
-
 export const Monitor = (props) => {
-    const [gmb, getChanges] = game.use();
-    const [data, refresh] = usePromise(null, _ => game.get(), [getChanges]);
+    const data = useGame();
+    const pop = usePop({ children:<Button onSubmit={_=>game.set(["pause"], false)}>Ukončit poradu</Button>, lock:true });
 
-    if (!data) { return; }
+    const pause = data?.pause;
 
-    const { state, stats, nodes } = data.ship;
+    useEffect(_=>{ if (pause === true) { pop.up() } else if (pause === false) { pop.down(); } }, [pause]);
+
+    if (!data) { return null; }
+
+    const { ship:{state, stats, nodes} } = data;
 
     return (
         <div className="Monitor">
-            <h2>Stav lodi : {state}</h2>
+            <div><h2>Stav lodi : {state}</h2><Button onSubmit={_=>game.set(["pause"], true)}>Svolat poradu</Button></div>
             <div className="stats">
                 {jet.forEach(stats, (stat, id) => <ShipStat key={id} {...stat} />)}
             </div>
@@ -56,4 +63,5 @@ export const Monitor = (props) => {
         </div>
     )
 }
+
 
