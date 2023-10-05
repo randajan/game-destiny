@@ -3,6 +3,7 @@ export const nodes = [
     {
         id: "core",
         title: "Reaktor",
+        info:"Tento systém řídí výrobu energie pro všechny ostatní systémy. Jeho vypnutí je vážný hazard se životy celé posádky.",
         decay: .25,
         health: _ => Number.jet.rnd(.4, .8),
         onTick: ({stats:{energy}}, node, rate) => {
@@ -12,6 +13,7 @@ export const nodes = [
     {
         id: "battery",
         title: "Záložní zdroj",
+        info:"Záložní zdroj se stará o dobíjení baterie z reaktoru. V případě výpadku reaktoru jsou kvalitní a nabité baterie k nezaplacení.",
         decay: .075,
         energyUse: .1,
         health: _ => Number.jet.rnd(.8, 1),
@@ -24,6 +26,7 @@ export const nodes = [
     {
         id: "shield",
         title: "Štíty",
+        info:"Protiradiační magnetický štít brání loď a posádku nejen proti radiaci, ale i proti drobným částicím, které se obrovskou rychlostí pohybují vesmírem.",
         energyUse: .1,
         decay: .1,
         powerSet: _ => Number.jet.rnd(.6, 1),
@@ -35,6 +38,7 @@ export const nodes = [
     {
         id: "oxygen",
         title: "Generátor kyslíku",
+        info:"Kyslík je užitečný plyn a proto je jeho generátor ve vesmíru poměrně zásadní záležitost. Mezi hlavní výhody kyslíkového generátoru patří, že bez něj ve vesmíru drtivá většina posádky zemře",
         energyUse: .075,
         decay: .12,
         health: _ => Number.jet.rnd(.6, 1),
@@ -45,6 +49,7 @@ export const nodes = [
     {
         id: "ac",
         title: "Klimatizace",
+        info:"Klimatizace ovlivňuje teplotu na lodi. Bez provozuschopné klimatizace začne klesat teplota na lodi tak dlouho dokud posádka nevyhlásí generální stávku nebo nezemře.",
         energyUse: .075,
         decay: .08,
         health: _ => Number.jet.rnd(.6, 1),
@@ -55,6 +60,7 @@ export const nodes = [
     {
         id: "navigation",
         title: "Navigace",
+        info:"Navigační systém je trochu potvora a vyžaduje neustálý dohled. Pokud tento systém nebude v perfektním stavu může způsobovat víc problémů než užitku.",
         energyUse: .15,
         decay: .25,
         isOn:false,
@@ -66,6 +72,7 @@ export const nodes = [
     {
         id: "engine",
         title: "Motory",
+        info:"Pozor ať nepřetížíš reaktor! Motory spotřebovávají poměrně velké množství energie. Jo a jestli to zapneš doporučuju neustále sledovat kurz.",
         energyUse: .3,
         decay: .1,
         isOn:false,
@@ -77,11 +84,12 @@ export const nodes = [
     {
         id: "light",
         title: "Světla",
+        info:"Světla jsou docela fajn utilitka, ale na druhou stranu když se na to člověk podívá ze správného úhlu pohledu tak kvůli vypnutým světlům přeci ještě nikdy nikdo neumřel ne?",
         energyUse: .1,
         decay: .25,
         isOn:false,
         health: _ => Number.jet.rnd(.2, .4),
-        onTick: (ship, node, rate) => {
+        onTick: (current, node, rate) => {
 
         }
     }

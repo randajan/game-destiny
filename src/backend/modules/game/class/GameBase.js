@@ -6,22 +6,23 @@ export class GameBase extends BaseAsync {
     constructor(onInit) {
         super(async (base, opt)=>{
 
-            const { rates, stats, nodes } = opt;
+            const { rates, stats, nodes, states } = opt;
         
             for (const node of nodes) {
                 const id = node.id;
-                const isOn = node.isOn != null ? node.isOn : true;
                 const title = String.jet.to(node.title) || id;
+                const info = String.jet.to(node.info) || title;
+
                 const onTick = jet.isRunnable(node.onTick) ? node.onTick : _=>{};
+                const isOn = node.isOn != null ? node.isOn : true;
                 const energyUse = Number.jet.frame(Number.jet.to(node.energyUse), 0, 1);
                 const decay = Number.jet.frame(Number.jet.to(node.decay), 0, 1);
                 const health = Number.jet.frame(Number.jet.to(node.health), 0, 1);
-        
-                base.fit(["ship.nodes", id], (next, f)=>{
-                    f = next(f);
-                    const v = Object.jet.tap(f);
-                    v.id = id;
-                    v.title = title,
+                const capacity = Math.max(0, Number.jet.to(node.capacity));
+
+                base.fit(["solid.nodes", id], _=>({id, title, info, onTick}));
+                base.fit(["current.nodes", id], (next, f)=>{
+                    const v = Object.jet.tap(next(f));
                     v.onTick = onTick;
                     v.isOn = Boolean.jet.to(v.isOn);
                     v.health = Number.jet.frame(Number.jet.to(v.health), 0, 1);
@@ -30,15 +31,16 @@ export class GameBase extends BaseAsync {
                     v.power = v.powerSet * v.health;
                     v.energyUse = v.powerSet * energyUse;
                     v.decay = v.powerSet * decay;
+                    v.capacity = v.health * capacity;
                     
                     return v;
                 });
         
-                base.set(["ship.nodes", id], {
+                base.set(["current.nodes", id], {
                     isOn,
                     health,
                     powerSet:Math.max(.2, (1-health)*1.2),
-                    capacity:Number.jet.only(node.capacity)
+                    capacity
                 });
         
             }
@@ -47,37 +49,36 @@ export class GameBase extends BaseAsync {
                 const id = stat.id;
                 const init = stat.init || 1;
                 const title = String.jet.to(stat.title) || id;
+                const info = String.jet.to(stat.info) || title;
                 const unit = Array.jet.to(stat.unit) || [0, 100, "%"];
-                const info = String.jet.to(stat.info);
+
                 const entropy = Number.jet.to(stat.entropy);
 
-                base.fit(["ship.stats", id], (next, f)=>{
-                    f = next(f);
-                    const v = Object.jet.tap(f);
-                    v.id = id;
-                    v.title = title,
-                    v.unit = unit;
-                    v.info = info;
+                base.fit(["solid.stats", id], _=>({id, title, info, unit}));
+                base.fit(["current.stats", id], (next, f)=>{
+                    const v = Object.jet.tap(next(f));
                     v.entropy = entropy;
                     v.value = Number.jet.round(Number.jet.frame(Number.jet.to(v.value), 0, 1), 4);
                     return v;
                 });
         
-                base.set(["ship.stats", id, "value"], init);
+                base.set(["current.stats", id, "value"], init);
             }
-        
-            base.fit("ship", (next, f)=>{
+
+            for (let id in rates) { base.fit(["solid.rates", id], (next, f)=>Math.max(0, Number.jet.to(next(f))) || rates[id]); }
+            base.set("solid.rates", rates);
+
+            const statesIndex = {};
+            for (const state of states) { statesIndex[state.id] = state; }
+
+            base.fit("solid.states", _=>statesIndex);
+            base.fit("current", (next, f)=>{
                 f = next(f);
                 const v = Object.jet.tap(f);
-                const {  nodes:{core, battery} } = v;
-                v.state = core.isOn ? "power" : battery.isOn ? "battery" : "blackout";
+                v.state = states.find(({ when })=>when(v)).id;
+                v.pause = Boolean.jet.to(v.pause);
                 return v;
             });
-
-            for (let id in rates) { base.fit(["rates", id], (next, f)=>Math.max(0, Number.jet.to(next(f))) || rates[id]); }
-            base.set("rates", rates);
-
-            base.fitTo("pause", "Boolean");
 
             if (jet.isRunnable(onInit)) { return onInit(base, opt); }
         })

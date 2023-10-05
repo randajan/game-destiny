@@ -1,16 +1,19 @@
 import { nodes } from "./nodes";
 import { rates } from "./rates";
+import { states } from "./states";
 import { stats } from "./stats";
+
+
 
 export const gameConfig = {
     rates,
     stats,
     nodes,
-    onTick: async (gameData, ticker)=>{
-        const { ship, rates } = gameData;
-        const {state, stats, nodes } = ship;
+    states,
+    onTick: async (game, ticker)=>{
+        const { solid:{ rates, states }, current:{ state, stats, nodes } } = game;
 
-        if (state === "home" || state === "death") { return gameData; }
+        if (states[state].isEnd) { return; }
 
         const { refresh, speed, entropy, decay } = rates;
 
@@ -24,6 +27,7 @@ export const gameConfig = {
         }
 
         const { energy, battery } = stats;
+        
 
         for (const i in nodes) {
             const node = nodes[i];
@@ -39,17 +43,18 @@ export const gameConfig = {
             if (!isOn) { continue; }
             if (health < 0.001 || !powerSet) { node.isOn = false; continue; }
 
-            if (state === "power" && energy.value >= energyUse) { energy.value -= energyUse;}
-            else if (state === "battery" && battery.value >= (energyUse / nodes.battery.capacity)) {
+            if (nodes.core.isOn && energy.value >= energyUse) { energy.value -= energyUse;}
+            else if (nodes.battery.isOn && battery.value >= (energyUse / nodes.battery.capacity)) {
+                nodes.core.isOn = false; //core overloaded shutdown
                 battery.value -= (energyUse / nodes.battery.capacity);
             }
-            else if (!node.capacity) { node.isOn = false; continue; }
+            else if (!node.capacity || !battery.value) { node.isOn = false; continue; }
 
-            await onTick(ship, node, q);
+            await onTick(game.current, node, q);
 
             node.health -= qd * decay * (Math.tan(powerSet*1.3) / 200 ); //idk why
         }
 
-        return gameData;
+        return game;
     }
 }

@@ -13,7 +13,7 @@ export const game = new BaseAsync(async base=>{
 let receiving = false;
 bridge.socket.on("game-tick", async (currentState) => {
     receiving = true;
-    await game.set(JSON.parse(currentState));
+    await game.set("current", JSON.parse(currentState));
     receiving = false;
 });
 
