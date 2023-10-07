@@ -2,20 +2,29 @@ import { nodes } from "./nodes";
 import { rates } from "./rates";
 import { states } from "./states";
 import { stats } from "./stats";
-
-
+import { setRealLights, setRealLightsEnd } from "./lights";
 
 export const gameConfig = {
     rates,
     stats,
     nodes,
     states,
+    onChange: async (game, ticker)=>{
+        const { solid:{ states }, current:{ pause, restart, state } } = game;
+
+        const { isEnd, isWin } = states[state];
+
+        if (restart) { ticker.restart(); }
+        else if (isEnd) { await setRealLightsEnd(isWin); ticker.stop(); }
+        else if (pause) { await setRealLights(1); }
+    },
     onTick: async (game, ticker)=>{
-        const { solid:{ rates, states }, current:{ state, stats, nodes } } = game;
+        const { solid:{ rates, states }, current:{ pause, state, stats, nodes } } = game;
 
-        if (states[state].isEnd) { return; }
+        const { isEnd } = states[state];
+        if (isEnd || pause) { return; }
 
-        const { refresh, speed, entropy, decay } = rates;
+        const { refresh, refreshLight, speed, entropy, decay } = rates;
 
         const q = refresh * speed;
         const qe = q * entropy;
@@ -28,7 +37,6 @@ export const gameConfig = {
 
         const { energy, battery } = stats;
         
-
         for (const i in nodes) {
             const node = nodes[i];
 
@@ -53,6 +61,11 @@ export const gameConfig = {
             await onTick(game.current, node, q);
 
             node.health -= qd * decay * (Math.tan(powerSet*1.3) / 200 ); //idk why
+        }
+
+        if (ticker.count % refreshLight === 1) {
+            const { isOn, power } = nodes.light;
+            await setRealLights(isOn ? power : 0);
         }
 
         return game;

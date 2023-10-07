@@ -1,0 +1,16 @@
+.Node {
+    display:grid;
+    grid-template-rows: auto 2fr auto 1fr 2fr;
+    align-items:center;
+    font-size: 1.2em;
+
+    .nodeInfo {
+        text-align: center;
+    }
+
+    .nodeStats, .nodeMw, .nodeControl {
+        display:flex;
+        justify-content:space-evenly;
+    }
+
+}

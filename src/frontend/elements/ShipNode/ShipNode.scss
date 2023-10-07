@@ -1,0 +1,30 @@
+.Range {
+    &.nodePowerSet, &.nodeHealth {
+        .wrap .interface .track {
+            width: 10em;
+        }
+    }
+    
+    &.nodePowerSet, &.nodeHealth, &.nodeIsOn {
+        
+        .wrap .interface .track {
+            height:.8em;
+
+            .pin {
+                width: 1em;
+                height: 1.5em;
+            }
+        
+            .Bar {
+                .unmark {
+                    background-color: #111;
+                }
+                .mark {
+                    background-color: rgba(207, 170, 1, .75);
+                }
+            }
+        }
+    
+    
+    }
+}

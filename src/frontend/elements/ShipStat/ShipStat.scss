@@ -1,0 +1,27 @@
+.ShipStat {
+    &.energy .unmark { background:blue !important; }
+    &.battery .unmark { background: #CFAA01 !important; }
+    &.smog .unmark { background:lime !important; }
+    &.oxygen .unmark { background:white !important; }
+    &.heat .unmark { background:red !important; }
+    &.direction .unmark { background:blue !important; }
+    &.distance .unmark { background: green !important; }
+
+    .wrap .interface .track {
+        width: 4em;
+
+        .Bar {
+            .mark {
+                background-color: #111;
+            }
+
+            .unmark {
+                background: rgb(255, 0, 0);
+                background: linear-gradient(0deg, red 0%, #CFAA01 35%, rgba(207, 170, 1, .5) 70%);
+                filter: none;
+            }
+        }
+
+
+    }
+}

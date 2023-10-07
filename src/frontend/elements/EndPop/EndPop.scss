@@ -1,0 +1,9 @@
+.EndPop {
+    &.win .endTitle {
+        color:green;
+    }
+
+    &.loose .endTitle {
+        color:red;
+    }
+}

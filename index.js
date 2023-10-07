@@ -4,7 +4,7 @@ import { sassPlugin } from 'esbuild-sass-plugin';
 
 //those values are default values
 
-const { home, title, slash } = envs();
+const { home, title, slash, shelly } = envs();
 
 sapp(argv.env === "prod", {
     port:3005,
@@ -14,7 +14,8 @@ sapp(argv.env === "prod", {
     },
     be:{
         info:{
-            slash:slash || "/"
+            slash:slash || "/",
+            shelly
         },
         plugins:[
             ImportGlobPlugin.default()

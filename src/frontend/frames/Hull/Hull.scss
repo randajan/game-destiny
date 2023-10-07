@@ -5,10 +5,17 @@
     & > * {
         height:100%;
         width:100%;
+        overflow:hidden;
 
         transition: .5s;
-        overflow:auto;
         transform:translate(0, -100%);
+
+        & > * {
+            padding:1vh 3vw 5vh;
+            min-height:100%;
+            overflow:auto;
+            margin:auto;
+        }
     }
 
 
@@ -22,6 +29,5 @@
         transform:translate(0, 100%);
         z-index:-1;
     }
-
     
 }

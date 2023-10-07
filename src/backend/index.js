@@ -7,7 +7,6 @@ import send from 'koa-send';
 import router from "./router";
 import "./controllers/**"; //setup all routes/controllers
 
-
 app.use(async (ctx, next) => {
     await next();
     if (ctx.status === 404) { await send(ctx, info.dir.fe+"/index.html"); }

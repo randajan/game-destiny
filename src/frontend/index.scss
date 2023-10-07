@@ -3,7 +3,8 @@
 body,
 input,
 textarea,
-select {
+select,
+button {
     font-family: 'Tektur', sans-serif;
     font-size:1.2rem;
     color: #CCC;
@@ -57,4 +58,31 @@ html, body, #root, .App {
           0 .03em rgba(102,102,102,.25),
           0 1em 1em rgba(255,255,255,.25);
     }
+
+    .heading {
+        display:grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items:center;
+    }
+
+    a {
+        text-decoration: none;
+        color:#CFAA01;
+        font-weight:bold;
+        transition: color 1s;
+
+        &:hover {
+            color:#CCC;
+            transition: color .2s;
+        }
+    }
+
+    .block {
+        width: 100vh;
+        min-width: 70vw;
+        max-width: 100%;
+    }
 }
+
+
+

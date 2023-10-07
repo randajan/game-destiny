@@ -26,7 +26,7 @@ export const states = [
     {
         id:"home",
         title:"Jsme doma!",
-        info:"Gratuluji dokázali jste to!",
+        info:"Sláva ALIANCI!",
         isEnd:true,
         isWin:true,
         when:({stats:{distance:{value}}})=>value <= 0

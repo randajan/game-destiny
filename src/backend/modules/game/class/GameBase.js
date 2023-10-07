@@ -7,6 +7,7 @@ export class GameBase extends BaseAsync {
         super(async (base, opt)=>{
 
             const { rates, stats, nodes, states } = opt;
+            const seed = jet.uid(16);
         
             for (const node of nodes) {
                 const id = node.id;
@@ -20,11 +21,12 @@ export class GameBase extends BaseAsync {
                 const health = Number.jet.frame(Number.jet.to(node.health), 0, 1);
                 const capacity = Math.max(0, Number.jet.to(node.capacity));
 
-                base.fit(["solid.nodes", id], _=>({id, title, info, onTick}));
+                base.fit(["solid.nodes", id], _=>({id, title, info, stat:node.stat, onTick}));
                 base.fit(["current.nodes", id], (next, f)=>{
                     const v = Object.jet.tap(next(f));
                     v.onTick = onTick;
                     v.isOn = Boolean.jet.to(v.isOn);
+                    v.isMw = Boolean.jet.to(v.isMw);
                     v.health = Number.jet.frame(Number.jet.to(v.health), 0, 1);
                     v.powerSet = Number.jet.frame(Number.jet.to(v.powerSet), 0, 1);
             
@@ -77,6 +79,8 @@ export class GameBase extends BaseAsync {
                 const v = Object.jet.tap(f);
                 v.state = states.find(({ when })=>when(v)).id;
                 v.pause = Boolean.jet.to(v.pause);
+                v.restart = Boolean.jet.to(v.restart);
+                v.seed = seed;
                 return v;
             });
 

@@ -1,11 +1,10 @@
 .Monitor {
     overflow: auto;
-    height: 100%;
+    min-height: 100%;
     display: grid;
     grid-template-rows: auto auto 1fr;
     grid-row-gap:1em;
     align-items:stretch;
-    padding:1vh 3vw;
 
     .heading {
         display:grid;
@@ -13,116 +12,18 @@
         justify-items: center;
     }
 
-    .Range[data-flags~="lock"] {
-        pointer-events: none;
-
-        .pin {
-            visibility: hidden;
-        }
-    }
-
-
-    .Range {
-
-        .wrap .interface .track {
-            .Bar {
-                width: 100%;
-                height:100%;
-                border: 2px solid #CFAA01;
-                box-shadow:
-                    0px 0px 1px 1px rgba(0, 0, 0, .6),
-                    0px 0px 2px 2px #FFF;
-            }
-
-            .pin {
-                background-color: #CFAA01;
-                box-shadow:
-                    0px 0px 1px 1px rgba(0, 0, 0, .6),
-                    0px 0px 2px 2px #FFF;
-
-                transition: transform 5s, box-shadow 5s;
-            }
-        }
-
-        &:hover .wrap .interface .track .pin {
-            box-shadow:
-                0px 0px 2px 2px rgba(0, 0, 0, .6),
-                0px 0px 5px 5px #fff;
-
-            transition: transform .2s, box-shadow .2s;
-        }
-    }
 
     .nodes {
         display: grid;
         grid-template-columns: auto .5fr 1fr 1fr;
         justify-items: center;
         align-items:end;
-
-        .nodeTitle {
-            justify-self: right;
-        }
-
-        .nodeTitle.off, .Switch[data-flags~="off"] label {
-            color: red;
-        }
-
-        .Range:not(.Switch) .track {
-            width: 10em;
-        }
-
-        .Range .wrap .interface .track {
-            height:.8em;
-
-            .pin {
-                width: 1em;
-                height: 1.5em;
-            }
-
-            .Bar {
-
-                .unmark {
-                    background-color: #111;
-                }
-
-                .mark {
-                    background-color: rgba(207, 170, 1, .75);
-                }
-            }
-        }
-
     }
 
 
     .stats {
         display: flex;
         justify-content: space-around;
-
-        .Stat.energy .unmark { background:blue !important; }
-        .Stat.battery .unmark { background: #CFAA01 !important; }
-        .Stat.smog .unmark { background:lime !important; }
-        .Stat.oxygen .unmark { background:white !important; }
-        .Stat.heat .unmark { background:red !important; }
-        .Stat.direction .unmark { background:blue !important; }
-        .Stat.distance .unmark { background: green !important; }
-
-        .Range .wrap .interface .track {
-            width: 4em;
-
-            .Bar {
-                .mark {
-                    background-color: #111;
-                }
-
-                .unmark {
-                    background: rgb(255, 0, 0);
-                    background: linear-gradient(0deg, red 0%, #CFAA01 35%, rgba(207, 170, 1, .5) 70%);
-                    filter: none;
-                }
-            }
-
-
-        }
     }
 
 }

@@ -1,6 +1,6 @@
 import jet from "@randajan/jet-core";
 
-const { solid, safe } = jet.prop;
+const { virtual, solid, safe } = jet.prop;
 
 export class Ticker {
 
@@ -52,6 +52,8 @@ export class Ticker {
         });
         
         solid(this, "resetCounter", _=>{ _p.count = 0; return this; });
+
+        virtual(this, "count", _=>_p.count);
 
     }
 

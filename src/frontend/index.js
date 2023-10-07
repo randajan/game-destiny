@@ -6,8 +6,10 @@ import "./config/dev";
 
 import Modal from "@randajan/react-popup";
 import "@randajan/react-popup/css";
+import '@randajan/react-form/css';
 
 import "./index.scss";
+import "./forms.scss";
 
 import Background from "./frames/Background/Background";
 import { HeadPane } from "./frames/HeadPane/HeadPane";
