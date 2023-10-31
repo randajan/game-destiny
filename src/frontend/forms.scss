@@ -71,13 +71,3 @@ button.Button {
         transition: transform .2s, box-shadow .2s;
     }
 }
-
-
-.nodeTitle {
-    justify-self: right;
-}
-
-.nodeTitle.off, .nodeIsOn[data-flags~="off"] label {
-    color: red;
-}
-

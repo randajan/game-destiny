@@ -12,7 +12,7 @@
     "@randajan/jet-core": "^3.2.14",
     "@randajan/jet-react": "1.2.14",
     "@randajan/js-object-view": "^1.0.2",
-    "@randajan/react-form": "^5.0.0",
+    "@randajan/react-form": "^5.1.5",
     "@randajan/react-popup": "^5.1.0",
     "@randajan/simple-app": "^2.0.9",
     "esbuild-plugin-import-glob": "^0.1.1",

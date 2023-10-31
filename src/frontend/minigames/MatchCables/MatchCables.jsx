@@ -21,7 +21,7 @@ const SocketAndCable = props=>{
         bound.relX = Number.jet.snap(bound.relX, .05, 0.1, .9);
         bound.relY = Number.jet.snap(bound.relY, .05, 0.2, .8);
         if (bound.state !== "stop") { return; }
-        onStop(bound.relY === .8 && socketX === bound.relX);
+        onStop(Number.jet.round(bound.relY, 4) === .8 && Number.jet.round(bound.relX, 4) === socketX);
     }, {
         initX:cableX,
         initY:0.2,
@@ -60,7 +60,6 @@ export const MatchCables = (props)=>{
 
     const onSelfSubmit = _=>{
         const correct = result.reduce((r, v)=>r + v, 0);
-        console.log(correct / _cableCount);
         onSubmit(correct / _cableCount);
     }
 

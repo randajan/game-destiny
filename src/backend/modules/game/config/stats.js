@@ -33,7 +33,7 @@ export const stats = [
         info:"Úroveň radiace snižuje Štít, jeho výkon a stav.\n\nPříliš mnoho radiace způsobí nepěknou zkázu lodi i posádce.",
         unit:[0, 6, "Sv"],
         entropy:-.005,
-        init:_=>Number.jet.rnd(.5, .9)
+        init:_=>Number.jet.rnd(.2, .7)
     },
     {
         id:"oxygen",
@@ -41,23 +41,23 @@ export const stats = [
         info:"Hladina kyslíku zvyšuje Generátor kyslíku, jeho výkon a stav.\n\nPokud hladina kyslíku klesne posádka ti nejprve udělá z uší rumba-koule, na krku zatančí fandango a následně se udusí",
         unit:[0, 21, "%"],
         entropy:.004,
-        init:_=>Number.jet.rnd(.5, .9)
+        init:_=>Number.jet.rnd(.3, .8)
     },
     {
         id:"heat",
         title:"teplota",
         info:"Teplotu udržuje Klimatizace, její výkon a stav.\n\nV příliš nízké teplotě se nedá pracovat. Eventuálně by posádka mohla trpět na omrzliny. Případně i umrznout a probudit se v roce 3000.",
-        unit:[-20, 21, "°C"],
+        unit:[-40, 21, "°C"],
         entropy:.006,
-        init:_=>Number.jet.rnd(.5, .9),
+        init:_=>Number.jet.rnd(.3, .8),
     },
     {
         id:"direction",
         title:"kurz",
         info:"Kurz je řízen prostřednictvím Navigace a je vyjádřen odchylkou od našeho cíle.\n\nŠpatný kurz znamená, že loď může letět úplně špatným směrem!",
         unit:[180, 0, "°"],
-        entropy:.004,
-        init:_=>Number.jet.rnd(.1, .5),
+        entropy:.008,
+        init:_=>Number.jet.rnd(0, .3),
     },
     {
         id:"distance",
@@ -65,7 +65,7 @@ export const stats = [
         info:"Naše vzdálenost od Země v astronomických jednotkách. \n\n"+planetsAu.join("\n"),
         unit:[0, 39, "au"],
         entropy:0,
-        init:_=>Number.jet.rnd(.8, 1)
+        init:_=>Number.jet.rnd(.9, 1)
     },
     
 ];

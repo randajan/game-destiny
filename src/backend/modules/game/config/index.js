@@ -2,7 +2,7 @@ import { nodes } from "./nodes";
 import { rates } from "./rates";
 import { states } from "./states";
 import { stats } from "./stats";
-import { setRealLights, setRealLightsEnd } from "./lights";
+import { setRealLights, setRealLightsEnd, setRealVent } from "./lights";
 
 export const gameConfig = {
     rates,
@@ -24,7 +24,7 @@ export const gameConfig = {
         const { isEnd } = states[state];
         if (isEnd || pause) { return; }
 
-        const { refresh, refreshLight, speed, entropy, decay } = rates;
+        const { refresh, refreshShelly, speed, entropy, decay } = rates;
 
         const q = refresh * speed;
         const qe = q * entropy;
@@ -40,16 +40,19 @@ export const gameConfig = {
         for (const i in nodes) {
             const node = nodes[i];
 
-            let { onTick, isOn, energyUse, powerSet, health, decay } = node;
+            let { onTick, isMw, isOn, energyUse, powerSet, health, decay } = node;
 
             //random events
-            const luck = (1-health)*powerSet;
-            if (luck && Boolean.jet.rnd(luck*.001)) { node.isOn = isOn = !isOn; }
-            if (luck && Boolean.jet.rnd(luck*.0005)) { node.powerSet = powerSet = Number.jet.rnd(0, 1); }
-            if (luck && Boolean.jet.rnd(luck*.0001)) { node.health = health = 0; }
+            const luck = q*(1-health)*powerSet;
+            if (luck > 0) {
+                if (Boolean.jet.rnd(luck*.0005)) { node.isMw = isMw = !isMw; }
+                if (Boolean.jet.rnd(luck*.0004)) { node.isOn = isOn = !isOn; }
+                if (Boolean.jet.rnd(luck*.0003)) { node.powerSet = powerSet = Number.jet.rnd(0, 1); }
+                if (Boolean.jet.rnd(luck*.0002)) { node.health = health = 0; }
+            }
 
             if (!isOn) { continue; }
-            if (health < 0.001 || !powerSet) { node.isOn = false; continue; }
+            if (health < 0.001 || isMw) { node.isOn = false; continue; }
 
             if (nodes.core.isOn && energy.value >= energyUse) { energy.value -= energyUse;}
             else if (nodes.battery.isOn && battery.value >= (energyUse / nodes.battery.capacity)) {
@@ -63,9 +66,10 @@ export const gameConfig = {
             node.health -= qd * decay * (Math.tan(powerSet*1.3) / 200 ); //idk why
         }
 
-        if (ticker.count % refreshLight === 1) {
-            const { isOn, power } = nodes.light;
-            await setRealLights(isOn ? power : 0);
+        if (ticker.count % refreshShelly === 1) {
+            const { light, engine } = nodes;
+            await setRealLights(light.isOn ? light.power : 0);
+            await setRealVent(engine.isOn);
         }
 
         return game;

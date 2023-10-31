@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import jet from "@randajan/jet-core";
 
-import { usePop } from "@randajan/react-popup";
+import { usePop } from "@randajan/react-form";
 import page from "@randajan/jet-react/page";
 
 import { game } from '../../config/game';

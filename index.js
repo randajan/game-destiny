@@ -4,10 +4,10 @@ import { sassPlugin } from 'esbuild-sass-plugin';
 
 //those values are default values
 
-const { home, title, slash, shelly } = envs();
+const { home, title, slash, shelly, port } = envs();
 
 sapp(argv.env === "prod", {
-    port:3005,
+    port,
     info:{
         home,
         title,

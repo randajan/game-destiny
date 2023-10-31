@@ -34,7 +34,7 @@ export const nodes = [
         powerSet: _ => Number.jet.rnd(.6, 1),
         health: _ => Number.jet.rnd(.6, 1),
         onTick: ({stats:{smog}}, node, rate) => {
-            smog.value -= rate * node.power * .012;
+            smog.value -= rate * node.power * .014;
         }
     },
     {
@@ -71,7 +71,7 @@ export const nodes = [
         isOn:false,
         health: _ => Number.jet.rnd(0, .2),
         onTick: ({stats:{direction}}, node, rate) => {
-            direction.value += rate * (node.powerSet * (node.health * 1.5 - .5)) * .0145;
+            direction.value += rate * (node.powerSet * (node.health * 1.5 - .5)) * .035;
         }
     },
     {
@@ -84,7 +84,7 @@ export const nodes = [
         isOn:false,
         health: _ => Number.jet.rnd(0, .2),
         onTick: ({stats:{distance, direction}}, node, rate) => {
-            distance.value -= rate * node.power * .002 * (direction.value * 2 - 1);
+            distance.value -= rate * node.power * .006 * (direction.value * 2 - 1);
         }
     },
     {

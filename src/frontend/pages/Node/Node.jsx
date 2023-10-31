@@ -9,11 +9,11 @@ import { game, useGame } from '../../config/game';
 import { Switch, Range, Button } from '@randajan/react-form';
 
 import { E404 } from "../E404/E404";
-import { usePop } from '@randajan/react-popup';
+import { usePop } from '@randajan/react-form';
 
 import "./Node.scss";
-import { ShipNode } from '../../elements/ShipNode/ShipNode';
-import { ShipStat } from '../../elements/ShipStat/ShipStat';
+import { NodeCtrl } from '../../elements/NodeCtrl/NodeCtrl';
+import { StatBar } from '../../elements/StatBar/StatBar';
 import { EndPopUp } from '../../elements/EndPop/EndPop';
 import { usePopPause } from '../../hooks/usePopPause';
 import { NodeMwPopUp } from '../NodeMw/NodeMw';
@@ -40,14 +40,14 @@ export const Node = (props)=>{
             <NodeMwPopUp {...nodes[id]} {...current.nodes[id]}/>
             <h2>{title}</h2>
             <div className="nodeStats">
-                <ShipStat { ...stats.energy } { ...current.stats.energy }/>
-                {stat ? <ShipStat { ...stats[stat] } { ...current.stats[stat] }/> : null}
+                <StatBar { ...stats.energy } { ...current.stats.energy }/>
+                {stat ? <StatBar { ...stats[stat] } { ...current.stats[stat] }/> : null}
             </div>
             <div className="nodeMw">
                 <Button onSubmit={_=>{ game.set(["current.nodes", id, "isMw"], true); }}>Opravit</Button>
             </div>
             <div className="nodeControl">
-                <ShipNode showInfo {...nodes[id]} { ...current.nodes[id] }/>
+                <NodeCtrl showInfo {...nodes[id]} { ...current.nodes[id] }/>
             </div>
             <div className="nodeInfo">{info}</div>
         </div>

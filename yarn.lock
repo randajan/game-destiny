@@ -114,10 +114,10 @@
   resolved "https://registry.yarnpkg.com/@randajan/js-object-view/-/js-object-view-1.0.2.tgz#80e5a9d3755f153569de9681de564b1deb7a1b4a"
   integrity sha512-kxUHQzjNmCEsql3PIByQRYjcfn9mYftNrF5sKQuZoGU5cvtUxckztaCswBw54U23CY1SKFvT6Ja7qsk6aTrLpA==
 
-"@randajan/react-form@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@randajan/react-form/-/react-form-5.0.0.tgz#c9000898c03c64e04c37a2e653d0581c0d2ff1fe"
-  integrity sha512-wGWIK7uLHZynDApFOpv4R3iv3hb6r3lTm6IK3vkMs/YgGbcCpBCYbwDEGFUVzPPoUF81arw0Ms6+6W2RGT/vtA==
+"@randajan/react-form@^5.1.5":
+  version "5.1.5"
+  resolved "https://registry.yarnpkg.com/@randajan/react-form/-/react-form-5.1.5.tgz#c3cece9ee5b062fc36aa842e61d6f4391035155e"
+  integrity sha512-wiOGbw7rY4iqDlng2cY+bs0X02Q/SgR3BahbchbdD0WK8iTWIjo0+BHi9E033wjEvjRIjovjgPFROwmxe/Qvbg==
 
 "@randajan/react-popup@^5.1.0":
   version "5.1.0"

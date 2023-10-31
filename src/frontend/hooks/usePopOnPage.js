@@ -1,5 +1,5 @@
 import page from "@randajan/jet-react/page";
-import { usePop } from "@randajan/react-popup";
+import { usePop } from "@randajan/react-form";
 import { useEffect } from "react";
 
 export const usePopOnPage = (props)=>{

@@ -4,8 +4,7 @@ import { createRoot } from 'react-dom/client';
 import fe, { bridge, info } from "@randajan/simple-app/fe";
 import "./config/dev";
 
-import Modal from "@randajan/react-popup";
-import "@randajan/react-popup/css";
+import { Modal } from "@randajan/react-form";
 import '@randajan/react-form/css';
 
 import "./index.scss";

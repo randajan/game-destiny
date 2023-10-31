@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import jet from "@randajan/jet-core";
 
-import { usePop } from "@randajan/react-popup";
+import { usePop } from "@randajan/react-form";
 
 
 import "./Monitor.scss";
@@ -10,8 +10,8 @@ import "./Monitor.scss";
 import { useGame } from '../../config/game';
 
 import { PauseButton } from '../../elements/PauseButton/PauseButton';
-import { ShipNode } from '../../elements/ShipNode/ShipNode';
-import { ShipStat } from '../../elements/ShipStat/ShipStat';
+import { NodeCtrl } from '../../elements/NodeCtrl/NodeCtrl';
+import { StatBar } from '../../elements/StatBar/StatBar';
 import { EndPopUp } from '../../elements/EndPop/EndPop';
 
 
@@ -32,10 +32,10 @@ export const Monitor = (props) => {
                 <p><PauseButton pause={current.pause}/></p>
             </div>
             <div className="stats">
-                {jet.forEach(stats, (stat, id) => <ShipStat key={id} {...stat} {...current.stats[id]} />)}
+                {jet.forEach(stats, (stat, id) => <StatBar key={id} {...stat} {...current.stats[id]} />)}
             </div>
             <div className="nodes">
-                {jet.forEach(nodes, (node, id) => <ShipNode key={id} {...node} {...current.nodes[id]} withTitle/>)}
+                {jet.forEach(nodes, (node, id) => <NodeCtrl full key={id} {...node} {...current.nodes[id]}/>)}
             </div>
         </div>
     )
