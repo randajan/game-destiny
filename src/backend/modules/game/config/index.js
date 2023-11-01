@@ -2,7 +2,7 @@ import { nodes } from "./nodes";
 import { rates } from "./rates";
 import { states } from "./states";
 import { stats } from "./stats";
-import { setRealLights, setRealLightsEnd, setRealVent } from "./lights";
+import { setRealLights, setRealLightsEnd, setRealVent } from "../../../../../lights";
 
 export const gameConfig = {
     rates,

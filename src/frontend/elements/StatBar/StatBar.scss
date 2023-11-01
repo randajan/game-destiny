@@ -1,10 +1,10 @@
 .StatBar {
-    &.energy .unmark { background:blue !important; }
+    &.energy .unmark { background:aqua !important; }
     &.battery .unmark { background: #CFAA01 !important; }
     &.smog .unmark { background:lime !important; }
     &.oxygen .unmark { background:white !important; }
     &.heat .unmark { background:red !important; }
-    &.direction .unmark { background:blue !important; }
+    &.direction .unmark { background:navy!important; }
     &.distance .unmark { background: green !important; }
 
     .wrap .interface .track {

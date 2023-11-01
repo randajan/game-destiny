@@ -4,11 +4,10 @@ import { Button } from "@randajan/react-form";
 import { useDrag } from "@randajan/jet-react";
 
 import "./MatchCables.scss";
-import { useGame } from '../../config/game';
+import { colors } from '../../config/const';
 
 const _rnds = {};
 
-const _colors = ["red", "green", "blue", "magenta"];
 const _cableCount = 4;
 
 const SocketAndCable = props=>{
@@ -43,19 +42,18 @@ const SocketAndCable = props=>{
             }} >{socketId}</div>
             <div className={"cable cable"+cableId} style={{
                 ...style,
-                backgroundColor:_colors[cableId]
+                backgroundColor:colors[cableId]
             }} ref={ref}>{Number.jet.toLetter(cableId)}</div>
         </>
     )
 }
 
 export const MatchCables = (props)=>{
-    const { id, onSubmit } = props;
+    const { gid, onSubmit } = props;
 
-    const seed = useGame("current.seed");
     const [result] = useState(_=>[]);
 
-    const gid = id+":"+seed;
+    
     const rnds = _rnds[gid] || (_rnds[gid] = Array.jet.shuffle(Array(_cableCount).fill(1).map((_, id)=>id)));
 
     const onSelfSubmit = _=>{

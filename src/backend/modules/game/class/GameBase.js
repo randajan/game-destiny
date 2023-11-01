@@ -4,9 +4,9 @@ import { BaseAsync } from "@randajan/jet-base";
 export class GameBase extends BaseAsync {
 
     constructor(onInit) {
-        super(async (base, opt)=>{
+        super(async (base, { cfg, ticker })=>{
 
-            const { rates, stats, nodes, states } = opt;
+            const { rates, stats, nodes, states } = cfg;
             const seed = jet.uid(16);
         
             for (const node of nodes) {
@@ -60,7 +60,7 @@ export class GameBase extends BaseAsync {
                 base.fit(["current.stats", id], (next, f)=>{
                     const v = Object.jet.tap(next(f));
                     v.entropy = entropy;
-                    v.value = Number.jet.round(Number.jet.frame(Number.jet.to(v.value), 0, 1), 4);
+                    v.value = Number.jet.frame(Number.jet.to(v.value), 0, 1);
                     return v;
                 });
         
@@ -81,6 +81,7 @@ export class GameBase extends BaseAsync {
                 v.pause = Boolean.jet.to(v.pause);
                 v.restart = Boolean.jet.to(v.restart);
                 v.seed = seed;
+                v.tick = ticker.count;
                 return v;
             });
 

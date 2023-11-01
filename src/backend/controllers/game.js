@@ -4,7 +4,7 @@ import router from "../router";
 import { koaBody } from "koa-body";
 import jet from "@randajan/jet-core";
 
-import { loadOrCreateGame } from "../modules/game";
+import { loadGame, loadOrCreateGame } from "../modules/game";
 
 
 router.use("/api", koaBody());
@@ -18,7 +18,10 @@ router.patch("/api/game", async ctx=>{
     const { body } = ctx.request;
     if (!body) { return; }
 
-    const game = loadOrCreateGame("XYZ");
+    const game = loadGame("XYZ");
     await game.base.set("", jet.merge(await game.base.get(), body));
+
+    ctx.body = await game.base.get("current");
+
 
 });

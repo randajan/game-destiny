@@ -9,27 +9,40 @@ export const game = new BaseAsync(async base=>{
     await base.set(data);
 });
 
+//solve sync glitch problem
+const phase = {
+    tickId:null,
+    pending:"",
+}
 
-let receiving = false;
 bridge.socket.on("game-tick", async (currentState) => {
-    receiving = true;
-    await game.set("current", JSON.parse(currentState));
-    receiving = false;
+    if (phase.pending) { return; }
+    phase.pending = "tick";
+    try { await game.set("current", JSON.parse(currentState)); } catch(err) {}
+    
+    delete phase.pending;
 });
 
 game.watch("", async (get, cngs) => {
-    if (receiving) { return; }
+    if (phase.pending) { return; }
+    phase.pending = "update";
 
-    const updates = Object.fromEntries(await Promise.all(cngs().map(async p => [p, await get(p)])));
+    try {
+        const updates = Object.fromEntries(await Promise.all(cngs().map(async p => [p, await get(p)])));
 
-    await fetch("/api/game", {
-        method: "PATCH",
-        body: JSON.stringify(jet.inflate(updates)),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
+        const resp = await fetch("/api/game", {
+            method: "PATCH",
+            body: JSON.stringify(jet.inflate(updates)),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+    
+        await game.set("current", await resp.json());
 
+    } catch(err) {}
+
+    delete phase.pending;
 });
 
 

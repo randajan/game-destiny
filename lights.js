@@ -1,5 +1,5 @@
 import info from "@randajan/simple-app/info";
-import { Shelly } from "../../shelly/Shelly";
+import { Shelly } from "./src/backend/modules/shelly/Shelly";
 
 const { shelly } = info;
 const realLights = new Shelly(shelly?.username, shelly?.password, shelly?.listRGBW);
