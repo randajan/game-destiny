@@ -1,6 +1,6 @@
 {
   "name": "game-destiny",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Destiny inspired by AmongUs",
   "repository": "git@github.com:randajan/game-destiny.git",
   "main": "index.js",
