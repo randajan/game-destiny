@@ -1,3 +1,21 @@
 .NodeMw {
+    .Bar {
+        margin:auto;
 
+        .caption {
+            color:#CCC;
+        }
+
+        border: 2px solid #CFAA01;
+        box-shadow:
+            0px 0px 1px 1px rgba(0, 0, 0, .6),
+            0px 0px 2px 2px #FFF;
+
+        .unmark {
+            background-color: #111;
+        }
+        .mark {
+            background-color: rgba(207, 170, 1, .75);
+        }
+    } 
 }

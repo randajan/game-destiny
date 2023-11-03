@@ -1,10 +1,7 @@
 .Modal .pops .Pop {
     background-color:#444 !important;
     padding: 1em;
-
-    nav {
-        display:none;
-    }
+    .nav { display:none; }
     .content {
         text-align:center;
         font-size:1.5em;

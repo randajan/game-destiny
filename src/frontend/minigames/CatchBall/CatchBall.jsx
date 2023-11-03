@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import jet from "@randajan/jet-core";
 
-import { Button } from "@randajan/react-form";
+import { Bar, Button } from "@randajan/react-form";
 import { useDrag } from "@randajan/jet-react";
 import "./CatchBall.scss";
 import { colors } from '../../config/const';
@@ -25,18 +25,19 @@ const setTrigger = (callback, msMin, msMax, msSqr)=>{
 
 export const CatchBall = (props)=>{
     const { gid, onSubmit } = props;
+    const [ status, setStatus ] = useState(0);
 
     const ref = useRef();
 
     useEffect(_=>{
-        let result = 0;
+        let result = 0, status = 0;
 
         const confirm = (plan, tid)=>{
             const el = ref.current;
             const state = tid%2;
             el.setAttribute("data-state", state ? "on" : "off");
             setTimeout(_=>{
-                if (tid == _max * 2) { console.log(result, Number.jet.toRatio(result, 0, _max)); onSubmit(Number.jet.toRatio(result, 0, _max)); }
+                if (tid == _max * 2) { onSubmit(status); }
                 if (state) {
                     el.style.top = Number.jet.rnd(20, 80) + "%";
                     el.style.left = Number.jet.rnd(10, 90) + "%";
@@ -48,9 +49,10 @@ export const CatchBall = (props)=>{
     
         }
 
-        const trigger = setTrigger(confirm, 750, 1250, 5);
+        const trigger = setTrigger(confirm, 650, 800, 3);
         const deaf = Element.jet.listen(ref.current, "click", _=>{
             result ++;
+            setStatus(status = Number.jet.round(Number.jet.toRatio(result, 0, _max), 4));
             trigger.tick();
         });
 
@@ -60,6 +62,7 @@ export const CatchBall = (props)=>{
 
     return (
         <div className="CatchBall">
+            <Bar value={status} from={0} to={1}>{(status * 100).toFixed(0)}%</Bar>
             <div className="field">
                 <div ref={ref} className="ball" data-state={"off"}></div>
             </div>

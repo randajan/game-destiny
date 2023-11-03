@@ -22,7 +22,12 @@ export const gameConfig = {
         const { solid:{ rates, states }, current:{ pause, state, stats, nodes } } = game;
 
         const { isEnd } = states[state];
-        if (isEnd || pause) { return; }
+        if (isEnd) { return; }
+        
+        if (pause) {
+            for (const i in nodes) { nodes[i].isMw = false; }
+            return game;
+        }
 
         const { refresh, refreshShelly, speed, entropy, decay } = rates;
 
@@ -52,7 +57,7 @@ export const gameConfig = {
             }
 
             if (!isOn) { continue; }
-            if (health < 0.001 || isMw) { node.isOn = false; continue; }
+            if (health < 0.001) { node.isOn = false; continue; }
 
             if (nodes.core.isOn && energy.value >= energyUse) { energy.value -= energyUse;}
             else if (nodes.battery.isOn && battery.value >= (energyUse / nodes.battery.capacity)) {

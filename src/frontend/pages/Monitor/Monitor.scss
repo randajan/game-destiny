@@ -15,7 +15,7 @@
 
     .nodes {
         display: grid;
-        grid-template-columns: auto .5fr 1fr 1fr;
+        grid-template-columns: auto 1fr;
         justify-items: center;
         align-items:end;
     }
