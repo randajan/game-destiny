@@ -17,6 +17,7 @@ import { StatBar } from '../../elements/StatBar/StatBar';
 import { EndPopUp } from '../../elements/EndPop/EndPop';
 import { usePopPause } from '../../hooks/usePopPause';
 import { NodeMwPopUp } from '../NodeMw/NodeMw';
+import { KillPopUp } from '../../frames/Kill/Kill';
 
 
 export const Node = (props)=>{
@@ -32,12 +33,13 @@ export const Node = (props)=>{
 
     if (!nodes[id]) { return <E404/>; }
 
-    const { stat, title, info,  } = nodes[id];
+    const { stat, title, info } = nodes[id];
 
     return (
         <div className="Node block">
             <EndPopUp {...currentState}/>
             <NodeMwPopUp {...nodes[id]} {...current.nodes[id]}/>
+            <KillPopUp {...nodes[id]} {...current.nodes[id]}/>
             <h2>{title}</h2>
             <div className="nodeStats">
                 <StatBar { ...stats.energy } { ...current.stats.energy }/>

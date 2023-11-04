@@ -45,15 +45,15 @@
     }
 
     &[data-node~="dmg"] {
-        &, label.Label { color: red; }
+        &, label.Label { color: #444; }
         pointer-events:none;
         .pin { display:none; }
     }
 
-    &[data-node~="mw"] {
-        &, label.Label { color: blue; }
-        pointer-events:none;
-        .pin { display:none; }
-    }
+    // &[data-node~="mw"] {
+    //     &, label.Label { color: #444; }
+    //     pointer-events:none;
+    //     .pin { display:none; }
+    // }
 
 }

@@ -29,7 +29,7 @@ export const gameConfig = {
             return game;
         }
 
-        const { refresh, refreshShelly, speed, entropy, decay } = rates;
+        const { refresh, refreshShelly, speed, entropy, decay, unluck } = rates;
 
         const q = refresh * speed;
         const qe = q * entropy;
@@ -48,12 +48,12 @@ export const gameConfig = {
             let { onTick, isMw, isOn, energyUse, powerSet, health, decay } = node;
 
             //random events
-            const luck = q*(1-health)*powerSet;
-            if (luck > 0) {
-                if (Boolean.jet.rnd(luck*.0005)) { node.isMw = isMw = !isMw; }
-                if (Boolean.jet.rnd(luck*.0004)) { node.isOn = isOn = !isOn; }
-                if (Boolean.jet.rnd(luck*.0003)) { node.powerSet = powerSet = Number.jet.rnd(0, 1); }
-                if (Boolean.jet.rnd(luck*.0002)) { node.health = health = 0; }
+            const ul = q*unluck*(1-health)*powerSet;
+            if (ul > 0) {
+                if (Boolean.jet.rnd(ul*.004)) { node.health = health = 0; }
+                if (Boolean.jet.rnd(ul*.006)) { node.powerSet = powerSet = Number.jet.rnd(0, 1); }
+                if (Boolean.jet.rnd(ul*.008)) { node.isOn = isOn = !isOn; }
+                if (isOn && isMw && Boolean.jet.rnd(ul*.1)) { node.isKill = true; }
             }
 
             if (!isOn) { continue; }

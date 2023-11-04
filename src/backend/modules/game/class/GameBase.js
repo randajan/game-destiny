@@ -26,8 +26,9 @@ export class GameBase extends BaseAsync {
                     const v = Object.jet.tap(next(f));
                     v.onTick = onTick;
                     v.isOn = Boolean.jet.to(v.isOn);
-                    v.isMw = Boolean.jet.to(v.isMw);
-                    v.health = Number.jet.frame(Number.jet.to(v.health), 0, 1);
+                    v.isKill = Boolean.jet.to(v.isKill);
+                    v.isMw = v.isKill ? false : Boolean.jet.to(v.isMw);
+                    v.health = v.isKill ? 0 : Number.jet.frame(Number.jet.to(v.health), 0, 1);
                     v.powerSet = Number.jet.frame(Number.jet.to(v.powerSet), 0, 1);
             
                     v.power = v.powerSet * v.health;

@@ -67,7 +67,7 @@ export const nodes = [
         info:"Navigační systém je trochu potvora a vyžaduje neustálý dohled. Pokud tento systém nebude v perfektním stavu může způsobovat víc problémů než užitku.",
         stat:"direction",
         energyUse: .15,
-        decay: .25,
+        decay: .2,
         isOn:false,
         health: _ => Number.jet.rnd(0, .2),
         onTick: ({stats:{direction}}, node, rate) => {

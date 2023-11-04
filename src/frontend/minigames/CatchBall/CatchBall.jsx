@@ -37,7 +37,7 @@ export const CatchBall = (props)=>{
             const state = tid%2;
             el.setAttribute("data-state", state ? "on" : "off");
             setTimeout(_=>{
-                if (tid == _max * 2) { onSubmit(status); }
+                if (tid >= _max * 2 || status >= 1) { onSubmit(status); }
                 if (state) {
                     el.style.top = Number.jet.rnd(20, 80) + "%";
                     el.style.left = Number.jet.rnd(10, 90) + "%";
