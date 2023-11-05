@@ -15,7 +15,9 @@ export class GameBoard extends BaseSync {
         });
 
         bridge.socket.on("gameBoardUpdate", data => {
-            withLock(_=>{ try { this.set("", data); } catch(err) {} });
+            withLock(_=>{ try { this.set("", data); } catch(err) {} }, false, _=>{
+                console.log("update was blocked");
+            });
         });
 
     }

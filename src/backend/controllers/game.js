@@ -26,5 +26,5 @@ import { Game } from "../modules/game/class/Game";
 
 // });
 
-events.use("gameConnect", (socket, { gameId, browserId })=>Game.connect(socket, gameId, browserId));
+events.use("gameConnect", (socket, { gameId, clientId })=>Game.connect(socket, clientId, gameId));
 events.use("gameBoardUpdate", (socket, data)=>Game.find(data?.id).board.set(data));

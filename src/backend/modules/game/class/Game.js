@@ -6,25 +6,21 @@ import { Ticker } from "../../../../arc/class/Ticker";
 import { gameConfig } from "../config";
 import { BaseSync } from "@randajan/jet-base";
 import { GameBoard } from "./GameBoard";
+import { generateId } from "../../../../arc/tools/generateID";
 
 const { solid, virtual } = jet.prop;
 
 const _ids = [];
 const _games = {};
-const _idsCache = {};
+const _gidByCid = {};
 
 const createId = _=>{
     while (true) {
-        const id = String.jet.rnd(6, 6) + Math.round(Number.jet.rnd(10, 100));
+        const id = generateId(6, 4);
         if (!_ids.includes(id)) { return id; }
     }
 }
 
-const getId = (role, browserId)=>{
-    if (!role || !browserId) { return createId(); }
-    const id = role + ":" + browserId;
-    return _idsCache[id] || ( _idsCache[id] = createId() );
-}
 
 export class Game extends Ticker {
 
@@ -34,12 +30,14 @@ export class Game extends Ticker {
         if (gameId && missingError) { throw Error(`Game not found id '${gameId}'`); }
     }
 
-    static connect(socket, gameId, browserId) {
-        return (Game.find(gameId, false) || new Game(browserId)).join(socket, browserId);
+    static connect(socket, clientId, gameId) {
+        
+        const gid = _gidByCid[clientId] = (gameId || _gidByCid[clientId] || createId());
+
+        return (Game.find(gid, !!gameId, !!gameId) || new Game(gid)).connect(socket, clientId);
     }
 
-    constructor(browserId) {
-        const id = getId("game", browserId);
+    constructor(id) {
 
         let current;
 
@@ -75,9 +73,7 @@ export class Game extends Ticker {
         this.sockets.forEach((id, socket)=>{ socket.emit(event, data); });
     }
 
-    join(socket, browserId) {
-        const id = getId("client", browserId);
-
+    connect(socket, id) {
         this.sockets.set(socket, id);
         this.board.set(["clients", id], { id });
 
@@ -86,7 +82,7 @@ export class Game extends Ticker {
             this.board.remove(["clients", id]);
         });
 
-        return id;
+        return this;
     }
 
 }

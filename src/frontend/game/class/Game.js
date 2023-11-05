@@ -14,8 +14,8 @@ export class Game {
         });
     }
 
-    async connect(gameId, browserId) {
-        return emit("gameConnect", { gameId, browserId });
+    async connect(gameId, clientId) {
+        return emit("gameConnect", { gameId, clientId });
     }
 
     async emit(event, data={}) {

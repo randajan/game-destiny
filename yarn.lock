@@ -94,6 +94,11 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
+"@randajan/file-db@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@randajan/file-db/-/file-db-0.1.2.tgz#4518a1ce9cfbb57635f8b6aa2fa89b23a54e89fc"
+  integrity sha512-Vwshc91SMWw6jf0hh5mSryN5OL2F3QxSOZw/QRyZbPlUB+WDUeVZaiLHE3+KXKK4yuNTa9ksKr9g7J45XfzzZQ==
+
 "@randajan/jet-base@^2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@randajan/jet-base/-/jet-base-2.1.5.tgz#c31ef9fea2c4c12ee3884cfc1de3af2f8bd88a7e"
@@ -104,15 +109,20 @@
   resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-3.2.17.tgz#74066646c4599ff4670a035c8261620ef8d1c8d5"
   integrity sha512-QIOyQ4gOwftRKNQs04yopx7cQJLa6hmdRP4NeP1bFH/GfbJha1LigX32Gkce/10cDPBtfDJjv94h3q97J/XOKg==
 
-"@randajan/jet-react@1.2.14":
-  version "1.2.14"
-  resolved "https://registry.yarnpkg.com/@randajan/jet-react/-/jet-react-1.2.14.tgz#d481338b13629bec65f0d1ab076569fab7f1d671"
-  integrity sha512-HrLL9qvqm8+QtMfa/r64LRmWA+L8qf87n7ke1IcwFslP1aFyit4JqOiL2FYIS15golrkUu2GehQuA91atcLvaw==
+"@randajan/jet-react@^1.2.23":
+  version "1.2.23"
+  resolved "https://registry.yarnpkg.com/@randajan/jet-react/-/jet-react-1.2.23.tgz#fd70461a88b7e6252ac70f31c7ed85cafb12ec91"
+  integrity sha512-weDGwm8RhlUnn8IH3ljsOClULnjrXXIdYFRG9B151JVQhBqf/kiXxgSCx5qVu8rLdN+U+doAgaUUX6rGJt+5hw==
 
 "@randajan/js-object-view@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@randajan/js-object-view/-/js-object-view-1.0.2.tgz#80e5a9d3755f153569de9681de564b1deb7a1b4a"
   integrity sha512-kxUHQzjNmCEsql3PIByQRYjcfn9mYftNrF5sKQuZoGU5cvtUxckztaCswBw54U23CY1SKFvT6Ja7qsk6aTrLpA==
+
+"@randajan/ram-db@^2.4.5":
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/@randajan/ram-db/-/ram-db-2.4.5.tgz#8dd1458a7dd9e30e729b0801ab80b2cd88f5e4c2"
+  integrity sha512-ghM04Ipirq6okx7TVda2LPPJ9hVLQ7TmepinBf5R1qWq21QX6rqf1nWg5MqiwTnuKBgEgrcV7KMNvaCJARjq/g==
 
 "@randajan/react-form@^5.1.5":
   version "5.1.5"
@@ -697,6 +707,11 @@ cross-spawn@^7.0.3:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+crypto-js@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.2.0.tgz#4d931639ecdfd12ff80e8186dba6af2c2e856631"
+  integrity sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==
 
 csstype@^3.0.2:
   version "3.1.2"
