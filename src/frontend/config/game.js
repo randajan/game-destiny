@@ -1,12 +1,13 @@
 import fe, { bridge, info } from "@randajan/simple-app/fe";
 
 import jet, { usePromise } from "@randajan/jet-react";
-import { BaseAsync } from "@randajan/jet-base";
+import { BaseAsync, BaseSync } from "@randajan/jet-base";
+
 
 export const game = new BaseAsync(async base=>{
-    const resp = await fetch("/api/game");
-    const data = await resp.json();
-    await base.set(data);
+    // const resp = await fetch("/api/game");
+    // const data = await resp.json();
+    // await base.set(data);
 });
 
 //solve sync glitch problem

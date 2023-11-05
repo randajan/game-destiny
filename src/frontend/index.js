@@ -23,7 +23,6 @@ screen.watch("", _=>root.setAttribute("data-screen", screen.getList().join(" "))
 createRoot(root).render(
     <Modal className="App">
         <Background/>
-        <HeadPane/>
         <Hull/>
     </Modal>
 );

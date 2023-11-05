@@ -94,15 +94,15 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@randajan/jet-base@^2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@randajan/jet-base/-/jet-base-2.1.4.tgz#7a7aaffa27b71023a038447403adeef8d69fcd42"
-  integrity sha512-NPPr/QXNMIVz5ZQAWybmosQJugcg6ZG7WCuZaaRqU5fGIGDJL346kXJi/GDsVEWEKbe2Uw49+s1i3QJ1NGsUuw==
+"@randajan/jet-base@^2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@randajan/jet-base/-/jet-base-2.1.5.tgz#c31ef9fea2c4c12ee3884cfc1de3af2f8bd88a7e"
+  integrity sha512-VT/0lP28/gN4th5/pD57V+XBDc5xLpKxW4kffhHvG3VwXWCfLRBKP+XYphSCt0cc6Fjg9pK7IJeDEknwVKThrg==
 
-"@randajan/jet-core@^3.2.14":
-  version "3.2.14"
-  resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-3.2.14.tgz#410cfc682a9823ce63ab613ad1c68bb1514fbe2b"
-  integrity sha512-ZdBawLskWAFuA7uK1ikByMecOHI/YGUh3FgPghCv+BPv5eIUDTz0lql0jz9PVbqWGq4wgrvQmE/O2cItjwew+g==
+"@randajan/jet-core@^3.2.17":
+  version "3.2.17"
+  resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-3.2.17.tgz#74066646c4599ff4670a035c8261620ef8d1c8d5"
+  integrity sha512-QIOyQ4gOwftRKNQs04yopx7cQJLa6hmdRP4NeP1bFH/GfbJha1LigX32Gkce/10cDPBtfDJjv94h3q97J/XOKg==
 
 "@randajan/jet-react@1.2.14":
   version "1.2.14"
@@ -118,11 +118,6 @@
   version "5.1.5"
   resolved "https://registry.yarnpkg.com/@randajan/react-form/-/react-form-5.1.5.tgz#c3cece9ee5b062fc36aa842e61d6f4391035155e"
   integrity sha512-wiOGbw7rY4iqDlng2cY+bs0X02Q/SgR3BahbchbdD0WK8iTWIjo0+BHi9E033wjEvjRIjovjgPFROwmxe/Qvbg==
-
-"@randajan/react-popup@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@randajan/react-popup/-/react-popup-5.1.0.tgz#526099147ec6405a4ad75e64c293f67548e98421"
-  integrity sha512-qrNuGAby9daBGLz5Jru/8h08ZTdZh84v55fecoTzGP4dGSkin0iqyXys+o2Zl0VzXw9WgyHr/cWxtMr6CUg3HQ==
 
 "@randajan/simple-app@^2.0.9":
   version "2.0.9"
