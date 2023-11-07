@@ -5,7 +5,7 @@ import { koaBody } from "koa-body";
 import jet from "@randajan/jet-core";
 
 
-import { themes } from "../../arc/themes";
+import { themes } from "../../arc/game/themes";
 
 router.get("/api/themes", async ctx=>{
     ctx.body = themes.map(t=>Object.jet.extract(t, ["id", "name", "desc"]));

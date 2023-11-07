@@ -3,10 +3,9 @@ import be, { app, http, io, bridge, info } from "@randajan/simple-app/be/koa";
 import jet from "@randajan/jet-core";
 
 import { Ticker } from "../../../../arc/class/Ticker";
-import { gameConfig } from "../config";
 import { BaseSync } from "@randajan/jet-base";
 import { GameBoard } from "./GameBoard";
-import { generateId } from "../../../../arc/tools/generateID";
+import { generateId } from "../../../../arc/tools/generateId";
 
 const { solid, virtual } = jet.prop;
 
@@ -31,10 +30,12 @@ export class Game extends Ticker {
     }
 
     static connect(socket, clientId, gameId) {
-        
         const gid = _gidByCid[clientId] = (gameId || _gidByCid[clientId] || createId());
-
         return (Game.find(gid, !!gameId, !!gameId) || new Game(gid)).connect(socket, clientId);
+    }
+
+    static updateBoard(data) {
+        return Game.find(data?.id).board.update(data);
     }
 
     constructor(id) {

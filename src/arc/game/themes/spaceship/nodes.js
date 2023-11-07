@@ -1,5 +1,5 @@
 
-export const nodes = [
+export default [
     {
         id: "core",
         title: "Reaktor",

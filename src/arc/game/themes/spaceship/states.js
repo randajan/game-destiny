@@ -1,4 +1,4 @@
-export const states = [
+export default [
     {
         id:"radiated",
         title:"Ozáření",

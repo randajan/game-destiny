@@ -10,7 +10,7 @@ const planetsAu = [
 ]
 
 
-export const stats = [
+export default [
     {
         id:"energy",
         title:"energie",

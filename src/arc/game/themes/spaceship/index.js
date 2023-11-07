@@ -1,22 +1,14 @@
-import { nodes } from "./nodes";
-import { rates } from "./rates";
-import { states } from "./states";
-import { stats } from "./stats";
-import { setRealLights, setRealLightsEnd, setRealVent } from "../../../../../lights";
 
-export const gameConfig = {
-    rates,
-    stats,
-    nodes,
-    states,
+export default {
+    id:"spaceship",
+    name:"Spaceship",
+    colors:["black", "white", "orange"],
     onChange: async (game, ticker)=>{
         const { solid:{ states }, current:{ pause, restart, state } } = game;
 
         const { isEnd, isWin } = states[state];
 
         if (restart) { ticker.restart(); }
-        else if (isEnd) { await setRealLightsEnd(isWin); ticker.stop(); }
-        else if (pause) { await setRealLights(1); }
     },
     onTick: async (game, ticker)=>{
         const { solid:{ rates, states }, current:{ pause, state, stats, nodes } } = game;
@@ -29,7 +21,7 @@ export const gameConfig = {
             return game;
         }
 
-        const { refresh, refreshShelly, speed, entropy, decay } = rates;
+        const { refresh, speed, entropy, decay } = rates;
 
         const q = refresh * speed;
         const qe = q * entropy;
@@ -69,12 +61,6 @@ export const gameConfig = {
             await onTick(game.current, node, q);
 
             node.health -= qd * decay * (Math.tan(powerSet*1.3) / 200 ); //idk why
-        }
-
-        if (ticker.count % refreshShelly === 1) {
-            const { light, engine } = nodes;
-            await setRealLights(light.isOn ? light.power : 0);
-            await setRealVent(engine.isOn);
         }
 
         return game;

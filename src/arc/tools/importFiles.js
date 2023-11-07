@@ -1,5 +1,12 @@
 
 
+export const forFiles = (files, prefix, callback)=>{
+    files?.filenames?.forEach((pathname, i)=>{
+        if (!pathname.startsWith(prefix)) { return; }
+        callback(pathname.substring(prefix.length), files.default[i]);
+    });
+}
+
 export const importFiles = (files, prefix="./", suffix=".js")=>{
     const r = {};
 
