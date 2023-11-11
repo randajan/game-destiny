@@ -1,32 +1,39 @@
 import React from 'react';
 
-import { Block } from "@randajan/react-form";
+import { Block, Field } from "@randajan/react-form";
 
 import { game } from "../../game";
+import { store } from '../../config/bases';
+
+import { Rates } from './Rates/Rates';
 
 import { ThemeSelect } from "./ThemeSelect/ThemeSelect";
-import { ThemeNodes } from "./ThemeNodes/ThemeNodes";
+import { NodesClients } from './NodesClients/NodesClients';
+
 
 import "./Lobby.scss";
-import { Rates } from './Rates/Rates';
+
+
+
+
+
 
 
 
 export const Lobby = (props)=>{
-    const { clientId } = props;
-
-    const [ board ] = game.board.use();
+    const [ boardId ] = game.board.use("id");
+    const [ _clientName ] = store.use("client.name");
+    const clientName = _clientName.get();
     
     return (
-        <Block className="Lobby" caption={"Game room: "+board.get("id")}>
+        <Block className="Lobby" caption={"Game room: "+boardId.get()}>
+            <Block className="clientName" caption="Terminal name">
+                <Field key={clientName} rawput={clientName} onOutput={(f, v)=>_clientName.set("", v)} />
+            </Block>
+            
             <ThemeSelect/>
-            <div className="clients">
-                {jet.forEach(board.get("clients"), (v, k)=>{
-                    return <div key={k} className={jet.melt(["client", k === clientId ? "local" : "remote"], " ")}>{k}</div>
-                })}
-            </div>
             <Rates/>
-            <ThemeNodes/>
+            <NodesClients/>
         </Block>
     )
 }

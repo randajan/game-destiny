@@ -3,22 +3,12 @@ import be, { app, http, io, bridge, info } from "@randajan/simple-app/be/koa";
 import jet from "@randajan/jet-core";
 
 import { Ticker } from "../../../../arc/class/Ticker";
-import { BaseSync } from "@randajan/jet-base";
 import { GameBoard } from "./GameBoard";
-import { generateId } from "../../../../arc/tools/generateId";
 
 const { solid, virtual } = jet.prop;
 
-const _ids = [];
+const _sockets = new Map();
 const _games = {};
-const _gidByCid = {};
-
-const createId = _=>{
-    while (true) {
-        const id = generateId(6, 4);
-        if (!_ids.includes(id)) { return id; }
-    }
-}
 
 
 export class Game extends Ticker {
@@ -29,9 +19,14 @@ export class Game extends Ticker {
         if (gameId && missingError) { throw Error(`Game not found id '${gameId}'`); }
     }
 
-    static connect(socket, clientId, gameId) {
-        const gid = _gidByCid[clientId] = (gameId || _gidByCid[clientId] || createId());
-        return (Game.find(gid, !!gameId, !!gameId) || new Game(gid)).connect(socket, clientId);
+    static connect(socket, gameId, client) {
+        if (!client?.id) { throw Error(`Game connect client id is undefined`); }
+        return (Game.find(gameId, false, false) || new Game(gameId)).connect(socket, client);
+    }
+
+    static disconnect(socket) {
+        const game = _sockets.get(socket);
+        if (game) { return game.disconnect(socket); }
     }
 
     static updateBoard(data) {
@@ -39,7 +34,6 @@ export class Game extends Ticker {
     }
 
     constructor(id) {
-
         let current;
 
         super({
@@ -74,16 +68,24 @@ export class Game extends Ticker {
         this.sockets.forEach((id, socket)=>{ socket.emit(event, data); });
     }
 
-    connect(socket, id) {
-        this.sockets.set(socket, id);
-        this.board.set(["clients", id], { id });
+    connect(socket, client) {
+        Game.disconnect(socket);
+        this.sockets.set(socket, client.id);
+        _sockets.set(socket, this);
+        this.board.set(["clients", client?.id], client);
+        console.log("connect", this.id, client);
+        return true;
+    }
 
-        socket.on("disconnect", _=>{
-            this.sockets.delete(socket);
-            this.board.remove(["clients", id]);
-        });
-
-        return this;
+    disconnect(socket) {
+        const clientId = this.sockets.get(socket);
+        
+        if (!clientId) { return false; } //socket is not part of this game
+        this.sockets.delete(socket);
+        _sockets.delete(socket);
+        this.board.remove(["clients", clientId]);
+        console.log("disconnect", this.id, clientId);
+        return true;
     }
 
 }

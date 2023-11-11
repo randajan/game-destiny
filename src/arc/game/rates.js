@@ -4,22 +4,26 @@
 export const rates = [
     {
         id:"speed",
-        title:"Rychlost hry",
-    },
-    {
-        id:"power",
-        title:"Síla systémů",
+        title:"Game speed",
     },
     {
         id:"entropy",
-        title:"Entropie okolí",
+        title:"Entropy",
+    },
+    {
+        id:"power",
+        title:"Systems power",
+    },
+    {
+        id:"energyUse",
+        title:"Energy use"
     },
     {
         id:"decay",
-        title:"Rozbití systému",
+        title:"Decay",
     },
     {
         id:"unluck",
-        title:"Míra neštěstí",
+        title:"Unluck",
     },
 ];

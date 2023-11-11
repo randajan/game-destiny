@@ -124,10 +124,10 @@
   resolved "https://registry.yarnpkg.com/@randajan/ram-db/-/ram-db-2.4.5.tgz#8dd1458a7dd9e30e729b0801ab80b2cd88f5e4c2"
   integrity sha512-ghM04Ipirq6okx7TVda2LPPJ9hVLQ7TmepinBf5R1qWq21QX6rqf1nWg5MqiwTnuKBgEgrcV7KMNvaCJARjq/g==
 
-"@randajan/react-form@^5.1.5":
-  version "5.1.5"
-  resolved "https://registry.yarnpkg.com/@randajan/react-form/-/react-form-5.1.5.tgz#c3cece9ee5b062fc36aa842e61d6f4391035155e"
-  integrity sha512-wiOGbw7rY4iqDlng2cY+bs0X02Q/SgR3BahbchbdD0WK8iTWIjo0+BHi9E033wjEvjRIjovjgPFROwmxe/Qvbg==
+"@randajan/react-form@^5.1.7":
+  version "5.1.7"
+  resolved "https://registry.yarnpkg.com/@randajan/react-form/-/react-form-5.1.7.tgz#48d9511d2c93c64ee80bbd68a36bf2e07d7f587c"
+  integrity sha512-XyJaA+Wb1HPX5q0OTNZG0lM0D2+EVhvHkDhWn0sP9a2KrS2UMjk+KyhAsL/tTBOWojc3VS7K3K2shd7NQNCGQw==
 
 "@randajan/simple-app@^2.0.9":
   version "2.0.9"

@@ -45,6 +45,14 @@ html, body, #root, .App {
     grid-template-rows: auto 1fr;
     overflow:hidden;
 
+    .grid {
+        display:grid;
+    }
+
+    .flex {
+        display:flex;
+    }
+
     .wall {
         background-color: #fff;
         box-shadow:

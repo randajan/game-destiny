@@ -26,5 +26,14 @@ import { Game } from "../modules/game/class/Game";
 
 // });
 
-events.use("gameConnect", (socket, { gameId, clientId })=>Game.connect(socket, clientId, gameId));
+events.use("gameConnect", (socket, { gameId, client })=>Game.connect(socket, gameId, client));
+events.use("gameDisconnect", (socket)=>Game.disconnect(socket));
+
 events.use("gameUpdateBoard", (socket, data)=>Game.updateBoard(data));
+
+
+io.sockets.on("connection", socket=>{
+    socket.on("disconnect", _=>{
+        Game.disconnect(socket);
+    });
+});

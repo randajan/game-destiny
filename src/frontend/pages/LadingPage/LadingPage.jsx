@@ -6,6 +6,7 @@ import { Button, usePop } from "@randajan/react-form";
 import "./LadingPage.scss";
 import { apiGet } from '../../config/api';
 import { usePromise } from '@randajan/jet-react';
+import { generateId } from '../../../arc/tools/generateID';
 
 
 
@@ -19,7 +20,7 @@ export const LadingPage = (props)=>{
     
     return (
         <div className="LadingPage">
-            <Link to={`game`}>Create game</Link>
+            <Link to={`game/${generateId()}`}>Create game</Link>
             <Button onSubmit={_=>pop.up(<SelectTheme back={back}/>)}>Join game</Button>
         </div>
     )

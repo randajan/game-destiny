@@ -1,3 +1,21 @@
 .Rates {
+    
+    .grid {
+        grid-template-columns: auto 1fr auto;
+        align-items:center;
 
+        gap:1vh 2vw;
+
+        .Caption {
+            justify-self: end;
+        }
+
+        .Range {
+            width:100%;
+            .track {
+                width:100%;
+            }
+        }
+    }
+    
 }

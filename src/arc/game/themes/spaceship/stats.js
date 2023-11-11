@@ -47,7 +47,7 @@ export default [
         id:"heat",
         title:"teplota",
         info:"Teplotu udržuje Klimatizace, její výkon a stav.\n\nV příliš nízké teplotě se nedá pracovat. Eventuálně by posádka mohla trpět na omrzliny. Případně i umrznout a probudit se v roce 3000.",
-        unit:[-40, 21, "°C"],
+        unit:[-20, 21, "°C"],
         entropy:.006,
         init:_=>Number.jet.rnd(.3, .8),
     },

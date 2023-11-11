@@ -1,5 +1,8 @@
 .ThemeSelect {
+    display:flex;
+    justify-content: space-evenly;
     .Button.current {
         color:red;
+        pointer-events:none;
     }
 }

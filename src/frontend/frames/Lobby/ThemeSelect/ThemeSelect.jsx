@@ -12,12 +12,12 @@ import { game } from '../../../game';
 
 export const ThemeSelect = (props)=>{
     const [ themes ] = usePromise([], _=>apiGet("themes"));
-    const [ current ] = game.board.use("theme");
-    const currentId = current.get("id");
+    const [ _themeId ] = game.board.use("theme.id");
+    const themeId = _themeId.get();
     
     return (
         <div className="ThemeSelect">
-            {themes.map(v=><Button className={v.id === currentId ? "current" : ""} key={v.id} onSubmit={_=>current.set("id", v.id)}>{v.name}</Button>)}
+            {themes.map(v=><Button className={v.id === themeId ? "current" : ""} key={v.id} onSubmit={_=>_themeId.set("", v.id)}>{v.name}</Button>)}
         </div>
     )
 }

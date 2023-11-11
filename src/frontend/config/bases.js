@@ -7,7 +7,15 @@ import { generateId } from "../../arc/tools/generateID";
 
 
 store.acceptAll();
-store.setDefault("client.id", generateId());
+
+store.fit("client", (next, t, f)=>{
+    const v = Object.jet.to(next(t));
+
+    v.id = f?.id || generateId();
+    v.name = v.name || v.id;
+
+    return v;
+});
 
 export {
     store,

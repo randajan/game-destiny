@@ -12,8 +12,6 @@ import { Game } from "../pages/Game/Game";
 
 export const pages = [
   { id:"page-landingPage", title:"", path:"/", content:<LadingPage/> },
-  { id:"page-game", title:"Game", path:"/game", content:<Game/> },
-  { id:"page-node", title:"Node", path:"/node/:id", content:<Node/>},
-  { id:"page-mgmt", title:"Mamagement", path:"/mgmt", content:<Mgmt/>, hidden:true },
+  { id:"page-game", title:"Game", path:"/game/:gameId", content:<Game/> },
   { id:"page-404", title:"404", path:"(.*)", content:<E404/>, hidden:true}
 ]

@@ -14,7 +14,7 @@
     "@randajan/jet-react": "^1.2.23",
     "@randajan/js-object-view": "^1.0.2",
     "@randajan/ram-db": "^2.4.5",
-    "@randajan/react-form": "^5.1.5",
+    "@randajan/react-form": "^5.1.7",
     "@randajan/simple-app": "^2.0.9",
     "crypto-js": "^4.2.0",
     "esbuild-plugin-import-glob": "^0.1.1",

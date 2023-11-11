@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
+import { useRoute } from "@randajan/jet-react/dom";
 
 import "./Game.scss";
 
 
 import { game } from "../../game";
-import { store, page } from '../../config/bases';
 import { Lobby } from '../../frames/Lobby/Lobby';
 
 
@@ -14,14 +14,16 @@ import { Lobby } from '../../frames/Lobby/Lobby';
 export const Game = (props)=>{
     const {} = props;
 
-    const [ client ] = store.use("client");
-    const clientId = client.get("id");
+    const { params:{ gameId } } = useRoute();
 
-    useEffect(_=>{ game.connect(page.pull("search.id"), clientId); }, [clientId]);
+    useEffect(_=>{
+        game.connect(gameId);
+        return _=>game.disconnect();
+    }, [ gameId ]);
     
     return (
         <div className="Game">
-            <Lobby clientId={clientId}/>
+            <Lobby/>
         </div>
     )
 }
