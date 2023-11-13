@@ -1,10 +1,10 @@
 .Rates {
-    
+    min-width:50vw;
     .grid {
+        
         grid-template-columns: auto 1fr auto;
         align-items:center;
 
-        gap:1vh 2vw;
 
         .Caption {
             justify-self: end;

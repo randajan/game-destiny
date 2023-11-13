@@ -16,7 +16,6 @@ export class GameBoard extends BaseSync {
             base.watch("", get=>{
                 if (!game.isConnected) { return; }
                 boardLock(async _=>{
-                    console.log("update");
                     this.set("", await game.emit("gameUpdateBoard", get()));
                 });
             });

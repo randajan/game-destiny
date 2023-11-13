@@ -1,6 +1,10 @@
 
 export default [
     {
+        id:"master",
+        title:"Monitor"
+    },
+    {
         id: "core",
         title: "Reaktor",
         info:"Tento systém řídí výrobu energie pro všechny ostatní systémy. Jeho vypnutí je vážný hazard se životy celé posádky.",

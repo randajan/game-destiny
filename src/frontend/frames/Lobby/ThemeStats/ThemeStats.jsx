@@ -1,12 +1,12 @@
 import React from 'react';
 
-import "./Players.scss";
+import "./ThemeStats.scss";
 
-export const Players = (props)=>{
+export const ThemeStats = (props)=>{
     const {} = props;
     
     return (
-        <div className="Players">
+        <div className="ThemeStats">
             
         </div>
     )

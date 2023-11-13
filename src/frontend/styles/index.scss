@@ -6,7 +6,7 @@ textarea,
 select,
 button {
     font-family: 'Tektur', sans-serif;
-    font-size:1.2rem;
+    font-size:1rem;
     color: #CCC;
 }
 
@@ -47,10 +47,12 @@ html, body, #root, .App {
 
     .grid {
         display:grid;
+        gap:2vh 1vw;
     }
 
     .flex {
         display:flex;
+        gap:2vh 1vw;
     }
 
     .wall {
@@ -78,6 +80,7 @@ html, body, #root, .App {
         color:#CFAA01;
         font-weight:bold;
         transition: color 1s;
+        cursor:pointer;
 
         &:hover {
             color:#CCC;

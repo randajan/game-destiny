@@ -99,10 +99,10 @@
   resolved "https://registry.yarnpkg.com/@randajan/file-db/-/file-db-0.1.2.tgz#4518a1ce9cfbb57635f8b6aa2fa89b23a54e89fc"
   integrity sha512-Vwshc91SMWw6jf0hh5mSryN5OL2F3QxSOZw/QRyZbPlUB+WDUeVZaiLHE3+KXKK4yuNTa9ksKr9g7J45XfzzZQ==
 
-"@randajan/jet-base@^2.1.5":
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/@randajan/jet-base/-/jet-base-2.1.5.tgz#c31ef9fea2c4c12ee3884cfc1de3af2f8bd88a7e"
-  integrity sha512-VT/0lP28/gN4th5/pD57V+XBDc5xLpKxW4kffhHvG3VwXWCfLRBKP+XYphSCt0cc6Fjg9pK7IJeDEknwVKThrg==
+"@randajan/jet-base@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@randajan/jet-base/-/jet-base-2.2.1.tgz#a8ccc427d068dfd2b41bce33c8a815b7962fa42e"
+  integrity sha512-D2Y+e3fLW1fDcvsRxW/CtQICJr/V7WQiynOoi1AUOCThl4qUFaddTqKSoSMajSssZSsEL3refONMlhGZGo/Ajg==
 
 "@randajan/jet-core@^3.2.17":
   version "3.2.17"

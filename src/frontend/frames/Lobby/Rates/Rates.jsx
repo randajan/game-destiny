@@ -12,7 +12,7 @@ const Rate = (props)=>{
     const ref = useRef();
 
     const onInput = (range, val)=>{
-        if (ref.current) { ref.current.innerText = val.toFixed(1); }
+        if (ref.current) { ref.current.innerText = (val*100).toFixed() + "%"; }
     }
 
     const onOutput = (range, val)=>{
@@ -21,10 +21,9 @@ const Rate = (props)=>{
 
     return (
         <>
-            {/* <Field type="number" rawput={value} from={0} to={5} step={0.1}/> */}
             <Caption>{title}</Caption>
-            <Range key={value} rawput={value} from={0.1} to={5} step={0.1} onInput={onInput} onOutput={onOutput}/>
-            <p ref={ref} className="currentValue">{value?.toFixed(1)}</p>
+            <Range key={value} rawput={value} from={0.01} to={2} step={0.01} onInput={onInput} onOutput={onOutput}/>
+            <p ref={ref} className="currentValue">{(value*100).toFixed() + "%"}</p>
         </>
     )
 }
@@ -35,7 +34,7 @@ export const Rates = (props)=>{
     const [ rates ] = game.board.use("rates");
     
     return (
-        <Block className="Rates" caption={"Obtížnost"}>
+        <Block className="Rates" caption={"Global rates"}>
             <Block className="grid">
                 {jet.forEach(rates.get(), (v, key)=><Rate key={key} {...v}/>)}
             </Block>

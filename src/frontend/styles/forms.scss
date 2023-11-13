@@ -1,7 +1,11 @@
 .Modal .pops .Pop {
     background-color:#444 !important;
     padding: 1em;
-    .nav { display:none; }
+
+    &[data-flags~="lock"] {
+        .nav { display:none; }
+    }
+    
     .content {
         text-align:center;
         font-size:1.5em;
@@ -12,6 +16,8 @@
 
 
 button.Button {
+    padding: 1vh 2vw;
+    font-weight:bold;
     border-radius:.2em;
     background-color:#111;
     border: 2px solid #CFAA01;

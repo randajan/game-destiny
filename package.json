@@ -9,7 +9,7 @@
   "private": true,
   "dependencies": {
     "@randajan/file-db": "^0.1.2",
-    "@randajan/jet-base": "^2.1.5",
+    "@randajan/jet-base": "^2.2.1",
     "@randajan/jet-core": "^3.2.17",
     "@randajan/jet-react": "^1.2.23",
     "@randajan/js-object-view": "^1.0.2",

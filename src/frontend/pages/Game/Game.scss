@@ -1,5 +1,8 @@
 .Game {
-    .client.local {
-        color:orange;
+    & > * {
+        padding:1vh 3vw 5vh;
+        min-height:100%;
+        overflow:auto;
+        margin:auto;
     }
 }

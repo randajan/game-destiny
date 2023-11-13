@@ -1,15 +1,22 @@
-.NodesClients {
+.ThemeNodes {
 
     .flex {
         flex-wrap:wrap;
         justify-content: space-evenly;
-        gap: 0 1vw;
     }
 
     .node {
         display: flex;
         flex-flow:column;
         align-items:center;
-        gap: .5vh 1vw;
+        justify-content: center;
+    }
+}
+
+.NodeSetup {
+    .clients {
+        display:flex;
+        flex-flow: column;
+        align-items:center;
     }
 }
