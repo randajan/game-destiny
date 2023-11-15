@@ -4,6 +4,7 @@ import jet from "@randajan/jet-core";
 
 import { Ticker } from "../../../../arc/class/Ticker";
 import { GameBoard } from "./GameBoard";
+import { GameState } from "./GameState";
 
 const { solid, virtual } = jet.prop;
 
@@ -11,7 +12,7 @@ const _sockets = new Map();
 const _games = {};
 
 
-export class Game extends Ticker {
+export class Game {
 
     static find(gameId, undefinedError=true, missingError=true) {
         if (_games[gameId]) { return _games[gameId]; }
@@ -33,32 +34,41 @@ export class Game extends Ticker {
         return Game.find(data?.id).board.update(data);
     }
 
-    constructor(id) {
-        let current;
+    static updateState(data) {
+        return Game.find(data?.id).state.update(data);
+    }
 
-        super({
-            onInit:_=>{
-                // const base = _p.base = (new GameBase()).config({ cfg, ticker:this });
-                // base.watch("solid.rates.refresh", async _=>this.setInterval(1000 * await base.get("solid.rates.refresh")));
-                // base.watch("current", async _=>be.io.emit("game-tick", JSON.stringify(await base.get("current"))));
-                // base.watch("", async get=>onChange(await get(""), this));
-            },
-            onTick:async _=>{
-                // const { base } = _p;
-                // const game = await base.get();
-                // const gameUpdate = await onTick(game, this);
-                // if (!gameUpdate || base !== _p.base) { return; }
-                // await base.set("", gameUpdate);
-            }
-        });
+    constructor(id) {
+
+        const _p = { }
+
+        const reset = _=>{ _p.state = new GameState(this); }
+
+        // super({
+        //     onInit:_=>{
+        //         // const base = _p.base = (new GameBase()).config({ cfg, ticker:this });
+        //         // base.watch("solid.rates.refresh", async _=>this.setInterval(1000 * await base.get("solid.rates.refresh")));
+        //         // base.watch("current", async _=>be.io.emit("game-tick", JSON.stringify(await base.get("current"))));
+        //         // base.watch("", async get=>onChange(await get(""), this));
+        //     },
+        //     onTick:async _=>{
+        //         // const { base } = _p;
+        //         // const game = await base.get();
+        //         // const gameUpdate = await onTick(game, this);
+        //         // if (!gameUpdate || base !== _p.base) { return; }
+        //         // await base.set("", gameUpdate);
+        //     }
+        // });
 
         solid.all(this, {
             id,
             sockets:new Map(),
-            board:new GameBoard(this)
+            board:new GameBoard(this),
         });
         
-        virtual(this, "current", _=>current);
+        virtual(this, "state", _=>_p.state);
+
+        this.board.watch("", get => { this.emit("gameUpdateBoard", get()); });
 
         //this.setInterval(1000 * cfg.rates.refresh).start();
         _games[id] = this;
@@ -73,7 +83,6 @@ export class Game extends Ticker {
         this.sockets.set(socket, client.id);
         _sockets.set(socket, this);
         this.board.set(["clients", client?.id], client);
-        console.log("connect", this.id, client);
         return true;
     }
 
@@ -84,7 +93,6 @@ export class Game extends Ticker {
         this.sockets.delete(socket);
         _sockets.delete(socket);
         this.board.remove(["clients", clientId]);
-        console.log("disconnect", this.id, clientId);
         return true;
     }
 

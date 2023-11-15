@@ -20,8 +20,8 @@ export const Monitor = (props) => {
 
     if (!data) { return null; }
 
-    const { solid:{ states, stats, nodes }, current } = data;
-    const currentState = states[current.state];
+    const { solid:{ stages, stats, nodes }, current } = data;
+    const currentState = stages[current.state];
 
     return (
         <div className="Monitor">

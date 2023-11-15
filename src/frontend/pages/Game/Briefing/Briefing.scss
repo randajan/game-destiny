@@ -1,0 +1,12 @@
+.Briefing {
+    .crews .flex {
+        flex-wrap:wrap;
+        justify-content:space-evenly;
+
+        .Button.ready {
+            pointer-events:none;
+            opacity:.25;
+        }
+
+    }
+}

@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Block, Caption, Button, Field, Menu, usePop } from "@randajan/react-form";
 
-import { game } from "../../game";
-import { store } from '../../config/bases';
+import { game } from "../../../game";
+import { store } from '../../../config/bases';
 
 import { Rates } from './Rates/Rates';
 
@@ -37,7 +37,7 @@ export const Lobby = (props)=>{
             <Menu trigger={<Caption>Crew members</Caption>} noblur transition={500}><Crews/></Menu>
             <Menu trigger={<Caption>Lights</Caption>} noblur transition={500}><Lights/></Menu>
             
-            
+            <Button onSubmit={_=>game.board.set("phase", 1)}>Start briefing</Button>
         </Block>
     )
 }

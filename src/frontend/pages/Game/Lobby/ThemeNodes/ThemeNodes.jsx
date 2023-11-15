@@ -2,8 +2,8 @@ import React from 'react';
 
 import "./ThemeNodes.scss";
 import { Block, Caption, usePop, Button } from '@randajan/react-form';
-import { game } from '../../../game';
-import { store } from '../../../config/bases';
+import { game } from '../../../../game';
+import { store } from '../../../../config/bases';
 
 const setNodeClient = (clientId, nodeId) => {
     const themeId = game.board.get("theme.id");

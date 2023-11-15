@@ -6,7 +6,7 @@ export class GameBase extends BaseAsync {
     constructor(onInit) {
         super(async (base, { cfg, ticker })=>{
 
-            const { rates, stats, nodes, states } = cfg;
+            const { rates, stats, nodes, stages } = cfg;
             const seed = jet.uid(16);
         
             for (const node of nodes) {
@@ -70,14 +70,14 @@ export class GameBase extends BaseAsync {
             for (let id in rates) { base.fit(["solid.rates", id], (next, f)=>Math.max(0, Number.jet.to(next(f))) || rates[id]); }
             base.set("solid.rates", rates);
 
-            const statesIndex = {};
-            for (const state of states) { statesIndex[state.id] = state; }
+            const stagesIndex = {};
+            for (const stage of stages) { stagesIndex[stage.id] = stage; }
 
-            base.fit("solid.states", _=>statesIndex);
+            base.fit("solid.stages", _=>stagesIndex);
             base.fit("current", (next, f)=>{
                 f = next(f);
                 const v = Object.jet.tap(f);
-                v.state = states.find(({ when })=>when(v)).id;
+                v.state = stages.find(({ when })=>when(v)).id;
                 v.pause = Boolean.jet.to(v.pause);
                 v.restart = Boolean.jet.to(v.restart);
                 v.seed = seed;

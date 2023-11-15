@@ -4,16 +4,16 @@ export default {
     name:"Spaceship",
     colors:["black", "white", "orange"],
     onChange: async (game, ticker)=>{
-        const { solid:{ states }, current:{ pause, restart, state } } = game;
+        const { solid:{ stages }, current:{ pause, restart, stage } } = game;
 
-        const { isEnd, isWin } = states[state];
+        const { isEnd, isWin } = stages[stage];
 
         if (restart) { ticker.restart(); }
     },
     onTick: async (game, ticker)=>{
-        const { solid:{ rates, states }, current:{ pause, state, stats, nodes } } = game;
+        const { solid:{ rates, stages }, current:{ pause, stage, stats, nodes } } = game;
 
-        const { isEnd } = states[state];
+        const { isEnd } = stages[stage];
         if (isEnd) { return; }
         
         if (pause) {

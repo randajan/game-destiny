@@ -2,7 +2,7 @@ import be, { app, http, io, bridge, info } from "@randajan/simple-app/be/koa";
 
 import jet from "@randajan/jet-core";
 
-import { Ticker } from "../../../../arc/class/Ticker";
+import { Ticker } from "../../../../../arc/class/Ticker";
 import { GameBase } from "./GameBase";
 import { gameConfig } from "../config";
 

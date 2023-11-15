@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { usePromise } from "@randajan/jet-react";
-import { apiGet } from "../../../config/api";
+import { apiGet } from "../../../../config/api";
 
 import { Button } from "@randajan/react-form";
 
 import "./ThemeSelect.scss";
-import { game } from '../../../game';
+import { game } from '../../../../game';
 
 
 

@@ -30,6 +30,7 @@ events.use("gameConnect", (socket, { gameId, client })=>Game.connect(socket, gam
 events.use("gameDisconnect", (socket)=>Game.disconnect(socket));
 
 events.use("gameUpdateBoard", (socket, data)=>Game.updateBoard(data));
+events.use("gameUpdateState", (socket, data)=>Game.updateState(data));
 
 
 io.sockets.on("connection", socket=>{
