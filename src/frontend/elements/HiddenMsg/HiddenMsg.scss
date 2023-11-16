@@ -1,0 +1,32 @@
+.HiddenMsg {
+    position:relative;
+    cursor:pointer;
+
+    .cover, .msg {
+        transition: opacity .2s;
+    }
+
+    .cover {
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        pointer-events:none;
+    }
+
+    .msg {
+        opacity:0;
+    }
+
+
+    &[data-flags~="visible"] {
+        .cover {
+            opacity:0;
+        }
+
+        .msg {
+            opacity:1;
+        }
+    }
+}

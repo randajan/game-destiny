@@ -31,7 +31,7 @@ export const Crews = (props)=>{
             <div className="flex list">
                 {crews?.list.map((c, id)=>(
                     <Block key={id} className="crew">
-                        <Field key={c.name} rawput={c.name} onOutput={(f, v)=>{ _crews.set(["list", id, "name"], v); }}/>
+                        <Field key={c.name} maxLength={12} rawput={c.name} onOutput={(f, v)=>{ _crews.set(["list", id, "name"], v); }}/>
                         <Button onSubmit={_=>{ _crews.remove(["list", id]); }}>X</Button>
                     </Block>
                 ))}

@@ -37,6 +37,18 @@ export class GameBoard extends BaseSync {
             base.fit("crews", (next, t, f)=>{
                 const v = Object.jet.to(next(t));
 
+                delete v.minName;
+                delete v.maxName;
+
+                v.list = Array.jet.to(v.list).map(c => {
+                    if (!c) { return; }
+                    if (!c.name) { c.name = String.jet.rnd(2, 6, -1).jet.capitalize(); }
+                    const cnl = c.name.length;
+                    v.minName = v.minName ? Math.min(v.minName, cnl) : cnl;
+                    v.maxName = v.maxName ? Math.max(v.maxName, cnl) : cnl;
+                    return c;
+                }).filter(c => c);
+
                 v.count = v?.list?.length || 0;
                 const enemyRate = calcResistanceRate(v.count, 3.5);
         
@@ -45,14 +57,6 @@ export class GameBoard extends BaseSync {
                 v.wildChance = enemyRate % 1;
         
                 return v;
-            });
-
-            base.fit("crews.list", (next, t, f)=>{
-                return Array.jet.to(next(t)).map(c => {
-                    if (!c) { return; }
-                    if (!c.name) { c.name = String.jet.rnd(2, 6, -1).jet.capitalize(); }
-                    return c;
-                }).filter(c => c);
             });
 
             base.fit("lights.list", (next, t, f)=>{

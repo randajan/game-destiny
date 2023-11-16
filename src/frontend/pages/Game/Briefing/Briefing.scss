@@ -1,12 +1,33 @@
 .Briefing {
-    .crews .flex {
-        flex-wrap:wrap;
-        justify-content:space-evenly;
 
-        .Button.ready {
-            pointer-events:none;
-            opacity:.25;
+    display:grid;
+    grid-template-rows: auto 1fr auto;
+
+    .crews {
+        display:grid;
+        grid-template-rows: auto 1fr;
+
+        .flex {
+            flex-wrap:wrap;
+            justify-content:space-evenly;
+            align-items:center;
+            gap: 2vh 2vw;
+    
+            .Button.ready {
+                pointer-events:none;
+                opacity:.25;
+            }
+
+            .Button {
+                font-size:1.8em;
+                padding:2vh 4vw;
+            }
+    
         }
+    }
 
+    .ctrls {
+        display:flex;
+        justify-content: space-evenly;
     }
 }

@@ -1,5 +1,4 @@
 import jet from "@randajan/jet-core";
-import fetch from "node-fetch";
 
 
 const { solid } = jet.prop;

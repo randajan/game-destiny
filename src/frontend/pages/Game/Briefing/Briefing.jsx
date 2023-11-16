@@ -4,39 +4,16 @@ import { Block, Button, usePop } from "@randajan/react-form";
 
 import "./Briefing.scss";
 import { game } from '../../../game';
+import { BriefCrew } from './BriefCrew/BriefCrew';
 
-
-const BriefCrew = props=>{
-    const { id, name, isAlly, code, enemies } = props;
-
-    return (
-        <Block level={0} caption={name}>
-            <Block className="code" caption="Passcode">
-                <div>{code}</div>
-            </Block>
-            <Block className="role" caption="Role">
-                {isAlly ? <div className="ally">Alliance</div> : <div className="enemy">Resistance</div>}
-            </Block>
-            {isAlly ? null :
-                <Block className="partners" caption="Partners">
-                    {enemies.filter(r=>r.code !== code).map((e, i)=>(
-                        <div key={i} className="partner enemy">
-                            {e.name}
-                        </div>
-                    ))}
-                </Block>
-            }
-        </Block>
-    )
-}
 
 const BriefButton = props=>{
     const { id, name, isReady } = props;
-    const pop = usePop(<BriefCrew { ...props}/>);
+    const pop = usePop();
 
     const onSubmit = isReady ? null : _=>{
         game.board.set(["crews", "list", id, "isReady"], true);
-        pop.up();
+        pop.up(<BriefCrew { ...props}/>);
     };
 
     return (
@@ -56,7 +33,7 @@ export const Briefing = (props)=>{
     const enemies = crewsList.filter(c=>!c.isAlly);
     
     return (
-        <Block className="Briefing" caption="Briefing">
+        <Block level={0} className="Briefing" caption="Briefing">
             <Block className="crews" caption={ "Crews"+String.jet.quote(pending.length, " (", ")") }>
                 <div className={"flex"}>
                     {crewsList.map((c, id)=><BriefButton key={id} id={id} {...c} enemies={enemies}/>)}

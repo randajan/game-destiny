@@ -1,0 +1,25 @@
+.BriefCrew {
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    min-width:80vw;
+    min-height:60vh;
+    text-align:left;
+
+
+    .grid {
+        grid-template-columns: 1fr 1fr;
+        align-items: baseline;
+
+        .Caption {
+            justify-self:end;
+            &::after {
+                content:":";
+            }
+        }
+
+        .HiddenMsg {
+            justify-self:stretch;
+        }
+    }
+}
