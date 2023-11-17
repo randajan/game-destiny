@@ -1,9 +1,6 @@
 import React from "react";
 
-import { Monitor } from "../pages/Monitor/Monitor";
 import { E404 } from "../pages/E404/E404";
-import { Node } from "../pages/Node/Node";
-import { Mgmt } from "../pages/Mgmt/Mgmt";
 import { LadingPage } from "../pages/LadingPage/LadingPage";
 import { Game } from "../pages/Game/Game";
 

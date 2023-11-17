@@ -7,7 +7,7 @@ import "./config/dev";
 import { Modal } from "@randajan/react-form";
 import '@randajan/react-form/css';
 
-import "./styles/**/*";
+import "./styles/*";
 
 import Background from "./frames/Background/Background";
 import { HeadPane } from "./frames/HeadPane/HeadPane";
@@ -22,6 +22,7 @@ screen.watch("", _=>root.setAttribute("data-screen", screen.getList().join(" "))
 createRoot(root).render(
     <Modal className="App">
         <Background/>
+        <HeadPane/>
         <Hull/>
     </Modal>
 );

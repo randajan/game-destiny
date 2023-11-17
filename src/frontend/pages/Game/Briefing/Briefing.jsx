@@ -33,18 +33,10 @@ export const Briefing = (props)=>{
     const enemies = crewsList.filter(c=>!c.isAlly);
     
     return (
-        <Block level={0} className="Briefing" caption="Briefing">
-            <Block className="crews" caption={ "Crews"+String.jet.quote(pending.length, " (", ")") }>
-                <div className={"flex"}>
-                    {crewsList.map((c, id)=><BriefButton key={id} id={id} {...c} enemies={enemies}/>)}
-                </div>
-                
-            </Block>
-            <div className="ctrls">
-                <Button onSubmit={_=>game.board.set("phase", 0)}>Reset briefing</Button>
-                <Button onSubmit={_=>game.board.set("phase", 0)}>We are ready</Button>
+        <Block className="Briefing" caption={ "Briefing"+String.jet.quote(pending.length, " (", ")") }>
+            <div className={"flex"}>
+                {crewsList.map((c, id)=><BriefButton key={id} id={id} {...c} enemies={enemies}/>)}
             </div>
-
         </Block>
     )
 }

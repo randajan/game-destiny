@@ -3,10 +3,12 @@ import React, { useEffect } from 'react';
 import jet from "@randajan/jet-core";
 
 import "./NodeMw.scss";
-import { usePopOnPage } from '../../hooks/usePopOnPage';
-import { game, useGame } from '../../config/game';
-import { MatchCables } from '../../minigames/MatchCables/MatchCables';
-import { CatchBall } from '../../minigames/CatchBall/CatchBall';
+import { usePopOnPage } from '../../../../../hooks/usePopOnPage';
+import { game } from '../../../../../game';
+import { MatchCables } from './MatchCables/MatchCables';
+import { CatchBall } from './CatchBall/CatchBall';
+
+
 
 const _miniGames = [ MatchCables, CatchBall ];
 const _rnds = {};
@@ -26,6 +28,8 @@ export const NodeMw = (props)=>{
 }
 
 export const NodeMwPopUp = props=>{
+
+    return null;
     const { id, isMw } = props;
 
     const seed = useGame("current.seed");

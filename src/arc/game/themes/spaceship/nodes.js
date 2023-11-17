@@ -1,7 +1,7 @@
 
 export default [
     {
-        id:"master",
+        id:"main",
         title:"Monitor"
     },
     {

@@ -4,7 +4,7 @@ import { Bar, Button } from "@randajan/react-form";
 import { useDrag, useForceRender } from "@randajan/jet-react";
 
 import "./MatchCables.scss";
-import { colors } from '../../config/const';
+import { colors } from '../../../../../../config/const';
 
 const _cfgs = {};
 const _cableCount = 4;

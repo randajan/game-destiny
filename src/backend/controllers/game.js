@@ -29,8 +29,8 @@ import { Game } from "../modules/game/class/Game";
 events.use("gameConnect", (socket, { gameId, client })=>Game.connect(socket, gameId, client));
 events.use("gameDisconnect", (socket)=>Game.disconnect(socket));
 
-events.use("gameUpdateBoard", (socket, data)=>Game.updateBoard(data));
-events.use("gameUpdateState", (socket, data)=>Game.updateState(data));
+events.use("gameUpdateBoard", (socket, { id, data })=>Game.updateBoard(id, data));
+events.use("gameUpdateState", (socket, { id, data })=>Game.updateState(id, data));
 
 
 io.sockets.on("connection", socket=>{

@@ -3,16 +3,18 @@ import { useRoute } from "@randajan/jet-react/dom";
 
 import "./Game.scss";
 
+import { Button } from "@randajan/react-form";
 
 import { game } from "../../game";
 import { Lobby } from './Lobby/Lobby';
 import { Briefing } from './Briefing/Briefing';
+import { Desk } from './Desk/Desk';
 
 
 const gamePhases = [
     <Lobby/>,
     <Briefing/>,
-    <div>DIS FUCKING GAME</div>
+    <Desk/>
 ];
 
 
@@ -27,12 +29,16 @@ export const Game = (props)=>{
     }, [ gameId ]);
 
     const [ _phase ] = game.board.use("phase");
+    const phaseId = _phase.get("id");
     
     return (
-        <div className="Game">
-            {
-                gamePhases[_phase.get()]
-            }
+        <div className="Game" data-phase={phaseId}>
+            { gamePhases[phaseId] }
+            <div className="ctrls flex">
+                <Button onSubmit={_=>_phase.set("id", 0)}>Config</Button>
+                <Button onSubmit={_=>_phase.set("id", 1)}>Briefing</Button>
+                <Button onSubmit={_=>_phase.set("id", 2)}>Game</Button>
+            </div>
         </div>
     )
 }

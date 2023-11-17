@@ -6,7 +6,7 @@ import { Button, usePop } from "@randajan/react-form";
 import "./LadingPage.scss";
 import { apiGet } from '../../config/api';
 import { usePromise } from '@randajan/jet-react';
-import { generateId } from '../../../arc/tools/generateID';
+import { generateId } from '../../../arc/tools/generateId';
 
 
 

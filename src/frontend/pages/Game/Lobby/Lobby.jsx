@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Block, Caption, Button, Field, Menu, usePop } from "@randajan/react-form";
+import { Block, Caption, Button, Field, Menu, Pane, usePop } from "@randajan/react-form";
 
 import { game } from "../../../game";
 import { store } from '../../../config/bases';
@@ -14,10 +14,19 @@ import "./Lobby.scss";
 import { Lights } from './Lights/Lights';
 import { Crews } from './Crews/Crews';
 import { ThemeNodes } from './ThemeNodes/ThemeNodes';
+import { Mods } from './Mods/Mods';
 
+
+const panels = [
+    { caption:"Modifiers", Content:Mods },
+    { caption:"Rates", Content:Rates },
+    { caption:"Nodes", Content:ThemeNodes },
+    { caption:"Crew members", Content:Crews },
+    { caption:"Lights", Content:Lights },
+]
 
 export const Lobby = (props)=>{
-    const pop = usePop();
+    const [ panel, setPanel ] = useState(0);
 
     const [ boardId ] = game.board.use("id");
     const [ _clientName ] = store.use("client.name");
@@ -32,12 +41,22 @@ export const Lobby = (props)=>{
                 </Block>
             </div>
             <ThemeSelect/>
-            <Menu trigger={<Caption>Rates</Caption>} noblur transition={500}><Rates/></Menu>
-            <Menu trigger={<Caption>Nodes</Caption>} noblur transition={500}><ThemeNodes/></Menu>
-            <Menu trigger={<Caption>Crew members</Caption>} noblur transition={500}><Crews/></Menu>
-            <Menu trigger={<Caption>Lights</Caption>} noblur transition={500}><Lights/></Menu>
-            
-            <Button onSubmit={_=>game.board.set("phase", 1)}>Start briefing</Button>
+            <div className="scene">
+                <div className="header">
+                    {panels.map(({caption}, key)=>(
+                        <Caption key={key} data-panel={key===panel ? "selected" : ""}>
+                            <a onClick={_=>setPanel(key)}>{caption}</a>
+                        </Caption>
+                    ))}
+                </div>
+                <div className="panels">
+                    {panels.map(({Content}, key)=>(
+                        <Pane key={key} unmountOnExit expand={key===panel} transition={500}>
+                            <Content />
+                        </Pane>
+                    ))}
+                </div>
+            </div>
         </Block>
     )
 }

@@ -1,8 +1,14 @@
 .Game {
+    display:grid;
+    grid-template-rows: 1fr auto;
+
     & > * {
-        padding:1vh 3vw 5vh;
-        min-height:100%;
+        padding:2vh 3vw;
         overflow:auto;
-        margin:auto;
     }
+
+    .ctrls {
+        justify-content: space-evenly;
+    }
+
 }

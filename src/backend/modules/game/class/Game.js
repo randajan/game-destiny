@@ -30,47 +30,50 @@ export class Game {
         if (game) { return game.disconnect(socket); }
     }
 
-    static updateBoard(data) {
-        return Game.find(data?.id).board.update(data);
+    static updateBoard(gameId, data) {
+        return Game.find(gameId).board.update(data);
     }
 
-    static updateState(data) {
-        return Game.find(data?.id).state.update(data);
+    static updateState(gameId, data) {
+        return Game.find(gameId).state.update(data);
     }
 
     constructor(id) {
 
         const _p = { }
 
-        const reset = _=>{ _p.state = new GameState(this); }
+        const onInit = _=>{
+            _p.state = (new GameState(this));
+            //const base = _p.base = (new GameBase()).config({ cfg, ticker:this });
+            // base.watch("solid.rates.refresh", async _=>this.setInterval(1000 * await base.get("solid.rates.refresh")));
+            // base.watch("current", async _=>be.io.emit("game-tick", JSON.stringify(await base.get("current"))));
+            // base.watch("", async get=>onChange(await get(""), this));
+        }
 
-        // super({
-        //     onInit:_=>{
-        //         // const base = _p.base = (new GameBase()).config({ cfg, ticker:this });
-        //         // base.watch("solid.rates.refresh", async _=>this.setInterval(1000 * await base.get("solid.rates.refresh")));
-        //         // base.watch("current", async _=>be.io.emit("game-tick", JSON.stringify(await base.get("current"))));
-        //         // base.watch("", async get=>onChange(await get(""), this));
-        //     },
-        //     onTick:async _=>{
-        //         // const { base } = _p;
-        //         // const game = await base.get();
-        //         // const gameUpdate = await onTick(game, this);
-        //         // if (!gameUpdate || base !== _p.base) { return; }
-        //         // await base.set("", gameUpdate);
-        //     }
-        // });
+        const onTick = _=>{
+            const board = this.board.get();
+            //board?.theme?.onTick(this);
+            //console.log(this.state.get("nodes.core.powerSet"));
+            this.emit("gameUpdateState", this.state.get());
+        }
 
         solid.all(this, {
             id,
             sockets:new Map(),
             board:new GameBoard(this),
+            ticker:new Ticker({onInit, onTick})
         });
         
         virtual(this, "state", _=>_p.state);
 
         this.board.watch("", get => { this.emit("gameUpdateBoard", get()); });
+        this.board.watch("phase.id", get=>{
+            const id = get();
+            if (id === 2) { this.ticker.start(); }
+            else { this.ticker.stop().resetCounter(); }
+        });
 
-        //this.setInterval(1000 * cfg.rates.refresh).start();
+        this.ticker.setInterval(500);
         _games[id] = this;
     }
 

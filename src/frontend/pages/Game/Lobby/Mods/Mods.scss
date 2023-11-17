@@ -1,0 +1,16 @@
+.Mods {
+    min-width:50vw;
+    .grid {
+        
+        grid-template-columns: auto auto 1fr;
+        align-items:center;
+
+
+        .Caption {
+            justify-self: end;
+        }
+
+
+    }
+    
+}

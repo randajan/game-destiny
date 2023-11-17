@@ -3,7 +3,7 @@ import { BaseSync } from "@randajan/jet-base";
 import store from "@randajan/jet-react/store";
 import page from "@randajan/jet-react/page";
 
-import { generateId } from "../../arc/tools/generateID";
+import { generateId } from "../../arc/tools/generateId";
 
 
 store.acceptAll();

@@ -5,7 +5,7 @@ import jet from "@randajan/jet-core";
 import { Bar, Button } from "@randajan/react-form";
 import { useDrag } from "@randajan/jet-react";
 import "./CatchBall.scss";
-import { colors } from '../../config/const';
+import { colors } from '../../../../../../config/const';
 
 const _max = 20;
 

@@ -2,16 +2,19 @@ export const mods = [
     {
         id:"quickGame",
         title:"Quick Game",
-        info:"Alliance wins when there is no Resistance, Resistance wins when the ratio of the Resistance to the Alliance members is 1:1",
+        infoOn:"Alliance WINS when there is no Resistance",
+        infoOff:"Alliance CONTINUES even without Resistance"
     },
     {
         id:"withPause",
         title:"With pause",
-        info:"Game will be paused during the session",
+        infoOn:"Game PAUSE during the crew meeting",
+        infoOff:"Game CONTINUES during the crew meeting"
     },
     {
         id:"deathReveal",
         title:"Death reveal",
-        info:"The role will be revealed after death",
+        infoOn:"After death the role will be REVEALED",
+        infoOff:"After death the role will be kept in SECRET"
     }
 ]

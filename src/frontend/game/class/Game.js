@@ -5,6 +5,7 @@ import { emit } from "../../config/io";
 import { GameBoard } from "./GameBoard";
 
 import { store } from "../../config/bases";
+import { GameState } from "./GameState";
 
 const { solid, virtual } = jet.prop;
 
@@ -13,10 +14,11 @@ export class Game {
 
     constructor() {
 
-        const _p = { isConnected:false};
+        const _p = { isConnected:false };
         
         solid.all(this, {
-            board:new GameBoard(this)
+            board:new GameBoard(this),
+            state:new GameState(this)
         });
 
         const disconnect = async _=>{
@@ -42,6 +44,7 @@ export class Game {
         }, false);
 
         virtual.all(this, {
+            id:_=>this.board.get("id"),
             isConnected:_=>_p.isConnected
         });
 

@@ -4,6 +4,7 @@ import "./ThemeNodes.scss";
 import { Block, Caption, usePop, Button } from '@randajan/react-form';
 import { game } from '../../../../game';
 import { store } from '../../../../config/bases';
+import { ThemeSelect } from '../ThemeSelect/ThemeSelect';
 
 const setNodeClient = (clientId, nodeId) => {
     const themeId = game.board.get("theme.id");

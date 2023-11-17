@@ -2,15 +2,7 @@
 export default {
     id:"spaceship",
     name:"Spaceship",
-    colors:["black", "white", "orange"],
-    onChange: async (game, ticker)=>{
-        const { solid:{ stages }, current:{ pause, restart, stage } } = game;
-
-        const { isEnd, isWin } = stages[stage];
-
-        if (restart) { ticker.restart(); }
-    },
-    onTick: async (game, ticker)=>{
+    onTick: async (game)=>{
         const { solid:{ rates, stages }, current:{ pause, stage, stats, nodes } } = game;
 
         const { isEnd } = stages[stage];

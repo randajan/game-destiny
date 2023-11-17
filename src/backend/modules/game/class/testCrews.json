@@ -1,0 +1,109 @@
+{
+    "list": [
+        {
+            "name": "Jeník",
+            "id": 0,
+            "isAlly": true,
+            "code": "299",
+            "isReady": true
+        },
+        {
+            "name": "Veru",
+            "id": 1,
+            "isAlly": true,
+            "code": "799",
+            "isReady": true
+        },
+        {
+            "name": "Otík",
+            "id": 2,
+            "isAlly": false,
+            "code": "634",
+            "isReady": true
+        },
+        {
+            "name": "Carlos",
+            "id": 3,
+            "isAlly": true,
+            "code": "770",
+            "isReady": true
+        },
+        {
+            "name": "Vojtík",
+            "id": 4,
+            "isAlly": true,
+            "code": "047",
+            "isReady": true
+        },
+        {
+            "name": "Míša",
+            "id": 5,
+            "isAlly": true,
+            "code": "808",
+            "isReady": true
+        },
+        {
+            "name": "Snas",
+            "id": 6,
+            "isAlly": true,
+            "code": "996",
+            "isReady": true
+        },
+        {
+            "name": "Franta",
+            "id": 7,
+            "isAlly": false,
+            "code": "730",
+            "isReady": true
+        },
+        {
+            "name": "Vojta",
+            "id": 8,
+            "isAlly": true,
+            "code": "194",
+            "isReady": true
+        },
+        {
+            "name": "Péťa",
+            "id": 9,
+            "isAlly": true,
+            "code": "720",
+            "isReady": true
+        },
+        {
+            "name": "Majns",
+            "id": 10,
+            "isAlly": false,
+            "code": "335",
+            "isReady": true
+        },
+        {
+            "name": "Kuba",
+            "id": 11,
+            "isAlly": true,
+            "code": "623",
+            "isReady": true
+        },
+        {
+            "name": "Bety",
+            "id": 12,
+            "isAlly": false,
+            "code": "573",
+            "isReady": true
+        },
+        {
+            "name": "Taryk",
+            "id": 13,
+            "isAlly": true,
+            "code": "427",
+            "isReady": true
+        }
+    ],
+    "count": 14,
+    "countAlly": 10,
+    "countEnemy": 3,
+    "wildChance": 0.5,
+    "isReady": true,
+    "minName": 4,
+    "maxName": 6
+}
