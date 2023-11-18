@@ -9,11 +9,6 @@
         align-items:center;
         gap: 2vh 2vw;
 
-        .Button.ready {
-            pointer-events:none;
-            opacity:.25;
-        }
-
         .Button {
             font-size:1.8em;
             padding:2vh 4vw;

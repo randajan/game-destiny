@@ -35,6 +35,7 @@ export const CatchBall = (props)=>{
         const confirm = (plan, tid)=>{
             const el = ref.current;
             const state = tid%2;
+            if (!el) { return }
             el.setAttribute("data-state", state ? "on" : "off");
             setTimeout(_=>{
                 if (tid == _max * 2) { onSubmit(status); }

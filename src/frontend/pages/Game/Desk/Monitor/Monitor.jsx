@@ -17,8 +17,7 @@ export const Monitor = (props) => {
     const nodes = _nodes.get();
     
     return (
-        <Block className="Monitor" caption={"Monitor"}>
-            <Stage/>
+        <Stage className="Monitor" caption={"Monitor"} main>
             <div className="stats">
                 {stats?.map((stat, key) => <StatBar key={key} {...stat}/>)}
             </div>
@@ -28,7 +27,7 @@ export const Monitor = (props) => {
                     return <NodeMonitor key={key} {...node}/>
                 })}
             </div>
-        </Block>
+        </Stage>
     )
 }
 

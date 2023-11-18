@@ -3,6 +3,9 @@ export default {
     id:"spaceship",
     name:"Spaceship",
     onTick: async (game)=>{
+        
+        console.log(game);
+        return;
         const { solid:{ rates, stages }, current:{ pause, stage, stats, nodes } } = game;
 
         const { isEnd } = stages[stage];

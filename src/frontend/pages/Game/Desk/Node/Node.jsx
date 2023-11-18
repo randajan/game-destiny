@@ -36,8 +36,7 @@ export const Node = (props)=>{
     const flags = getFlags(state || {});
 
     return (
-        <Block className="Node" caption={title}>
-            <Stage/>
+        <Stage className="Node" caption={title}>
             <NodeMwPopUp {...props} {...state}/>
             <div className="nodeStats">
                 {stats.filter(s=>s.id === "energy" || s.id === stat).map(s=><StatBar key={s.id} {...s}/>)}
@@ -52,7 +51,7 @@ export const Node = (props)=>{
                 <Range className="nodeHealth" key={"helath"+health} label={"stav"} lock rawput={health * 100} from={0} to={100} data-node={flags}/>
             </div>
             <div className="nodeInfo">{info}</div>
-        </Block>
+        </Stage>
     )
 }
 

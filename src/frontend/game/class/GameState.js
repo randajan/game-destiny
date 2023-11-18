@@ -11,10 +11,11 @@ export class GameState extends BaseSync {
 
         super((base, config)=>{
 
-            base.watch("", get=>{
+            base.watch("", (get, cngs)=>{
                 if (!game.isConnected) { return; }
                 stateLock(async _=>{
-                    this.set("", await game.emit("gameUpdateState", {id:game.board.get("id"), data:get()}));
+                    const data = Object.fromEntries(cngs().map(p => [p, get(p)]));
+                    this.set("", await game.emit("gameUpdateState", {id:game.board.get("id"), data}));
                 });
             });
 
@@ -23,7 +24,7 @@ export class GameState extends BaseSync {
 
         bridge.socket.on("gameUpdateState", data => {
             if (!game.isConnected) { return; }
-            stateLock(_=>{ try { this.set("", data); } catch(err) {} });
+            stateLock(_=>{ this.set("", data); });
         });
 
     }

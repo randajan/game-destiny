@@ -17,6 +17,7 @@
 
 button.Button {
     padding: 1vh 2vw;
+    margin: 1vh 1vw;
     font-weight:bold;
     border-radius:.2em;
     background-color:#111;
@@ -34,6 +35,12 @@ button.Button {
         0px 0px 5px 5px #fff;
 
         transition: transform .2s, box-shadow .2s;
+    }
+
+    &[data-flags~="lock"] {
+        color:#ccc;
+        background-color:rgba(0, 0, 0, .1);
+        opacity:75%;
     }
 }
 

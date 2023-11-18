@@ -2,13 +2,16 @@
 import jet from "@randajan/jet-core";
 
 import { BaseSync } from "@randajan/jet-base";
-import { themes, themesIndex } from "../../../../arc/game/themes";
-import { rates } from "../../../../arc/game/rates";
-import { mods } from "../../../../arc/game/mods";
+import { themes, themesIndex } from "../themes";
+import { rates } from "../rates";
+import { mods } from "../mods";
 import testCrews from "./testCrews.json";
+
 
 import { fceSure, numFrame, numNo0to1, strSure } from "../../../../arc/tools/formats";
 import { uniqueRnd } from "../../../../arc/tools/uniqueRnd";
+
+
 
 const { solid, virtual } = jet.prop;
 
@@ -160,7 +163,7 @@ export class GameBoard extends BaseSync {
     }
 
     update(data) {
-        this.set("", data);
+        this.set("", jet.merge(this.get(), data));
         return this.get();
     }
 }

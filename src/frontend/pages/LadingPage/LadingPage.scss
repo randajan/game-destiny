@@ -1,3 +1,11 @@
 .LadingPage {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
+    a {
+        font-size:3em;
+        margin:2vh 4vw;
+    }
 }

@@ -1,5 +1,5 @@
 
-import { forFiles, importFiles } from "../tools/importFiles";
+import { forFiles, importFiles } from "../../../arc/tools/importFiles";
 import * as files from "./themes/**/*";
 
 export const themesIndex = {};

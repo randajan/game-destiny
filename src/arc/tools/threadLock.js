@@ -1,5 +1,5 @@
 export const threadLock = _=>{
-    let lock;
+    let lock = 0;
     return async (exe, force=false, onLock)=>{
         if (lock && !force) { return onLock ? onLock() : undefined; }
         lock ++;

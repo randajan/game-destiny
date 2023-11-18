@@ -16,6 +16,7 @@ export class GameState extends BaseSync {
             const seed = jet.uid(16);
             base.fit("seed", _=>seed);
             base.fit("pause", (next, t)=>Boolean.jet.to(next(t)));
+            base.fit("tick", (next, t)=>game.ticker.count);
         
             for (const node of nodes) {
                 const id = node.id;
@@ -62,7 +63,7 @@ export class GameState extends BaseSync {
             }
 
             for (const c of crews.list) {
-                base.fit(["crews", "c"+c.code], (next, t)=>{
+                base.fit(["crews", "list", c.id], (next, t)=>{
                     const v = Object.jet.tap(next(t));
                     v.id = c.id;
                     v.isAlive = bolOrTrue(v.isAlive);
@@ -73,7 +74,6 @@ export class GameState extends BaseSync {
             base.fit("", (next, t)=>{
                 const v = Object.jet.tap(next(t));
                 v.stage = stages.find(({ when })=>when(v)).id;
-                v.tick = game.ticker.count;
                 return v;
             });
 
@@ -86,7 +86,7 @@ export class GameState extends BaseSync {
     }
 
     update(data) {
-        this.set("", data);
+        this.set("", jet.merge(this.get(), data));
         return this.get();
     }
 }

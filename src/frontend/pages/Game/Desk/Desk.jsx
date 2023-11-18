@@ -5,10 +5,6 @@ import "./Desk.scss";
 import { store } from '../../../config/bases';
 import { Monitor } from './Monitor/Monitor';
 import { Node } from './Node/Node';
-import { Stage } from "./Stage/Stage";
-
-import { PauseButton } from '../../../elements/PauseButton/PauseButton';
-import { EndPopUp } from '../../../elements/EndPop/EndPop';
 
 export const Desk = (props)=>{
     const {} = props;

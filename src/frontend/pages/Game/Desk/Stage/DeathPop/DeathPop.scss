@@ -1,0 +1,15 @@
+.DeathPop {
+    display:flex;
+    flex-direction:column;
+    
+    .Field {
+        text-align:left;
+    }
+
+    &[data-state="lock"] {
+        .Button {
+            pointer-events:none;
+            opacity:50%;
+        }
+    }
+}

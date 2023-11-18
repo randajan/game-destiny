@@ -2,7 +2,7 @@ import be, { app, http, io, bridge, info } from "@randajan/simple-app/be/koa";
 
 import jet from "@randajan/jet-core";
 
-import { Ticker } from "../../../../arc/class/Ticker";
+import { Ticker } from "./Ticker";
 import { GameBoard } from "./GameBoard";
 import { GameState } from "./GameState";
 
@@ -44,16 +44,11 @@ export class Game {
 
         const onInit = _=>{
             _p.state = (new GameState(this));
-            //const base = _p.base = (new GameBase()).config({ cfg, ticker:this });
-            // base.watch("solid.rates.refresh", async _=>this.setInterval(1000 * await base.get("solid.rates.refresh")));
-            // base.watch("current", async _=>be.io.emit("game-tick", JSON.stringify(await base.get("current"))));
-            // base.watch("", async get=>onChange(await get(""), this));
         }
 
         const onTick = _=>{
             const board = this.board.get();
-            //board?.theme?.onTick(this);
-            //console.log(this.state.get("nodes.core.powerSet"));
+            board?.theme?.onTick(this);
             this.emit("gameUpdateState", this.state.get());
         }
 

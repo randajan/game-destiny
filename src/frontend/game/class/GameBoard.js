@@ -13,10 +13,11 @@ export class GameBoard extends BaseSync {
 
         super((base, config)=>{
 
-            base.watch("", get=>{
+            base.watch("", (get, cngs)=>{
                 if (!game.isConnected) { return; }
                 boardLock(async _=>{
-                    this.set("", await game.emit("gameUpdateBoard", { id:get("id"), data:get() }));
+                    const data = Object.fromEntries(cngs().map(p => [p, get(p)]));
+                    this.set("", await game.emit("gameUpdateBoard", { id:get("id"), data }));
                 });
             });
 
@@ -32,8 +33,10 @@ export class GameBoard extends BaseSync {
 
 
         bridge.socket.on("gameUpdateBoard", data => {
+            
             if (!game.isConnected) { return; }
-            boardLock(_=>{ try { this.set("", data); } catch(err) {} });
+            boardLock(_=>{ this.set("", data); });
+            
         });
 
     }
