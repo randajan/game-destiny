@@ -25,7 +25,7 @@ export const PausePop = ()=>{
     const alive = crewsState.filter(c=>c.isAlive);
 
     return (
-        <Block className="PausePop" caption={"Porada posádky" + String.jet.quote(alive.length, " (", ")")}>
+        <Block className="PausePop" caption={"Svolání posádky" + String.jet.quote(alive.length, " (", ")")}>
             <Timer/>
             <div className="crews">
                 {crewsState.map(c=>{

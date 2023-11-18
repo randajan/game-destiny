@@ -8,7 +8,7 @@ import { mods } from "../mods";
 import testCrews from "./testCrews.json";
 
 
-import { fceSure, numFrame, numNo0to1, strSure } from "../../../../arc/tools/formats";
+import { fceSure, numFrame, numNo0Or1, strSure } from "../../../../arc/tools/formats";
 import { uniqueRnd } from "../../../../arc/tools/uniqueRnd";
 
 
@@ -36,9 +36,9 @@ export class GameBoard extends BaseSync {
                 for (const n of theme.nodes) {
                     n.title = strSure(n.title, n.id);
                     n.info = strSure(n.info, n.title);
-                    n.rateEnergyUse = numNo0to1(n.rateEnergy);
-                    n.rateDecay = numNo0to1(n.rateDecay);
-                    n.ratePower = numNo0to1(n.ratePower);
+                    n.rateEnergyUse = numNo0Or1(n.rateEnergy);
+                    n.rateDecay = numNo0Or1(n.rateDecay);
+                    n.ratePower = numNo0Or1(n.ratePower);
                     n.onTick = fceSure(n.onTick);
                 }
         
@@ -47,7 +47,7 @@ export class GameBoard extends BaseSync {
                     s.info = strSure(s.info, s.title);
                     s.unit = Array.jet.to(s.unit) || [0, 100, "%"];
                     s.entropy = numFrame(s.entropy, -1);
-                    s.rateEntropy = numNo0to1(s.rateEntropy);
+                    s.rateEntropy = numNo0Or1(s.rateEntropy);
                 }
 
                 return theme;
@@ -66,7 +66,7 @@ export class GameBoard extends BaseSync {
                 const v = Object.jet.to(next(t));
                 for (const rate of rates) {
                     const vr = v[rate.id] = { ...Object.jet.to(v[rate.id]), ...rate };
-                    vr.value = numNo0to1(vr.value);
+                    vr.value = numNo0Or1(vr.value);
                 }
                 return v;
             });

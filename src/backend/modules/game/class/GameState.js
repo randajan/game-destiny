@@ -2,7 +2,7 @@
 import jet from "@randajan/jet-core";
 
 import { BaseSync } from "@randajan/jet-base";
-import { bolOrTrue, numFrame } from "../../../../arc/tools/formats";
+import { bolOrTrue, numFrame, numGt } from "../../../../arc/tools/formats";
 
 const { solid, virtual } = jet.prop;
 
@@ -24,12 +24,13 @@ export class GameState extends BaseSync {
                 const energyUse = numFrame(node.energyUse);
                 const decay = numFrame(node.decay);
                 const health = numFrame(node.health);
-                const capacity = numFrame(node.capacity);
+                const capacity = numGt(node.capacity);
 
                 base.fit(["nodes", id], (next, t)=>{
                     const v = Object.jet.tap(next(t));
                     v.isOn = Boolean.jet.to(v.isOn);
                     v.isMw = Boolean.jet.to(v.isMw);
+                    v.isKill = Boolean.jet.to(v.isKill);
                     v.health = numFrame(v.health);
                     v.powerSet = numFrame(v.powerSet);
             
@@ -66,10 +67,25 @@ export class GameState extends BaseSync {
                 base.fit(["crews", "list", c.id], (next, t)=>{
                     const v = Object.jet.tap(next(t));
                     v.id = c.id;
+                    v.isAlly = c.isAlly;
                     v.isAlive = bolOrTrue(v.isAlive);
                     return v;
                 });
             }
+
+            base.fit("crews", (next, t)=>{
+                const v = Object.jet.to(t);
+
+                v.aliveAlly = 0;
+                v.aliveEnemy = 0;
+
+                for (const c of v.list) {
+                    if (!c.isAlive) { continue; }
+                    if (c.isAlly) { v.aliveAlly ++; } else { v.aliveEnemy ++; }
+                }
+
+                return v;
+            });
 
             base.fit("", (next, t)=>{
                 const v = Object.jet.tap(next(t));

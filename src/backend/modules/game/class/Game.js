@@ -42,13 +42,12 @@ export class Game {
 
         const _p = { }
 
-        const onInit = _=>{
-            _p.state = (new GameState(this));
-        }
+        const onInit = _=>{ _p.state = (new GameState(this)); }
 
         const onTick = _=>{
             const board = this.board.get();
-            board?.theme?.onTick(this);
+            const upd = board?.theme?.onTick(this);
+            if (upd) { this.state.set("", upd); }
             this.emit("gameUpdateState", this.state.get());
         }
 
@@ -68,7 +67,7 @@ export class Game {
             else { this.ticker.stop().resetCounter(); }
         });
 
-        this.ticker.setInterval(500);
+        this.ticker.setInterval(200);
         _games[id] = this;
     }
 

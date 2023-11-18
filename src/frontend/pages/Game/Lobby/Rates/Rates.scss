@@ -1,5 +1,5 @@
 .Rates {
-    min-width:50vw;
+
     .grid {
         
         grid-template-columns: auto 1fr auto;
@@ -12,7 +12,7 @@
 
         .Range {
             width:100%;
-            .track {
+            .wrap .interface .track {
                 width:100%;
             }
         }

@@ -6,6 +6,7 @@ import { PausePop } from "./PausePop/PausePop";
 import { EndPop } from "./EndPop/EndPop";
 
 import "./Stage.scss";
+import { Timer } from '../../../../elements/Timer/Timer';
 
 
 export const Stage = (props)=>{
@@ -29,7 +30,7 @@ export const Stage = (props)=>{
     return (
         <Block className={jet.melt(["Stage", className], " ")}>
             <div className="grid heading">
-                <p/>
+                <Timer/>
                 <div>
                     <Caption level={1}>{caption}</Caption>
                     <Caption level={2} title={stage?.info}>{stage?.title}</Caption>

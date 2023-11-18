@@ -24,6 +24,22 @@ export default [
         when:({stats:{heat:{value}}})=>value <= 0
     },
     {
+        id:"allyDeath",
+        title:"Smrt",
+        info:"Sláva RESISTENCI!",
+        isEnd:true,
+        isWin:false,
+        when:({crews:{aliveAlly, aliveEnemy}})=>aliveAlly <= aliveEnemy
+    },
+    {
+        id:"enemyDeath",
+        title:"Smrt",
+        info:"Sláva ALIANCI!",
+        isEnd:true,
+        isWin:true,
+        when:({crews:{aliveEnemy}})=>aliveEnemy <= 0
+    },
+    {
         id:"home",
         title:"Jsme doma!",
         info:"Sláva ALIANCI!",

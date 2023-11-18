@@ -1,10 +1,10 @@
 export const mods = [
-    {
-        id:"quickGame",
-        title:"Quick Game",
-        infoOn:"Alliance WINS when there is no Resistance",
-        infoOff:"Alliance CONTINUES even without Resistance"
-    },
+    // {
+    //     id:"quickGame",
+    //     title:"Quick Game",
+    //     infoOn:"Alliance WINS when there is no Resistance",
+    //     infoOff:"Alliance CONTINUES even without Resistance"
+    // },
     {
         id:"withPause",
         title:"With pause",

@@ -10,14 +10,14 @@ export const rates = [
         id:"entropy",
         title:"Entropy",
     },
-    {
-        id:"power",
-        title:"Systems power",
-    },
-    {
-        id:"energyUse",
-        title:"Energy use"
-    },
+    // {
+    //     id:"power",
+    //     title:"Systems power",
+    // },
+    // {
+    //     id:"energyUse",
+    //     title:"Energy use"
+    // },
     {
         id:"decay",
         title:"Decay",

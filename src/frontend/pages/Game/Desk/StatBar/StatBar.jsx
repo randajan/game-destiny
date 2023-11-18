@@ -2,7 +2,7 @@ import React from 'react';
 
 import jet from "@randajan/jet-core";
 
-import { Range } from '@randajan/react-form';
+import { Range, Bar, Block } from '@randajan/react-form';
 
 import "./StatBar.scss";
 import { numFrame } from '../../../../../arc/tools/formats';
@@ -18,8 +18,9 @@ export const StatBar = props => {
     
     
     return (
-        <div className={`StatBar ${id}`} title={info}>
-            <Range key={value} label={<><p>{title}</p><b>{vlabel}</b></>} lock vertical rawput={(1 - value) * 100} from={0} to={100} />
-        </div>
+        <Block className={`StatBar ${id}`} title={info} caption={title}>
+            <b>{vlabel}</b>
+            <Bar vertical value={(1 - value) * 100} from={0} to={100}/>
+        </Block>
     )
 }

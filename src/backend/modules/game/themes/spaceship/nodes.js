@@ -1,8 +1,9 @@
+import { numFrame } from "../../../../../arc/tools/formats";
 
 export default [
     {
         id:"main",
-        title:"Monitor"
+        title:"Můstek"
     },
     {
         id: "core",
@@ -11,7 +12,7 @@ export default [
         decay: .25,
         health: _ => Number.jet.rnd(.4, .8),
         onTick: ({stats:{energy}}, node, rate) => {
-            energy.value = Number.jet.frame(node.power*1.5, 0, 1);
+            energy.value = numFrame(node.power*1.5);
         }
     },
     {

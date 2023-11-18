@@ -41,14 +41,12 @@ export const Node = (props)=>{
             <div className="nodeStats">
                 {stats.filter(s=>s.id === "energy" || s.id === stat).map(s=><StatBar key={s.id} {...s}/>)}
             </div>
-            <div className="nodeMw">
-                <Button onSubmit={_=>{ _state.set("isMw", true); }}>Opravit</Button>
-            </div>
             <div className="nodeControl">
                 <Switch className="nodeIsOn" key={"isOn"+isOn} label={isOn?"on":"off"} rawput={isOn ? 1 : 0} onOutput={(s, v) => {
                     _state.set("isOn", !!v);
                 }} data-node={flags}/>
-                <Range className="nodeHealth" key={"helath"+health} label={"stav"} lock rawput={health * 100} from={0} to={100} data-node={flags}/>
+                <Range className="nodeHealth" key={"health"+health} label={"stav"} lock rawput={health * 100} from={0} to={100} data-node={flags}/>
+                <Button onSubmit={_=>{ _state.set("isMw", true); }}>Opravit</Button>
             </div>
             <div className="nodeInfo">{info}</div>
         </Stage>

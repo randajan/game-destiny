@@ -15,17 +15,20 @@ export const Monitor = (props) => {
 
     const stats = _stats.get();
     const nodes = _nodes.get();
+
+    let caption = "Monitor";
+    const nodesElements = nodes?.map((node, key) =>{
+        if (node?.id === "main") { caption = node.title; return null; }
+        return <NodeMonitor key={key} {...node}/>
+    })
     
     return (
-        <Stage className="Monitor" caption={"Monitor"} main>
+        <Stage className="Monitor" caption={caption} main>
             <div className="stats">
                 {stats?.map((stat, key) => <StatBar key={key} {...stat}/>)}
             </div>
             <div className="nodes">
-                {nodes?.map((node, key) =>{
-                    if (node?.id === "main") { return null; }
-                    return <NodeMonitor key={key} {...node}/>
-                })}
+                {nodesElements}
             </div>
         </Stage>
     )

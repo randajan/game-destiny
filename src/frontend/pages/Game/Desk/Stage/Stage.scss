@@ -2,6 +2,10 @@
     .heading {
         grid-template-columns: 1fr auto 1fr;
         justify-items: center;
+
+        .Timer {
+            font-size:2em;
+        }
     }
 
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Link } from "@randajan/jet-react/dom";
-import { usePop, Field } from "@randajan/react-form";
+import { usePop, Field, Pane } from "@randajan/react-form";
 
 import { page } from "../../config/bases";
 
@@ -14,14 +14,19 @@ import { generateId } from '../../../arc/tools/generateId';
 export const LadingPage = (props)=>{
     const {} = props;
 
-    const pop = usePop();
+    const [ _showJoin ] = page.use("hash.showJoin");
+    const showJoin = _showJoin.get();
+
     
     return (
         <div className="LadingPage">
             <Link to={`game/${generateId()}`}>Create game</Link>
-            <a onClick={_=>pop.up(<Field focus label="Game room" onOutput={(r, v)=>{
-                if (v) { pop.down(); page.set("pathname", `/game/${String.jet.simplify(v)}`); }
-            }}/>)}>Join game</a>
+            <a onClick={_=>showJoin ? _showJoin.remove() : _showJoin.set("", 1)}>Join game</a>
+            <Pane expand={!!showJoin} transition={500}>
+                <Field focus label="Game room" onOutput={(r, v)=>{
+                    if (v) { page.set("pathname", `/game/${String.jet.camelCase(v)}`); }
+                }}/>
+            </Pane>
         </div>
     )
 }

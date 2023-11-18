@@ -22,7 +22,7 @@ const Rate = (props)=>{
     return (
         <>
             <Caption>{title}</Caption>
-            <Range key={value} rawput={value} from={0.01} to={2} step={0.01} onInput={onInput} onOutput={onOutput}/>
+            <Range key={value} rawput={value} from={0.01} to={3} step={0.01} onInput={onInput} onOutput={onOutput}/>
             <p ref={ref} className="currentValue">{(value*100).toFixed() + "%"}</p>
         </>
     )

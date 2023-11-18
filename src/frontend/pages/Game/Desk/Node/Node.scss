@@ -1,6 +1,7 @@
 .Node {
+    min-height:100%;
     display:grid;
-    grid-template-rows: auto 2fr auto 1fr 2fr;
+    grid-template-rows: auto auto auto 1fr;
     align-items:center;
     font-size: 1.2em;
 

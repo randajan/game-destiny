@@ -1,4 +1,25 @@
 .StatBar {
+
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin:1em;
+        
+    .Bar {
+        width: 11vh !important;
+        height: 15vh !important;
+
+        .mark {
+            background-color: #111;
+        }
+
+        .unmark {
+
+            filter: none;
+        }
+
+    }
+
     &.energy .unmark { background:aqua !important; }
     &.battery .unmark { background: #CFAA01 !important; }
     &.smog .unmark { background:lime !important; }
@@ -7,21 +28,5 @@
     &.direction .unmark { background:navy!important; }
     &.distance .unmark { background: green !important; }
 
-    .wrap .interface .track {
-        width: 4em;
 
-        .Bar {
-            .mark {
-                background-color: #111;
-            }
-
-            .unmark {
-                background: rgb(255, 0, 0);
-                background: linear-gradient(0deg, red 0%, #CFAA01 35%, rgba(207, 170, 1, .5) 70%);
-                filter: none;
-            }
-        }
-
-
-    }
 }

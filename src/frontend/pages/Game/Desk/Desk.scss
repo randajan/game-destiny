@@ -1,37 +1,5 @@
 .Desk {
     
-    .Range {
-        &.nodePowerSet, &.nodeHealth {
-            .wrap .interface .track {
-                width: 10em;
-            }
-        }
-        
-        &.nodePowerSet, &.nodeHealth, &.nodeIsOn {
-            
-            .wrap .interface .track {
-                height:.8em;
-    
-                .pin {
-                    width: 1em;
-                    height: 1.5em;
-                }
-            
-                .Bar {
-                    .unmark {
-                        background-color: #111;
-                    }
-                    .mark {
-                        background-color: rgba(207, 170, 1, .75);
-                    }
-                }
-            }
-        
-        
-        }
-    }
-    
-    
     .nodeTitle {
         justify-self: right;
     }
@@ -47,16 +15,21 @@
         }
     
         &[data-node~="dmg"] {
-            &, label.Label { color: red; }
+            &, label.Label { color: #444; }
+            pointer-events:none;
+            .pin { display:none; }
+        }
+
+        &:not(.nodeIsOn)[data-node~="off"] {
             pointer-events:none;
             .pin { display:none; }
         }
     
-        &[data-node~="mw"] {
-            &, label.Label { color: blue; }
-            pointer-events:none;
-            .pin { display:none; }
-        }
+        // &[data-node~="mw"] {
+        //     &, label.Label { color: #444; }
+        //     pointer-events:none;
+        //     .pin { display:none; }
+        // }
     
     }
     
