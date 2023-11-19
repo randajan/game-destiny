@@ -1,4 +1,4 @@
-import { numFrame } from "../../../../../arc/tools/formats";
+import { setRealLights, setRealLightsEnd } from "../../class/Shelly";
 
 export default {
     id:"spaceship",
@@ -13,14 +13,15 @@ export default {
 
         //breaks
         if (!stage) { return; }
-        if (stage?.isEnd) { game.ticker.stop(); return s; } //stop game on end
-        if (s.pause && mods.withPause.active) { //paused
-            for (const n of nodes) { s.nodes[n.id].isMw = false; }
+        if (stage.isEnd || (s.pause && mods.withPause.active)) { //paused or end
+            for (const node of nodes) { const n = s.nodes[node.id]; n.isMw = n.isKill = false; }
+            if (stage.isEnd) { s.pause = false; setRealLightsEnd(stage.isWin); }
+            else { setRealLights(1); }
             return s;
         }
 
         //rates
-        const { speed, entropy, decay, energyUse, unluck } = rates;
+        const { speed, entropy, decay, unluck } = rates;
         const refresh = game.ticker.interval / 1000;
 
         const q = refresh * speed.value;
@@ -31,7 +32,7 @@ export default {
         //stats
         for (const { id, rateEntropy, entropy } of stats) {
             const stat = s.stats[id];
-            stat.value = numFrame(stat.value - qe * rateEntropy * entropy);
+            stat.value = entropy === 1 ? 0 : (stat.value - qe * rateEntropy * entropy);
         }
 
         //nodes
@@ -48,7 +49,7 @@ export default {
                 if (Boolean.jet.rnd(ul*.004)) { n.health = health = 0; }
                 if (Boolean.jet.rnd(ul*.006)) { n.powerSet = powerSet = Number.jet.rnd(0, 1); }
                 if (Boolean.jet.rnd(ul*.008)) { n.isOn = isOn = !isOn; }
-                if (isOn && isMw && Boolean.jet.rnd(ul*.1)) { n.isKill = true; }
+                if (isOn && isMw && Boolean.jet.rnd(ul*.2)) { n.isKill = true; }
             }
 
             if (!isOn) { continue; }
@@ -65,6 +66,11 @@ export default {
             onTick(s, n, q);
 
             n.health -= qd * rateDecay * decay * (Math.tan(powerSet*1.3) / 200 ); //idk why
+        }
+
+        if ((game.ticker.count % 5) === 1) {
+            const { light } = s.nodes;
+            setRealLights(light.isOn ? light.power : 0);
         }
 
         return s

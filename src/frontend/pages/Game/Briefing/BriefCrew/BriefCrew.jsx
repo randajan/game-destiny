@@ -26,7 +26,7 @@ export const BriefCrew = props=>{
                 <Caption>Passcode</Caption>
                 <HiddenMsg value={code} pattern={"runic"}/>
                 <Caption>Role</Caption>
-                <HiddenMsg value={isAlly ? "Alliance" : "Resistance"} pattern={"runic"}/>
+                <HiddenMsg value={isAlly ? "Alliance" : "Resistance"} pattern={"runic"} length={8}/>
                 <Caption>Partners</Caption>
                 <HiddenMsg className="partners" value={isAlly ? "?" : (enms || "-")} pattern={"runic"} length={hl}/>
             </Block>

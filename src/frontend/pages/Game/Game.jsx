@@ -3,7 +3,7 @@ import { useRoute } from "@randajan/jet-react/dom";
 
 import "./Game.scss";
 
-import { Button } from "@randajan/react-form";
+import { Button, Pane } from "@randajan/react-form";
 
 import { game } from "../../game";
 import { Lobby } from './Lobby/Lobby';
@@ -34,11 +34,13 @@ export const Game = (props)=>{
     return (
         <div className="Game" data-phase={phaseId}>
             { gamePhases[phaseId] }
-            <div className="ctrls flex">
-                <Button onSubmit={_=>_phase.set("id", 0)}>Config</Button>
-                <Button onSubmit={_=>_phase.set("id", 1)}>Briefing</Button>
-                <Button onSubmit={_=>_phase.set("id", 2)}>Game</Button>
-            </div>
+            <Pane className="ctrls" transition={500} expand={phaseId != 2}>
+                <div className="flex">
+                    <Button onSubmit={_=>_phase.set("id", 0)}>Config</Button>
+                    <Button onSubmit={_=>_phase.set("id", 1)}>Briefing</Button>
+                    <Button onSubmit={_=>_phase.set("id", 2)}>Game</Button>
+                </div>
+            </Pane>
         </div>
     )
 }

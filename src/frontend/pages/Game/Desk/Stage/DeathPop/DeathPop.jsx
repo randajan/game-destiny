@@ -12,7 +12,7 @@ export const DeathPop = (props)=>{
 
     return (
         <Block className="DeathPop" caption={name}>
-            <Field label="Osobní kód" onOutput={(r, v)=>setCc(v)}/>
+            <Field label="Osobní kód" focus onOutput={(r, v)=>setCc(v)}/>
             <Button key={lock} lock={lock} onSubmit={kick}>Vyhodit z lodi</Button>
         </Block>
     )

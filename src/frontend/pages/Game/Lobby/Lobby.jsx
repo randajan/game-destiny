@@ -22,7 +22,7 @@ const panels = [
     { caption:"Rates", Content:Rates },
     { caption:"Nodes", Content:ThemeNodes },
     { caption:"Crew members", Content:Crews },
-    { caption:"Lights", Content:Lights },
+    // { caption:"Lights", Content:Lights },
 ]
 
 export const Lobby = (props)=>{

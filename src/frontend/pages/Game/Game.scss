@@ -2,13 +2,18 @@
     display:grid;
     grid-template-rows: 1fr auto;
 
-    & > * {
+    & > *:not(.ctrls), .ctrls .flex {
         padding:2vh 3vw;
         overflow:auto;
     }
 
     .ctrls {
-        justify-content: space-evenly;
+        .content {
+            transition:.5s;
+        }
+        .flex {
+            justify-content: space-evenly;
+        }
     }
 
 }

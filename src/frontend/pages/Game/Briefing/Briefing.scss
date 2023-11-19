@@ -12,6 +12,10 @@
         .Button {
             font-size:1.8em;
             padding:2vh 4vw;
+
+            &[data-flags="lock"] {
+                opacity: .1 !important;
+            }
         }
 
     }

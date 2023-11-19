@@ -17,7 +17,7 @@ const BriefButton = props=>{
     };
 
     return (
-        <Button lock={isReady} onSubmit={onSubmit}>
+        <Button key={isReady} lock={isReady} onSubmit={onSubmit}>
             {name}
         </Button>
     )

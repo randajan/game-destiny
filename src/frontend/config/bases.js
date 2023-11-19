@@ -17,6 +17,13 @@ store.fit("client", (next, t, f)=>{
     return v;
 });
 
+// store.fit("io.lights", (next, t, f)=>{
+//     const v = Array.jet.to(t).filter(v=>v);
+//     store.shelly = new Shelly("super", "Kiniguze42$", v.filter(({host})=>host).map(({host})=>/^https?:\/\//.test(host) ? host : ("http://"+host)));
+//     return v;
+// });
+
+
 export {
     store,
     page

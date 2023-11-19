@@ -21,16 +21,23 @@ export const Stage = (props)=>{
     const [ _pause ] = game.state.use("pause");
     const pause = _pause.get();
 
-    const pausePop = usePop({lock:true, children:main ? <PausePop/> : "Dostavte se prosím neprodleně na můstek"});
-    const endPop = usePop({lock:true, children:<EndPop main={main}/>});
+    const pausePop = usePop({lock:true});
+    const endPop = usePop({lock:true});
 
-    useEffect(_=>{ if (pause) { pausePop.up(); } else { pausePop.down(); } }, [pause]);
-    useEffect(_=>{ if (stage?.isEnd) { endPop.up(); } else { endPop.down(); } }, [stageId]);
+    useEffect(_=>{ if (pause) { pausePop.up(main ? <PausePop/> : "Dostavte se prosím neprodleně na můstek"); } else { pausePop.down(); } }, [pause]);
+    useEffect(_=>{
+        if (stage?.isEnd) {
+            endPop.up(<EndPop {...stage} main={main} onSubmit={_=>{ endPop.down(); game.board.set("phase.id", 0); }}/>);
+        }
+        else {
+            endPop.down();
+        }
+    }, [stageId]);
     
     return (
         <Block className={jet.melt(["Stage", className], " ")}>
             <div className="grid heading">
-                <Timer/>
+                <Timer stop={stage?.isEnd}/>
                 <div>
                     <Caption level={1}>{caption}</Caption>
                     <Caption level={2} title={stage?.info}>{stage?.title}</Caption>

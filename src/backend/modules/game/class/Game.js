@@ -5,6 +5,7 @@ import jet from "@randajan/jet-core";
 import { Ticker } from "./Ticker";
 import { GameBoard } from "./GameBoard";
 import { GameState } from "./GameState";
+import { setRealLights } from "./Shelly";
 
 const { solid, virtual } = jet.prop;
 
@@ -64,7 +65,11 @@ export class Game {
         this.board.watch("phase.id", get=>{
             const id = get();
             if (id === 2) { this.ticker.start(); }
-            else { this.ticker.stop().resetCounter(); }
+            else {
+                this.ticker.stop().resetCounter();
+                this.emit("gameUpdateState", {});
+                setRealLights(1);
+            }
         });
 
         this.ticker.setInterval(200);

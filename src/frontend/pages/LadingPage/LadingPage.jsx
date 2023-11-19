@@ -24,7 +24,9 @@ export const LadingPage = (props)=>{
             <a onClick={_=>showJoin ? _showJoin.remove() : _showJoin.set("", 1)}>Join game</a>
             <Pane expand={!!showJoin} transition={500}>
                 <Field focus label="Game room" onOutput={(r, v)=>{
-                    if (v) { page.set("pathname", `/game/${String.jet.camelCase(v)}`); }
+                    if (!v) { return; }
+                    _showJoin.remove();
+                    page.set("pathname", `/game/${String.jet.camelCase(v)}`);
                 }}/>
             </Pane>
         </div>

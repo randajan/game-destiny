@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import jet from "@randajan/jet-core";
 
-import { Switch, Range, Button, Block } from '@randajan/react-form';
+import { Switch, Range, Button, Block} from '@randajan/react-form';
 
 import "./Node.scss";
 import { StatBar } from '..//StatBar/StatBar';
@@ -35,6 +35,8 @@ export const Node = (props)=>{
 
     const flags = getFlags(state || {});
 
+    console.log("refresh node", health);
+
     return (
         <Stage className="Node" caption={title}>
             <NodeMwPopUp {...props} {...state}/>
@@ -42,10 +44,12 @@ export const Node = (props)=>{
                 {stats.filter(s=>s.id === "energy" || s.id === stat).map(s=><StatBar key={s.id} {...s}/>)}
             </div>
             <div className="nodeControl">
-                <Switch className="nodeIsOn" key={"isOn"+isOn} label={isOn?"on":"off"} rawput={isOn ? 1 : 0} onOutput={(s, v) => {
+                <Switch className="nodeIsOn" key={`isOn${isOn}`} label={isOn?"on":"off"} rawput={isOn ? 1 : 0} onOutput={(s, v) => {
                     _state.set("isOn", !!v);
                 }} data-node={flags}/>
-                <Range className="nodeHealth" key={"health"+health} label={"stav"} lock rawput={health * 100} from={0} to={100} data-node={flags}/>
+                <div>Stav: {(health*100).toFixed(2)+"%"}</div>
+                
+                {/* <Range className="nodeHealth" key={`health${health}`} label={"stav"} lock rawput={health * 100} from={0} to={100} data-node={flags}/> */}
                 <Button onSubmit={_=>{ _state.set("isMw", true); }}>Opravit</Button>
             </div>
             <div className="nodeInfo">{info}</div>

@@ -72,7 +72,7 @@ export class GameBoard extends BaseSync {
             });
 
             base.fit("crews", (next, t, f)=>{
-                return testCrews;
+                //return testCrews;
                 const v = Object.jet.to(next(t));
 
                 delete v.minName;
@@ -98,10 +98,6 @@ export class GameBoard extends BaseSync {
                 v.wildChance = enemyRate % 1;
         
                 return v;
-            });
-
-            base.fit("lights.list", (next, t, f)=>{
-                return Array.jet.to(next(t)).filter(c => c);
             });
 
             base.fit("", (next, t, f)=>{
