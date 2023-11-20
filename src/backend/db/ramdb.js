@@ -5,6 +5,7 @@ import meta from "../../arc/meta";
 import { fdb } from "./files";
 
 const _chops = {
+    sys_accs:tbl=>tbl.rows.chopByCol("username"),
     // kin_contacts:tbl=>tbl.rows.chopByCol("accounts"),
     // sys_apis:tbl=>tbl.rows.chopByCol("authkey")
 }

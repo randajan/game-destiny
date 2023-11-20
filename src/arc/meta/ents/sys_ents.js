@@ -23,6 +23,6 @@ export default {
   "img": {},
   "info": {},
   "options": { separator:"; " },
-  ...timestamps(),
+  ...timestamps("sys_accs"),
   "access":{ isVirtual:true, display:2, selector:"options", formula:v=>_options.translate(v) }
 }

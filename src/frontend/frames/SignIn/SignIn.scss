@@ -1,0 +1,14 @@
+.SignIn {
+    .Form {
+        display:flex;
+        flex-direction:column;
+        .Pane {
+            .content {
+                padding:0;
+            }
+            .Field {
+                width:100%;
+            }
+        }
+    }
+}
