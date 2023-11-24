@@ -2,16 +2,23 @@ import jet from "@randajan/jet-core";
 
 
 export const apiFetch = async (src, body, method, cache="default")=>{
+
     const opt = {
         method:String.jet.only(method, body ? "POST" : "GET"),
         cache:String.jet.only(!Boolean.jet.is(cache) ? "default" : cache ? "force-cache" : "no-cache"),
-        body
+        headers:new Headers(),
+        redirect: 'follow'
     }
 
-    if (body) { opt.headers = { "Content-Type": "application/json" }}
+    if (body) {
+        opt.headers.append("Content-Type", "application/json");
+        opt.body = jet.json.to(body);
+    }
 
-    const resp = await fetch("/api/"+src, opt);
+    const resp = await fetch("api/"+src, opt);
     return jet.json.from(await resp.text());
 }
 
 export const apiGet = async (src, cache="default")=>apiFetch(src, null, null, cache);
+
+export const apiPost = async (src, body)=>apiFetch(src, body, "POST");

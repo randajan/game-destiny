@@ -14,4 +14,11 @@ export const routes = routeTree(info.home.origin, add=>{
 
 });
 
-export default routes;
+export const channels = routeTree("", add=>{
+
+    add("acc", [
+        "signin",
+        "signup"
+    ]);
+
+});

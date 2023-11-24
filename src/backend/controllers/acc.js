@@ -10,6 +10,9 @@ import jet from "@randajan/jet-core";
 import { db } from "../db/ramdb";
 
 import bcrypt from "bcrypt";
+import { events } from "../io";
+
+import { signIn, signUp } from "../modules/acc/sign";
 
 const _passwordRequirments = {
     short:/.{8,}/,
@@ -28,6 +31,9 @@ router.use("/api/acc", koaBody());
 router.post("/api/acc/signin", async ctx=>{
     const { username, password } = ctx.request.body;
 
+    const acc = signIn()
+    if (!username || !password) { throw apiError(401, "fields required", { required:["username", "password"] }); }
+
     const tbl = await db("sys_accs");
 
     const acc = (await tbl.rows.getChop("username").getList(username))[0];
@@ -39,10 +45,11 @@ router.post("/api/acc/signin", async ctx=>{
 
 router.post("/api/acc/signup", async ctx=>{
     const { username, password } = ctx.request.body;
+    if (!username || !password) { throw apiError(401, "fields required", { required:["username", "password"] }); }
 
     const tbl = await db("sys_accs");
     const passwordUnsafe = validatePassword(password);
-    if (passwordUnsafe.length) { throw apiError(401, "password unsafe", { missing:passwordUnsafe }); }
+    if (passwordUnsafe.length) { throw apiError(401, "password weak", { weakness:passwordUnsafe }); }
 
     const usernameCount = (await tbl.rows.getChop("username").count(username));
     if (usernameCount) { throw apiError(401, "username taken"); }

@@ -11,7 +11,7 @@ import "./controllers/**"; //setup all routes/controllers
 
 
 
-app.use(session({}, app));
+//app.use(session({}, app));
 
 app.use(async (ctx, next) => {
     let err;
@@ -21,7 +21,7 @@ app.use(async (ctx, next) => {
     if (err instanceof ApiError) {
         const { status, message, details } = err;
         ctx.status = status;
-        ctx.body = { error:{ message, details } }
+        return ctx.body = { error:{ message, details } }
     }
     
     throw err;

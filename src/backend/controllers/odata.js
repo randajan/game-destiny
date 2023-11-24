@@ -6,7 +6,7 @@ import fse from "fs-extra";
 import jet from "@randajan/jet-core";
 import odataResponder from "@randajan/odata-server/koa";
 
-import routes from "../../arc/routes";
+import { routes } from "../../arc/routes";
 import { odata } from "../db/odata";
 //import { authorizeMW } from "../db/auth";
 

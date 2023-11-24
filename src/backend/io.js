@@ -10,7 +10,10 @@ io.on("connection", socket=>{
             const rsp = _events[event];
             if (!rsp) { ack(false, `BE > Unknown event '${event}'`); }
             try { ack(true, await rsp(socket, body)); }
-            catch(err) { ack(false, `BE > ${err}`); }
+            catch(err) {
+                console.warn(err);
+                ack(false, `BE > ${err}`);
+            }
         });
     }
 });

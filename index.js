@@ -16,6 +16,7 @@ sapp(argv.env === "prod", {
         info:{
             slash:slash || "/"
         },
+        external:["co-body", "raw-body", "inflation"],
         plugins:[
             ImportGlobPlugin.default()
         ]
