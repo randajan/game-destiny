@@ -18,12 +18,12 @@ export const LadingPage = (props)=>{
     const [ _showJoin ] = page.use("hash.showJoin");
     const showJoin = _showJoin.get();
 
-    const signPop = usePop(<SignIn/>);
+    const signPop = usePop(<SignIn onDone={_=>signPop.down()}/>);
     
     return (
         <div className="LadingPage">
             <a onClick={_=>signPop.up()}>Sign In</a>
-            <Link to={`game/${generateId()}`}>Create game</Link>
+            {/* <Link to={`game/${generateId()}`}>Create game</Link> */}
             <a onClick={_=>showJoin ? _showJoin.remove() : _showJoin.set("", 1)}>Join game</a>
             <Pane expand={!!showJoin} transition={500}>
                 <Field focus label="Game room" onOutput={(r, v)=>{

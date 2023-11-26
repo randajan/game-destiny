@@ -3,59 +3,41 @@
 
 import be, { app, http, io, bridge, info } from "@randajan/simple-app/be/koa";
 
-import router, { apiError } from "../router";
-import { koaBody } from "koa-body";
 import jet from "@randajan/jet-core";
 
-import { db } from "../db/ramdb";
 
-import bcrypt from "bcrypt";
-import { events } from "../io";
+import { channel } from "../io";
 
-import { signIn, signUp } from "../modules/acc/sign";
+import { signIn, signUp, signOut } from "../modules/acc/sign";
+import { getProfile, setProfile } from "../modules/acc/profile";
 
-const _passwordRequirments = {
-    short:/.{8,}/,
-    symbols:/[^a-zA-Z0-9]/,
-    numbers:/[0-9]/,
-    lowerCase:/[a-z]/,
-    upperCase:/[A-Z]/
+const emitUpdate = async (session, account)=>{
+    session.account = account;
+    const profile = account ? await getProfile(account) : {};
+    channel.emit("acc", [...session.sockets], profile);
 }
 
-const validatePassword = (password)=>{
-    const p = String.jet.to(password);
-    return jet.forEach(_passwordRequirments, (rg, k)=>{ if (!rg.test(p)) { return k; } });
-}
 
-router.use("/api/acc", koaBody());
-router.post("/api/acc/signin", async ctx=>{
-    const { username, password } = ctx.request.body;
 
-    const acc = signIn()
-    if (!username || !password) { throw apiError(401, "fields required", { required:["username", "password"] }); }
-
-    const tbl = await db("sys_accs");
-
-    const acc = (await tbl.rows.getChop("username").getList(username))[0];
-    const check = !acc ? false : await bcrypt.compare(password, (await acc("password")));
-    if (!check) { throw apiError(401, `invalid credentials`); }
-
-    ctx.body = await tbl.cols.map(async c=>c.display > 0 ? acc(c) : null, { byKey:true });
+channel.use("acc/signIn", async (socket, formData)=>{
+    return signIn(socket.session, formData, emitUpdate);
 });
 
-router.post("/api/acc/signup", async ctx=>{
-    const { username, password } = ctx.request.body;
-    if (!username || !password) { throw apiError(401, "fields required", { required:["username", "password"] }); }
+channel.use("acc/signUp", async (socket, formData)=>{
+    return signUp(socket.session, formData, emitUpdate);
+});
 
-    const tbl = await db("sys_accs");
-    const passwordUnsafe = validatePassword(password);
-    if (passwordUnsafe.length) { throw apiError(401, "password weak", { weakness:passwordUnsafe }); }
+channel.use("acc/signOut", async (socket)=>{
+    return signOut(socket.session, emitUpdate);
+});
 
-    const usernameCount = (await tbl.rows.getChop("username").count(username));
-    if (usernameCount) { throw apiError(401, "username taken"); }
+channel.use("acc/update", async (socket, data)=>{
+    const { session } = socket;
+    const res = await setProfile(session?.account, data);
+    if (res) { emitUpdate(session, session.account); }
+    return res;
+});
 
-    const hash = await bcrypt.hash(password, 10);
-    const acc = await tbl.rows.addOrUpdate({username, password:hash});
-    
-    ctx.body = await tbl.cols.map(async c=>c.display > 0 ? acc(c) : null, { byKey:true });
+channel.use("acc", async (socket)=>{
+    return getProfile(socket.session?.account);
 });

@@ -2,11 +2,11 @@ import jet from "@randajan/jet-core";
 
 
 const _passwordRequirments = {
-    short:/.{8,}/,
-    symbols:/[^a-zA-Z0-9]/,
-    numbers:/[0-9]/,
-    lowerCase:/[a-z]/,
-    upperCase:/[A-Z]/
+    // short:/.{8,}/,
+    // symbols:/[^a-zA-Z0-9]/,
+    // numbers:/[0-9]/,
+    // lowerCase:/[a-z]/,
+    // upperCase:/[A-Z]/
 }
 
 export const validatePassword = (password)=>{

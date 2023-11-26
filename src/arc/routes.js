@@ -17,8 +17,17 @@ export const routes = routeTree(info.home.origin, add=>{
 export const channels = routeTree("", add=>{
 
     add("acc", [
-        "signin",
-        "signup"
+        "signIn",
+        "signUp",
+        "signOut",
+        "update"
+    ]);
+
+    add("game", [
+        "connect",
+        "disconnect",
+        "updateBoard",
+        "updateState"
     ]);
 
 });

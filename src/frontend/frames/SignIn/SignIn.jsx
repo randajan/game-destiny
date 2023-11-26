@@ -3,31 +3,37 @@ import React, { useState } from 'react';
 import { Switch, Block, Form, Field, Button, usePop, Pane } from "@randajan/react-form";
 
 import "./SignIn.scss";
-import { apiPost } from '../../config/api';
+
+import { account } from '../../config/acc';
 
 export const SignIn = (props)=>{
-    const {} = props;
+    const { onDone } = props;
     const [ register, setRegister ] = useState(false);
+    const [ { reason }, setResult ] = useState({});
+
+    const onSubmit = async b=>{
+        const form = b.props.parent;
+        const result = await account.sign(register, form.getOutput());
+        if (result?.isDone) {
+            form.submit();
+            onDone(result);
+        }
+        setResult(result);
+    }
 
     return (
         <Block className="SignIn" caption="Sign In">
             <div>
                 <a onClick={_=>setRegister(!register)}>{register ? "Existing" : "Create"} account</a>
             </div>
-            <Form onOutputDirty={_=>console.log("aaa")}>
+            <Form>
                 <Field name="username" label="Username" maxLength={16}/>
                 <Field name="password" type="password" label="Password"/>
                 <Pane expand={register} transition={500}>
                     <Field name="passwordCheck" type="password" label="Password check"/>
                 </Pane>
-                <Button type="submit" onSubmit={async b=>{
-                    const form = b.props.parent;
-                    const data = form.getOutput();
-                    const result = await apiPost(register ? "acc/signup" : "acc/signin", data);
-                    console.log(result);
-                    //form.submit();
-                    return true;
-                }}>Submit</Button>
+                <div>{reason?.message}</div>
+                <Button type="submit" onSubmit={onSubmit}>Submit</Button>
             </Form>
         </Block>
     )

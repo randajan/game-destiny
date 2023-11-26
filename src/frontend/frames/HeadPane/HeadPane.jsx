@@ -3,13 +3,16 @@ import React from 'react';
 import { Img } from "@randajan/react-form";
 
 import "./HeadPane.scss";
+import { Profile } from './Profile/Profile';
 
 export const HeadPane = (props)=>{
     const {} = props;
     
     return (
         <nav className="HeadPane">
-            <h1><Img alt={"Destiny"} src="/icons/logo.svg"/></h1>
+            <p></p>
+            <Img alt={"Destiny"} src="/icons/logo.svg"/>
+            <Profile/>
         </nav>
     )
 }

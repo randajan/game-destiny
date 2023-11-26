@@ -4,7 +4,7 @@ import router from "../router";
 import { koaBody } from "koa-body";
 import jet from "@randajan/jet-core";
 
-import { events } from "../io";
+import { channel } from "../io";
 import { Game } from "../modules/game/class/Game";
 
 // router.use("/api", koaBody());
@@ -26,11 +26,11 @@ import { Game } from "../modules/game/class/Game";
 
 // });
 
-events.use("gameConnect", (socket, { gameId, client })=>Game.connect(socket, gameId, client));
-events.use("gameDisconnect", (socket)=>Game.disconnect(socket));
+channel.use("game/connect", (socket, { gameId, client })=>Game.connect(socket, gameId, client));
+channel.use("game/disconnect", (socket)=>Game.disconnect(socket));
 
-events.use("gameUpdateBoard", (socket, { id, data })=>Game.updateBoard(id, data));
-events.use("gameUpdateState", (socket, { id, data })=>Game.updateState(id, data));
+channel.use("game/updateBoard", (socket, { id, data })=>Game.updateBoard(id, data));
+channel.use("game/updateState", (socket, { id, data })=>Game.updateState(id, data));
 
 
 io.sockets.on("connection", socket=>{

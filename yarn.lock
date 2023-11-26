@@ -151,15 +151,15 @@
     path-to-regexp "6.2.1"
     xmlbuilder "15.1.1"
 
-"@randajan/ram-db@^2.4.6":
-  version "2.4.6"
-  resolved "https://registry.yarnpkg.com/@randajan/ram-db/-/ram-db-2.4.6.tgz#4cdc80a0c8afdbd81abaecff202d0da3c5d852d1"
-  integrity sha512-4jzZoRQqzyoSTNKF9m/BfIJLfBTDltXHF+25aOnmm/vNnCyH1lcKVNP9xPuLXOF+TMDd8kDHtdiDzc9EUisL1w==
+"@randajan/ram-db@^2.4.8":
+  version "2.4.8"
+  resolved "https://registry.yarnpkg.com/@randajan/ram-db/-/ram-db-2.4.8.tgz#484c52db0cd6ac54d3dad6807d370be4a384d981"
+  integrity sha512-+Sh3kvIJnKWVqNZrVp6UpArkzEPGUZWtZP1BiX4YMUTULnCLnU6FFkL2IDh2NrykF3GMaCgyE12/8Y0XKH9NEw==
 
-"@randajan/react-form@^5.1.8":
-  version "5.1.8"
-  resolved "https://registry.yarnpkg.com/@randajan/react-form/-/react-form-5.1.8.tgz#1f72040aff7bfaf32b09e36d88199d2f17cd012b"
-  integrity sha512-VBzPtskKNr4u+AcwVMLT5EZ9BJNOL2HB0+z+lDs6lAHbByBLpjmO9+Y7iLADgNwWNlaeL3RbdeOAO7qcIST3RQ==
+"@randajan/react-form@^5.1.9":
+  version "5.1.9"
+  resolved "https://registry.yarnpkg.com/@randajan/react-form/-/react-form-5.1.9.tgz#23baf23222bbfa749a2b0c9342ac4943a9a60b28"
+  integrity sha512-BdEWXmRsBWM4s33AycXMNp3KdFj7Gmn4mLN7eP4wzghfcaYQezVpg4VA1MaLhRNmDbO0Ns8yivrdLjzpbT23xA==
 
 "@randajan/simple-app@^2.0.9":
   version "2.0.9"

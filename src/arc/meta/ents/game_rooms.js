@@ -2,15 +2,10 @@ import jet from "@randajan/jet-core";
 import { nref, timestamps } from "@randajan/ram-db/async";
 
 export default {
-    "id": { isPrimary: true, init:jet.uid(8) },
-    "username": {},
+    "id": { isPrimary: true, init:jet.uid(16) },
     "name": {},
-    "avatar": {},
     "password": { display:0 },
-    "pin":{},
-    "email":{},
-    "phone":{},
     "publics":{ separator:"; " },
-    "game_rooms":nref("game_rooms", "owner"),
+    "owner":{ ref:"sys_accs" },
     ...timestamps("sys_accs")
 }
