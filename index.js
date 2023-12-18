@@ -1,6 +1,7 @@
 import sapp, { argv, envs } from "@randajan/simple-app";
 import ImportGlobPlugin from 'esbuild-plugin-import-glob';
 import { sassPlugin } from 'esbuild-sass-plugin';
+import jet from "@randajan/jet-core";
 
 //those values are default values
 
@@ -11,6 +12,7 @@ sapp(argv.env === "prod", {
     info:{
         home,
         title,
+        channelsOrigin:jet.uid(12)
     },
     be:{
         info:{

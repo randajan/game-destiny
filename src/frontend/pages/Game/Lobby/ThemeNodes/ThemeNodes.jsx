@@ -2,7 +2,7 @@ import React from 'react';
 
 import "./ThemeNodes.scss";
 import { Block, Caption, usePop, Button } from '@randajan/react-form';
-import { game } from '../../../../game';
+import { game } from '../../../../modules/game';
 import { store } from '../../../../config/bases';
 import { ThemeSelect } from '../ThemeSelect/ThemeSelect';
 

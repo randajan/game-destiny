@@ -6,7 +6,7 @@ import { usePop, Block } from "@randajan/react-form";
 
 import "./NodeMw.scss";
 
-import { game } from '../../../../../game';
+import { game } from '../../../../../modules/game';
 import { MatchCables } from './MatchCables/MatchCables';
 import { CatchBall } from './CatchBall/CatchBall';
 import { KillPop } from './KillPop/KillPop';

@@ -5,7 +5,7 @@ import "./Game.scss";
 
 import { Button, Pane } from "@randajan/react-form";
 
-import { game } from "../../game";
+import { game } from "../../modules/game";
 import { Lobby } from './Lobby/Lobby';
 import { Briefing } from './Briefing/Briefing';
 import { Desk } from './Desk/Desk';

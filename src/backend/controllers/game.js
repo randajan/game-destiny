@@ -1,39 +1,28 @@
 import be, { app, http, io, bridge, info } from "@randajan/simple-app/be/koa";
 
-import router from "../router";
-import { koaBody } from "koa-body";
 import jet from "@randajan/jet-core";
 
-import { channel } from "../io";
 import { Game } from "../modules/game/class/Game";
+import { db } from "../db/ramdb";
 
-// router.use("/api", koaBody());
+const accept = async (content)=>({ isDone:true, code:200, content});
+const reject = (code, message, details={})=>({isDone:false, code, reason:{ message, details }});
 
-// router.get("/api/game", async ctx=>{
-//     const game = loadOrCreateGame("XYZ");
-//     ctx.body = await game.base.get();
-// });
+bridge.rx("game/create", async (socket)=>{
+    const acc = socket.session.account;
+    if (!acc) { return reject(403, "Unauthorized"); }
+    const tbl = await db("game_rooms");
+    return accept(await tbl.rows.add({ owner:acc }));
+});
 
-// router.patch("/api/game", async ctx=>{
-//     const { body } = ctx.request;
-//     if (!body) { return; }
+bridge.rx("game/connect", (socket, { gameId, client })=>Game.connect(socket, gameId, client));
+bridge.rx("game/disconnect", (socket)=>Game.disconnect(socket));
 
-//     const game = loadGame("XYZ");
-//     await game.base.set("", jet.merge(await game.base.get(), body));
-
-//     ctx.body = await game.base.get("current");
-
-
-// });
-
-channel.use("game/connect", (socket, { gameId, client })=>Game.connect(socket, gameId, client));
-channel.use("game/disconnect", (socket)=>Game.disconnect(socket));
-
-channel.use("game/updateBoard", (socket, { id, data })=>Game.updateBoard(id, data));
-channel.use("game/updateState", (socket, { id, data })=>Game.updateState(id, data));
+bridge.rx("game/updateBoard", (socket, { id, data })=>Game.updateBoard(id, data));
+bridge.rx("game/updateState", (socket, { id, data })=>Game.updateState(id, data));
 
 
-io.sockets.on("connection", socket=>{
+io.on("connection", socket=>{
     socket.on("disconnect", _=>{
         Game.disconnect(socket);
     });

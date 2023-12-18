@@ -8,7 +8,7 @@ import { StatBar } from '..//StatBar/StatBar';
 
 import { NodeMwPopUp } from './NodeMw/NodeMw';
 import { Stage } from '../Stage/Stage';
-import { game } from '../../../../game';
+import { game } from '../../../../modules/game';
 import { numFrame } from '../../../../../arc/tools/formats';
 
 const _flags = {

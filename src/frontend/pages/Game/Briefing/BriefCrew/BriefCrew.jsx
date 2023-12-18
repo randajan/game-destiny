@@ -5,7 +5,7 @@ import { Block, Caption } from "@randajan/react-form";
 
 import { HiddenMsg } from '../../../../elements/HiddenMsg/HiddenMsg';
 
-import { game } from "../../../../game";
+import { game } from "../../../../modules/game";
 
 import "./BriefCrew.scss";
 

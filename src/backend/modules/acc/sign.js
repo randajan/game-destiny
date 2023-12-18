@@ -8,11 +8,10 @@ import { db } from "../../db/ramdb";
 
 import bcrypt from "bcrypt";
 import { validatePassword } from "./password";
+import { getProfile } from "./profile";
 
-const signDone = async (session, account, onDone)=>{
-    await onDone(session, account);
-    return { isDone:true, code:200, account }
-};
+const signDone = async (account)=>({ isDone:true, code:200, account, profile:await getProfile(account)});
+
 const signReject = (code, message, details={})=>({isDone:false, code, reason:{ message, details }});
 
 const validateFields = (fields, formData)=>{
@@ -20,7 +19,7 @@ const validateFields = (fields, formData)=>{
     if (required.length) { return signReject(400, "fields required", { required }); }
 };
 
-export const signIn = async (session, formData, onDone)=>{
+export const signIn = async (formData)=>{
     const r = validateFields(["username", "password"], formData);
     if (r) { return r; }
 
@@ -33,10 +32,10 @@ export const signIn = async (session, formData, onDone)=>{
     const check = !acc ? false : await bcrypt.compare(password, (await acc("password")));
     if (!check) { return signReject(401, `invalid credentials`); }
 
-    return signDone(session, acc, onDone);
+    return signDone(acc);
 };
 
-export const signUp = async (session, formData, onDone)=>{
+export const signUp = async (formData)=>{
     const r = validateFields(["username", "password", "passwordCheck"], formData);
     if (r) { return r; }
 
@@ -53,7 +52,7 @@ export const signUp = async (session, formData, onDone)=>{
     const hash = await bcrypt.hash(password, 10);
     const acc = await tbl.rows.addOrUpdate({username, password:hash});
 
-    return signDone(session, acc, onDone);
+    return signDone(acc);
 };
 
-export const signOut = async (session, onDone)=>signDone(session, null, onDone);
+export const signOut = async _=>signDone();

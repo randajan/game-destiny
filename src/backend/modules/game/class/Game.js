@@ -6,6 +6,7 @@ import { Ticker } from "./Ticker";
 import { GameBoard } from "./GameBoard";
 import { GameState } from "./GameState";
 import { setRealLights } from "./Shelly";
+import { channels } from "../../../../arc/routes";
 
 const { solid, virtual } = jet.prop;
 
@@ -49,7 +50,7 @@ export class Game {
             const board = this.board.get();
             const upd = board?.theme?.onTick(this);
             if (upd) { this.state.set("", upd); }
-            this.emit("gameUpdateState", this.state.get());
+            this.emit(channels("game/updateState", true), this.state.get());
         }
 
         solid.all(this, {
@@ -61,13 +62,15 @@ export class Game {
         
         virtual(this, "state", _=>_p.state);
 
-        this.board.watch("", get => { this.emit("gameUpdateBoard", get()); });
+        this.board.watch("", get => {
+            this.emit(channels("game/updateBoard", true), get());
+        });
         this.board.watch("phase.id", get=>{
             const id = get();
             if (id === 2) { this.ticker.start(); }
             else {
                 this.ticker.stop().resetCounter();
-                this.emit("gameUpdateState", {});
+                this.emit(channels("game/updateState", true), {});
                 setRealLights(1);
             }
         });

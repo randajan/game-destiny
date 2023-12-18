@@ -3,7 +3,7 @@ import React from 'react';
 import { Field, Block, Button } from '@randajan/react-form';
 
 import "./Crews.scss";
-import { game } from '../../../../game';
+import { game } from '../../../../modules/game';
 
 export const Crews = (props)=>{
     const {} = props;

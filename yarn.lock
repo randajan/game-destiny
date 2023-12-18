@@ -161,10 +161,10 @@
   resolved "https://registry.yarnpkg.com/@randajan/react-form/-/react-form-5.1.9.tgz#23baf23222bbfa749a2b0c9342ac4943a9a60b28"
   integrity sha512-BdEWXmRsBWM4s33AycXMNp3KdFj7Gmn4mLN7eP4wzghfcaYQezVpg4VA1MaLhRNmDbO0Ns8yivrdLjzpbT23xA==
 
-"@randajan/simple-app@^2.0.9":
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/@randajan/simple-app/-/simple-app-2.0.9.tgz#cbf9da948141ca3dc3f9d58180b0ba03bfbc488e"
-  integrity sha512-ztRtVp0DzgLRuU1CuXnE9bSrFd1ReURIYeMg++E+AqevynsRrXAmSsuM7L2ttg1Kl1t+tvBB/rfoWAFFvwuMDA==
+"@randajan/simple-app@2.1.3":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@randajan/simple-app/-/simple-app-2.1.3.tgz#8c0e3d2e12e8425f261b94b00c59decdaa60cb25"
+  integrity sha512-Ewso8y4iS1VllQCryt91A7qjL/dE0i3mwvRG/IH948noq4M1OzlHKIqEKBBRX/BVEGrKxSJlykf6AZz98yVQTg==
   dependencies:
     app-root-path "^3.0.0"
     chalk "^5.2.0"

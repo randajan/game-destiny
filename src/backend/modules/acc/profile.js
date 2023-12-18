@@ -15,3 +15,9 @@ export const setProfile = async (account, data)=>{
 
     return true;
 }
+
+export const getProfiles = async (account)=>{
+    if (!account) { return; }
+
+    return account.rows.getList();
+}

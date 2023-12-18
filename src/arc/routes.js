@@ -1,7 +1,8 @@
 
 import info from "@randajan/simple-app/info";
-
+import jet from "@randajan/jet-core";
 import routeTree from "./tools/RouteTree";
+
 
 export const routes = routeTree(info.home.origin, add=>{
     
@@ -14,16 +15,20 @@ export const routes = routeTree(info.home.origin, add=>{
 
 });
 
-export const channels = routeTree("", add=>{
+
+export const channels = routeTree(info.channelsOrigin, add=>{
+
+    add("$$system");
 
     add("acc", [
         "signIn",
         "signUp",
         "signOut",
-        "update"
+        "list"
     ]);
 
     add("game", [
+        "create",
         "connect",
         "disconnect",
         "updateBoard",

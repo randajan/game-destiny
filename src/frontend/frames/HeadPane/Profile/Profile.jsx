@@ -1,7 +1,7 @@
 import React from 'react';
 
 import "./Profile.scss";
-import { account } from '../../../config/acc';
+import { account } from '../../../modules/acc';
 
 export const Profile = (props)=>{
     const {} = props;

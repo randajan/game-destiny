@@ -3,7 +3,7 @@ import React from 'react';
 import { Block, Button, usePop } from "@randajan/react-form";
 
 import "./Briefing.scss";
-import { game } from '../../../game';
+import { game } from '../../../modules/game';
 import { BriefCrew } from './BriefCrew/BriefCrew';
 
 

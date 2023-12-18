@@ -4,7 +4,7 @@ import { Switch, Block, Form, Field, Button, usePop, Pane } from "@randajan/reac
 
 import "./SignIn.scss";
 
-import { account } from '../../config/acc';
+import { account } from '../../modules/acc';
 
 export const SignIn = (props)=>{
     const { onDone } = props;

@@ -3,7 +3,7 @@ import jet from "@randajan/jet-core";
 
 
 
-import { game } from '../../../../../game';
+import { game } from '../../../../../modules/game';
 
 import { Switch, Range } from '@randajan/react-form';
 

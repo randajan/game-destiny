@@ -1,10 +1,9 @@
 import fe, { bridge, info } from "@randajan/simple-app/fe";
 
 import jet from "@randajan/jet-react";
-import { channel } from "../../config/io";
 import { GameBoard } from "./GameBoard";
 
-import { store } from "../../config/bases";
+import { store } from "../../../config/bases";
 import { GameState } from "./GameState";
 
 const { solid, virtual } = jet.prop;
@@ -24,7 +23,7 @@ export class Game {
         const disconnect = async _=>{
             if (!_p.isConnected) { false; }
             _p.isConnected = false;
-            const done = await channel.emit("game/disconnect");
+            const done = await bridge.tx("game/disconnect");
             _p.isConnected = !done;
             if (done) { this.board.remove(); }
             return done;
@@ -32,7 +31,7 @@ export class Game {
 
         const connect = async gameId=>{
             _p.isConnected = true;
-            const done = await channel.emit("game/connect", { gameId, client:store.get("client") });
+            const done = await bridge.tx("game/connect", { gameId, client:store.get("client") });
             _p.isConnected = done;
             if (!done) { this.board.remove(); }
             return done;
@@ -48,6 +47,12 @@ export class Game {
             isConnected:_=>_p.isConnected
         });
 
+        
+
+    }
+
+    async create() {
+        return bridge.tx("game/create");
     }
 
 }

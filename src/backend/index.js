@@ -6,8 +6,12 @@ import serve from "koa-static";
 import send from 'koa-send';
 
 import router, { ApiError } from "./router";
-import "./session";
+import "./io";
 import "./controllers/**"; //setup all routes/controllers
+
+import attachSession from "./modules/koa-io-session";
+
+attachSession(app, io);
 
 app.use(async (ctx, next) => {
     let err;

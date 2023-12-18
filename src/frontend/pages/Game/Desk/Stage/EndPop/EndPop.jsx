@@ -7,7 +7,7 @@ import { Block } from "@randajan/react-form";
 
 
 import { Button } from '@randajan/react-form';
-import { game } from '../../../../../game';
+import { game } from '../../../../../modules/game';
 
 
 

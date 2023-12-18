@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button, Block, usePop } from "@randajan/react-form";
-import { game } from "../../../../../game";
+import { game } from "../../../../../modules/game";
 
 import "./PausePop.scss";
 

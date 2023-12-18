@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Block, Caption, Button, Field, Menu, Pane, usePop } from "@randajan/react-form";
 
-import { game } from "../../../game";
+import { game } from "../../../modules/game";
 import { store } from '../../../config/bases';
 
 import { Rates } from './Rates/Rates';

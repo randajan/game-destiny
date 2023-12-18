@@ -5,39 +5,46 @@ import be, { app, http, io, bridge, info } from "@randajan/simple-app/be/koa";
 
 import jet from "@randajan/jet-core";
 
-
-import { channel } from "../io";
-
 import { signIn, signUp, signOut } from "../modules/acc/sign";
-import { getProfile, setProfile } from "../modules/acc/profile";
+import { getProfile, getProfiles, setProfile } from "../modules/acc/profile";
+import { db } from "../db/ramdb";
 
-const emitUpdate = async (session, account)=>{
-    session.account = account;
-    const profile = account ? await getProfile(account) : {};
-    channel.emit("acc", [...session.sockets], profile);
+const brgByAcc = bridge.createGroup("byAccount", socket=>socket?.session?.account?.key);
+
+const processReply = async (socket, reply)=>{
+    const { isDone, account, profile } = reply;
+    if (!isDone) { return reply; }
+    const ses = socket.session;
+    ses.account = account;
+    brgByAcc.reset();
+    await bridge.tx("acc", profile, socket.brothers); //signin, signout state send only sockets of current session
+    return reply;
 }
 
-
-
-channel.use("acc/signIn", async (socket, formData)=>{
-    return signIn(socket.session, formData, emitUpdate);
+db("sys_accs").then(tbl=>{
+    tbl.rows.on("afterUpdate", async acc=>{
+        await brgByAcc.tx("acc", await getProfile(acc), acc.key);
+    });
 });
 
-channel.use("acc/signUp", async (socket, formData)=>{
-    return signUp(socket.session, formData, emitUpdate);
+bridge.rx("acc/signIn", async (socket, formData)=>{
+    return processReply(socket, await signIn(formData));
 });
 
-channel.use("acc/signOut", async (socket)=>{
-    return signOut(socket.session, emitUpdate);
+bridge.rx("acc/signUp", async (socket, formData)=>{
+    return processReply(socket, await signUp(formData));
 });
 
-channel.use("acc/update", async (socket, data)=>{
-    const { session } = socket;
-    const res = await setProfile(session?.account, data);
-    if (res) { emitUpdate(session, session.account); }
-    return res;
+bridge.rx("acc/signOut", async (socket)=>{
+    return processReply(socket, await signOut());
 });
 
-channel.use("acc", async (socket)=>{
-    return getProfile(socket.session?.account);
+bridge.rx("acc", async (socket, data)=>{
+    const account = socket.session?.account;
+    if (data) { setProfile(account, data); }
+    return getProfile(account);
+});
+
+bridge.rx("acc/list", async (socket)=>{
+    return getProfiles(socket.session?.account);
 });

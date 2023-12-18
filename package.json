@@ -16,7 +16,7 @@
     "@randajan/odata-server": "^2.1.14",
     "@randajan/ram-db": "^2.4.8",
     "@randajan/react-form": "^5.1.9",
-    "@randajan/simple-app": "^2.0.9",
+    "@randajan/simple-app": "2.1.3",
     "bcrypt": "^5.1.1",
     "crypto-js": "^4.2.0",
     "date-fns": "^2.30.0",
